@@ -13,6 +13,9 @@
         android:theme="@style/Theme.FUMIC"
         tools:targetApi="31">
         <activity
+            android:name="fpt.edu.fumic.LoginActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
