@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.fumic.R;
+import fpt.edu.fumic.R;
 
 public class LoginActivity extends AppCompatActivity {
 
