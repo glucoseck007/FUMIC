@@ -35,7 +35,7 @@ public class CategoryDAO {
         return categoryArrayList;
     }
 
-    public ArrayList<Category> getAll() {
+    public ArrayList<Category> getAllCategory() {
         String sql = "SELECT * FROM CATEGORY";
 
         return get(sql);
