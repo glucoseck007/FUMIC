@@ -97,9 +97,7 @@ public class FumicDB extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS AUHOR");
             db.execSQL("DROP TABLE IF EXISTS OWN");
             db.execSQL("DROP TABLE IF EXISTS FAVOURITE");
-
             onCreate(db);
         }
     }
-
 }
