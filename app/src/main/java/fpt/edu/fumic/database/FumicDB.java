@@ -28,6 +28,7 @@ public class FumicDB extends SQLiteOpenHelper {
             "Password TEXT NOT NULL, " +
             "Name TEXT NOT NULL, " +
             "Age INTEGER, " +
+            "Gender INTEGER, " +
             "Email TEXT NOT NULL, " +
             "Phone TEXT, " +
             "Role INTEGER NOT NULL, " +

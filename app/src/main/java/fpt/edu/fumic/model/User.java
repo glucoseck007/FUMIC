@@ -9,6 +9,7 @@ public class User {
     private String password;
     private String name;
     private int age;
+    private int gender;
     private String email;
     private String phone;
     private int role;
@@ -16,11 +17,12 @@ public class User {
 
     public User() {};
 
-    public User(String id, String password, String name, int age, String email, String phone, int role, String notification) {
+    public User(String id, String password, String name, int age, int gender, String email, String phone, int role, String notification) {
         this.id = id;
         this.password = password;
         this.name = name;
         this.age = age;
+        this.gender = gender;
         this.email = email;
         this.phone = phone;
         this.role = role;
@@ -57,6 +59,14 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 
     public String getEmail() {
