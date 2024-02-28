@@ -39,6 +39,7 @@ public class FumicDB extends SQLiteOpenHelper {
             "Title TEXT NOT NULL, " +
             "NoOfChapter INTEGER NOT NULL, " +
             "Description TEXT, " +
+            "ImageURL TEXT, " +
             "CategoryId INTEGER REFERENCES CATEGORY(Id), " +
             "Rating INTEGER, " +
             "NoOfView INTEGER, " +
