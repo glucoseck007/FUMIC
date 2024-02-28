@@ -85,14 +85,13 @@
 
         <Button
             android:id="@+id/bt_register"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="104dp"
             android:background="@color/Transparent1"
             android:padding="0dp"
             android:text="No Account? Register now"
             android:textColor="@color/Blue"
-            app:layout_constraintEnd_toEndOf="@+id/bt_login"
-            app:layout_constraintTop_toBottomOf="@+id/bt_login" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

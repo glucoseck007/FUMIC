@@ -13,7 +13,10 @@
         android:theme="@style/Theme.FUMIC"
         tools:targetApi="31">
         <activity
-            android:name="fpt.edu.fumic.ui.LoginActivity"
+            android:name=".ui.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.LoginActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
