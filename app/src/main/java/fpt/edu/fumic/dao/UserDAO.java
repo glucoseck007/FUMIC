@@ -33,6 +33,7 @@ public class UserDAO {
                 user.setPassword(cursor.getString(cursor.getColumnIndex("Password")));
                 user.setName(cursor.getString(cursor.getColumnIndex("Name")));
                 user.setAge(cursor.getInt(cursor.getColumnIndex("Age")));
+                user.setGender(cursor.getInt(cursor.getColumnIndex("Gender")));
                 user.setEmail(cursor.getString(cursor.getColumnIndex("Email")));
                 user.setPhone(cursor.getString(cursor.getColumnIndex("Phone")));
                 user.setRole(cursor.getInt(cursor.getColumnIndex("Role")));
