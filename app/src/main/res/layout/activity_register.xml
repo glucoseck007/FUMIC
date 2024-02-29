@@ -174,7 +174,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="@color/Sienna"
+                    android:background="@drawable/bgr_button_sienna_rd5"
                     android:padding="16dp"
                     android:text="Register"
                     android:textColor="@color/WhiteSmoke"

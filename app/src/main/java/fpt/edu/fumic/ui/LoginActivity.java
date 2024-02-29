@@ -1,8 +1,10 @@
 package fpt.edu.fumic.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,34 +12,27 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.Objects;
+
 import fpt.edu.fumic.R;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText edit_username, edit_password;
+    TextInputLayout til_username, til_password;
     CheckBox check_box_remember;
     Button bt_login, bt_register;
+    IntentFilter intentFilter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //Connect elements
-        edit_username = findViewById(R.id.edit_username);
-        edit_password = findViewById(R.id.edit_password);
-        check_box_remember = findViewById(R.id.check_box_remember);
-        bt_login = findViewById(R.id.bt_login);
-        bt_register = findViewById(R.id.bt_register);
+
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = edit_username.getText().toString();
-                String password = edit_password.getText().toString();
-                if (username.length() == 0) {
-                    edit_username.setError("This field can not empty!");
-                } else if(password.length() == 0) {
-                    edit_password.setError("This field can not empty!");
-                }else {
-                    Toast.makeText(LoginActivity.this, "Login successfully!", Toast.LENGTH_SHORT).show();
-                }
+
             }
         });
         bt_register.setOnClickListener(new View.OnClickListener() {
@@ -48,5 +43,21 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void initView(){
+        check_box_remember = findViewById(R.id.chkbox_remember_me);
+        bt_register = findViewById(R.id.bt_register);
+        til_username = findViewById(R.id.til_username);
+        til_password = findViewById(R.id.til_password);
+    }
+
+    private void initIntentFilter() {
+        intentFilter = new IntentFilter();
+        intentFilter.addAction("action login");
+    }
+    @NonNull
+    private String getText(TextInputLayout textInputLayout) {
+        return Objects.requireNonNull(textInputLayout.getEditText()).getText().toString().trim();
     }
 }
