@@ -1,6 +1,7 @@
 package fpt.edu.fumic.database;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fpt.edu.fumic.model.Category;
+import fpt.edu.fumic.model.User;
 
 public class FumicDB extends SQLiteOpenHelper {
 
@@ -28,6 +30,7 @@ public class FumicDB extends SQLiteOpenHelper {
             "Password TEXT NOT NULL, " +
             "Name TEXT NOT NULL, " +
             "Age INTEGER, " +
+            "Gender INTEGER, " +
             "Email TEXT NOT NULL, " +
             "Phone TEXT, " +
             "Role INTEGER NOT NULL, " +
@@ -38,6 +41,7 @@ public class FumicDB extends SQLiteOpenHelper {
             "Title TEXT NOT NULL, " +
             "NoOfChapter INTEGER NOT NULL, " +
             "Description TEXT, " +
+            "ImageURL TEXT, " +
             "CategoryId INTEGER REFERENCES CATEGORY(Id), " +
             "Rating INTEGER, " +
             "NoOfView INTEGER, " +
@@ -96,9 +100,11 @@ public class FumicDB extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS AUHOR");
             db.execSQL("DROP TABLE IF EXISTS OWN");
             db.execSQL("DROP TABLE IF EXISTS FAVOURITE");
-
             onCreate(db);
         }
     }
+
+
+
 
 }

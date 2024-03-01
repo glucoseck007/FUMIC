@@ -8,23 +8,25 @@ public class Book {
     private String title;
     private int noOfChapter;
     private String description;
+    private String imageURL;
     private int categoryId;
     private int rating;
-    private int view;
+    private int noOfView;
     private Date dateUpload;
     private int status;
     private int userId;
 
     public Book() {};
 
-    public Book(int id, String title, int noOfChapter, String description, int categoryId, int rating, int view, Date dateUpload, int status, int userId) {
+    public Book(int id, String title, int noOfChapter, String description, String imageURL, int categoryId, int rating, int noOfView, Date dateUpload, int status, int userId) {
         this.id = id;
         this.title = title;
         this.noOfChapter = noOfChapter;
         this.description = description;
+        this.imageURL = imageURL;
         this.categoryId = categoryId;
         this.rating = rating;
-        this.view = view;
+        this.noOfView = noOfView;
         this.dateUpload = dateUpload;
         this.status = status;
         this.userId = userId;
@@ -78,12 +80,20 @@ public class Book {
         this.rating = rating;
     }
 
-    public int getView() {
-        return view;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public void setView(int view) {
-        this.view = view;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public int getNoOfView() {
+        return noOfView;
+    }
+
+    public void setNoOfView(int noOfView) {
+        this.noOfView = noOfView;
     }
 
     public Date getDateUpload() {
