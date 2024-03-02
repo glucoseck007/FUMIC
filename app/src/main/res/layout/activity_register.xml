@@ -49,6 +49,7 @@
                 android:layout_weight="1"
                 >
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_fullname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -63,17 +64,19 @@
                         />
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_dob"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     >
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tie_dob"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawablePadding="10dp"
                         android:drawableStart="@drawable/ic_calendar_1"
-                        android:hint="Enter age"
+                        android:hint="Date of birth"
                         android:inputType="textPersonName" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -117,6 +120,7 @@
                     </RadioGroup>
                 </LinearLayout>
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -131,6 +135,7 @@
                         />
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -144,6 +149,7 @@
                         />
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -157,6 +163,7 @@
                         />
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -166,6 +173,20 @@
                         android:drawableStart="@drawable/ic_lock_line_1"
                         android:drawablePadding="10dp"
                         android:hint="Enter password"
+                        android:inputType="textPassword"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_re_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_lock_line_1"
+                        android:drawablePadding="10dp"
+                        android:hint="Confirm password"
                         android:inputType="textPassword"
                         />
                 </com.google.android.material.textfield.TextInputLayout>

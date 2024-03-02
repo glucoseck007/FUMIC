@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         initIntentFilter();
         //Connect DAO database
         userDAO = new UserDAO(this);
-        //Setup functions of activity
+        //Setup function buttons of activity
         bt_login.setOnClickListener(this);
         tv_Register.setOnClickListener(this);
 
@@ -78,10 +78,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             switch (Objects.requireNonNull(statusLogin)) {
                 case STATUS_LOGIN_SUCCESS:
                     MyToast.successfulToast(LoginActivity.this, "Login Successfully!");
+                    loadingDialog.stopLoadingDialog();
+                    break;
                 case STATUS_LOGIN_FAILED:
                     MyToast.warningToast(LoginActivity.this, "Login Failed! Check login information and try again!");
+                    loadingDialog.stopLoadingDialog();
+                    break;
                 case STATUS_LOGIN_ERROR:
                     MyToast.errorToast(LoginActivity.this, "All Field must be filled!");
+                    loadingDialog.stopLoadingDialog();
+                    break;
             }
         }
     };
