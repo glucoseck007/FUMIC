@@ -2,23 +2,16 @@ package fpt.edu.fumic;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
-
-import java.util.List;
-
 import fpt.edu.fumic.dao.CategoryDAO;
 import fpt.edu.fumic.database.FumicDB;
-import fpt.edu.fumic.model.Category;
-import fpt.edu.fumic.ui.LoginActivity;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private FumicDB mFumicDB;
-    private CategoryDAO categoryDAO = new CategoryDAO(this);
+    private final CategoryDAO categoryDAO = new CategoryDAO(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +20,6 @@ public class MainActivity extends AppCompatActivity {
         mFumicDB = new FumicDB(this);
         categoryDAO.getAllCategory();
         Log.d("MainActivity", "Database status: " + (mFumicDB.getReadableDatabase() != null ? "Created" : "Not created"));
-        Intent intentLogin = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intentLogin);
     }
 
 }
