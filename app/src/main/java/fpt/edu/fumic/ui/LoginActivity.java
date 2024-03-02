@@ -22,10 +22,15 @@ import java.util.Objects;
 
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.dao.UserDAO;
+import fpt.edu.fumic.utils.MyToast;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    public static final String ACTION_LOGIN = "action login",
-                        STATUS_LOGIN = "status login";
+    public static final String ACTION_LOGIN = "action login"
+            , STATUS_LOGIN = "status login"
+            , STATUS_LOGIN_SUCCESS = "login successful"
+            , STATUS_LOGIN_FAILED = "login failed"
+            , STATUS_LOGIN_ERROR = "login error"
+            , KEY_LOGIN_USER = "keyUser";
     TextInputLayout til_username, til_password;
     CheckBox check_box_remember;
     Button bt_login;
@@ -43,13 +48,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private final BroadcastReceiver loginBroadcastReceiver = new BroadcastReceiver() {
-        String statusLogin = getIntent().getStringExtra(STATUS_LOGIN);
         @Override
-
         public void onReceive(Context context, Intent intent) {
-
+            String statusLogin = intent.getStringExtra(STATUS_LOGIN);
+            switch (statusLogin) {
+                case STATUS_LOGIN_SUCCESS:
+                    MyToast.successfulToast(LoginActivity.this, "Login Successfully!");
+                case STATUS_LOGIN_FAILED:
+                    MyToast.errorToast(LoginActivity.this, "Login Failed! Please try again later!");
+                case STATUS_LOGIN_ERROR:
+                    MyToast.warningToast(LoginActivity.this, "All Field must be filled!");
+            }
         }
-    }
+    };
 
     private void initActivity(){
         til_username = findViewById(R.id.til_username);
