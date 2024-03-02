@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
 import fpt.edu.fumic.database.model.User;
 
 @Entity(tableName = "USER")
@@ -17,7 +19,7 @@ public class UserEntity implements User {
     private String id;
     private String password;
     private String name;
-    private int age;
+    private Date dob;
     private int gender;
     private String email;
     private String phone;
@@ -26,16 +28,15 @@ public class UserEntity implements User {
 
     public UserEntity() {};
 
-    public UserEntity(String id, String password, String name, int age, int gender, String email, String phone, int role, String notification) {
+    public UserEntity(@NonNull String id, String password, String name, Date dob, int gender, String email, String phone, int role) {
         this.id = id;
         this.password = password;
         this.name = name;
-        this.age = age;
+        this.dob = dob;
         this.gender = gender;
         this.email = email;
         this.phone = phone;
         this.role = role;
-        this.notification = notification;
     }
 
     public void setId(@NonNull String id) {
@@ -50,8 +51,8 @@ public class UserEntity implements User {
         this.name = name;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
 
     public void setGender(int gender) {
@@ -87,8 +88,8 @@ public class UserEntity implements User {
         return name;
     }
 
-    public int getAge() {
-        return age;
+    public Date getDob() {
+        return dob;
     }
 
     public int getGender() {

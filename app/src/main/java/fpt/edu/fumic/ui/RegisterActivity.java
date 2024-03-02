@@ -24,7 +24,9 @@ import java.util.Date;
 import java.util.Objects;
 
 import fpt.edu.fumic.R;
+import fpt.edu.fumic.database.AppDatabase;
 import fpt.edu.fumic.database.dao.UserDAO;
+import fpt.edu.fumic.database.entity.UserEntity;
 import fpt.edu.fumic.utils.DateConverterStrDate;
 import fpt.edu.fumic.utils.LoadingDialog;
 import fpt.edu.fumic.utils.MyToast;
@@ -45,6 +47,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Button btRegister;
     private IntentFilter intentFilter;
     private LoadingDialog loadingDialog;
+
     UserDAO userDAO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         //Init intent filter
         initIntentFilter();
         //Connect DAO database
-
+        AppDatabase appDatabase = AppDatabase.getInstance(this);
+        userDAO = appDatabase.userDAO();
         //Setup function buttons of activity
         ivBack.setOnClickListener(this);
         tvLogin.setOnClickListener(this);
@@ -113,7 +117,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     };
     //REGISTER PROCESS
-    private void registerSystem(){
+    private void registerSystem() throws ParseException {
         loadingDialog.startLoadingDialog();
         String fullName = getText(tilFullname);
         String dob = getText(tilDoB);
@@ -161,6 +165,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             tilRepassword.setError("Password not matched!");
             sendRegisterStatusToBoardcast(STATUS_REGISTER_FAILED);
         } else {
+            Date xDob = DateConverterStrDate.stringToDate(dob);
+            userDAO.insertUser(new UserEntity(username, password, fullName, xDob, gender, email, phone, 0));
             toLoginActivity();
             sendRegisterStatusToBoardcast(STATUS_REGISTER_SUCCESS);
         }
@@ -250,7 +256,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         } else if (view.getId() == R.id.tie_dob) {
             showDateDialog();
         } else if (view.getId() == R.id.bt_register) {
-            registerSystem();
+            try {
+                registerSystem();
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
         } else if (view.getId() == R.id.tv_login) {
             toLoginActivity();
         }

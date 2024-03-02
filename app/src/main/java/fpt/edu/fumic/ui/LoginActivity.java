@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +18,10 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Objects;
 
 import fpt.edu.fumic.R;
+import fpt.edu.fumic.database.AppDatabase;
 import fpt.edu.fumic.database.dao.UserDAO;
+import fpt.edu.fumic.database.entity.UserEntity;
+import fpt.edu.fumic.repository.UserRepository;
 import fpt.edu.fumic.utils.LoadingDialog;
 import fpt.edu.fumic.utils.MyToast;
 
@@ -34,7 +38,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView tv_Register;
     LoadingDialog loadingDialog;
     IntentFilter intentFilter;
-    UserDAO userDAO;
+    UserRepository userDAO;
+    boolean rememberMe = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +49,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //Init intent filter
         initIntentFilter();
         //Connect DAO database
+
         //Setup function buttons of activity
         bt_login.setOnClickListener(this);
         tv_Register.setOnClickListener(this);
+
+        getPreferencesMemory();
 
         loadingDialog = new LoadingDialog(LoginActivity.this);
     }
@@ -64,6 +72,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         intentFilter.addAction(ACTION_LOGIN);
     }
 
+
+    private void setPreferencesMemory(){
+        SharedPreferences sharedPreferences = getSharedPreferences("login_info", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("username", getText(til_username));
+        editor.putString("password", getText(til_password));
+        editor.putBoolean("remember_me", true); // Lưu trạng thái "Remember Me"
+        editor.apply();
+    }
+    private void getPreferencesMemory(){
+        SharedPreferences sharedPreferences = getSharedPreferences("login_info", Context.MODE_PRIVATE);
+        String savedUsername = sharedPreferences.getString("username", null);
+        String savedPassword = sharedPreferences.getString("password", null);
+        if(savedUsername != null && savedPassword != null){
+            Objects.requireNonNull(til_username.getEditText()).setText(savedUsername);
+            Objects.requireNonNull(til_password.getEditText()).setText(savedPassword);
+            check_box_remember.setChecked(true);
+            loginSystem();
+        }
+    }
     private void sendLoginStatusToBoardcast(String statusLoginStr) {
         Intent loginIntent = new Intent();
         loginIntent.setAction(ACTION_LOGIN);
@@ -90,14 +118,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         }
     };
+
     private void loginSystem() {
         loadingDialog.startLoadingDialog();
         String username = getText(til_username);
         String password = getText(til_password);
         String statusLogin = STATUS_LOGIN_ERROR;
+        if(check_box_remember.isChecked()){
+            setPreferencesMemory();
+        }else {
+            SharedPreferences sharedPreferences = getSharedPreferences("login_info", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.apply();
+        }
         if(!username.isEmpty() && !password.isEmpty()){
-            statusLogin = STATUS_LOGIN_SUCCESS;
-            toUserProfileActivity(username);
+            UserEntity user = userDAO.getUserById(username);
+            if(user != null){
+                if (user.getPassword().equals(password)){
+                    statusLogin = STATUS_LOGIN_SUCCESS;
+                    toUserProfileActivity(username);
+                } else {
+                    statusLogin = STATUS_LOGIN_FAILED;
+                }
+            }else {
+                statusLogin = STATUS_LOGIN_FAILED;
+            }
         }
         sendLoginStatusToBoardcast(statusLogin);
     }
