@@ -12,4 +12,6 @@ import fpt.edu.fumic.database.entity.UserEntity;
 public interface UserDAO {
     @Query("SELECT * FROM USER")
     LiveData<List<UserEntity>> getAllUser();
+    @Query("SELECT * FROM USER WHERE Id = :username")
+    UserEntity getUserById(String username);
 }
