@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @SuppressLint("SimpleDateFormat")
-public class DateConverter {
+public class DateConverterStrDate {
     static SimpleDateFormat spDate = new SimpleDateFormat("yyyy-MM-dd");
     static SimpleDateFormat spDateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 

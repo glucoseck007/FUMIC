@@ -24,8 +24,8 @@ import java.util.Date;
 import java.util.Objects;
 
 import fpt.edu.fumic.R;
-import fpt.edu.fumic.dao.UserDAO;
-import fpt.edu.fumic.utils.DateConverter;
+import fpt.edu.fumic.database.dao.UserDAO;
+import fpt.edu.fumic.utils.DateConverterStrDate;
 import fpt.edu.fumic.utils.LoadingDialog;
 import fpt.edu.fumic.utils.MyToast;
 
@@ -37,14 +37,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         , STATUS_REGISTER_ERROR = "register error"
         , EMPTY_FIELD_WARNING = "This field can not empty!"
         ;
-    TextInputLayout tilFullname, tilEmail, tilPhone, tilUsername, tilPassword, tilRepassword, tilDoB;
-    TextInputEditText tieDate;
-    RadioGroup rdgGender;
-    TextView tvLogin;
-    ImageView ivBack;
-    Button btRegister;
-    IntentFilter intentFilter;
-    LoadingDialog loadingDialog;
+    private TextInputLayout tilFullname, tilEmail, tilPhone, tilUsername, tilPassword, tilRepassword, tilDoB;
+    private TextInputEditText tieDate;
+    private RadioGroup rdgGender;
+    private TextView tvLogin;
+    private ImageView ivBack;
+    private Button btRegister;
+    private IntentFilter intentFilter;
+    private LoadingDialog loadingDialog;
     UserDAO userDAO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         //Init intent filter
         initIntentFilter();
         //Connect DAO database
-        userDAO = new UserDAO(this);
+
         //Setup function buttons of activity
         ivBack.setOnClickListener(this);
         tvLogin.setOnClickListener(this);
@@ -175,7 +175,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         // Show dialog
         DatePickerDialog datePickerDialog = new DatePickerDialog(RegisterActivity.this, (datePicker, y, m, d) -> {
             calendar.set(y, m, d);
-            tieDate.setText(DateConverter.dateToString(calendar.getTime()));
+            tieDate.setText(DateConverterStrDate.dateToString(calendar.getTime()));
         }, year, month, date);
 
         datePickerDialog.show();
@@ -190,7 +190,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
     private boolean isDate(String dateStr) {
         try {
-            Date date = DateConverter.stringToDate(dateStr);
+            Date date = DateConverterStrDate.stringToDate(dateStr);
             return true;
         } catch (ParseException e) {
             e.printStackTrace();

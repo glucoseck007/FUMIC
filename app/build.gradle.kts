@@ -29,7 +29,9 @@ android {
 }
 
 dependencies {
-
+    implementation("androidx.room:room-runtime:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+    androidTestImplementation("androidx.room:room-testing:2.6.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation ("io.github.shashank02051997:FancyToast:2.0.2")
     implementation("com.airbnb.android:lottie:6.3.0")
