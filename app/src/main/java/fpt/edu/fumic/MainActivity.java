@@ -22,7 +22,5 @@ public class MainActivity extends AppCompatActivity {
         mFumicDB = new FumicDB(this);
         categoryDAO.getAllCategory();
         Log.d("MainActivity", "Database status: " + (mFumicDB.getReadableDatabase() != null ? "Created" : "Not created"));
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
     }
 }
