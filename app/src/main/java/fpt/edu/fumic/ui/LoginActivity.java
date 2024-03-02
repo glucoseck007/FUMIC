@@ -22,6 +22,7 @@ import java.util.Objects;
 
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.dao.UserDAO;
+import fpt.edu.fumic.utils.MyToast;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String ACTION_LOGIN = "action login"
@@ -52,6 +53,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             String statusLogin = intent.getStringExtra(STATUS_LOGIN);
             switch (statusLogin) {
                 case STATUS_LOGIN_SUCCESS:
+                    MyToast.successfulToast(LoginActivity.this, "Login Successfully!");
+                case STATUS_LOGIN_FAILED:
+                    MyToast.errorToast(LoginActivity.this, "Login Failed! Please try again later!");
+                case STATUS_LOGIN_ERROR:
+                    MyToast.warningToast(LoginActivity.this, "All Field must be filled!");
             }
         }
     };
