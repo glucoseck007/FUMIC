@@ -37,8 +37,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView tv_Register;
     LoadingDialog loadingDialog;
     IntentFilter intentFilter;
-    AppDatabase appDatabase = AppDatabase.getInstance(this);
-    UserDAO userDAO = appDatabase.userDAO();
+
+    UserDAO userDAO;
     boolean rememberMe = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +49,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //Init intent filter
         initIntentFilter();
         //Connect DAO database
+        AppDatabase appDatabase = AppDatabase.getInstance(this);
+        userDAO = appDatabase.userDAO();
         //Setup function buttons of activity
         bt_login.setOnClickListener(this);
         tv_Register.setOnClickListener(this);
