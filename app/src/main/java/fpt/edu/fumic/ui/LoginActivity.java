@@ -21,6 +21,7 @@ import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.AppDatabase;
 import fpt.edu.fumic.database.dao.UserDAO;
 import fpt.edu.fumic.database.entity.UserEntity;
+import fpt.edu.fumic.repository.UserRepository;
 import fpt.edu.fumic.utils.LoadingDialog;
 import fpt.edu.fumic.utils.MyToast;
 
@@ -37,8 +38,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView tv_Register;
     LoadingDialog loadingDialog;
     IntentFilter intentFilter;
-
-    UserDAO userDAO;
+    UserRepository userDAO;
     boolean rememberMe = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //Init intent filter
         initIntentFilter();
         //Connect DAO database
-        AppDatabase appDatabase = AppDatabase.getInstance(this);
-        userDAO = appDatabase.userDAO();
+
         //Setup function buttons of activity
         bt_login.setOnClickListener(this);
         tv_Register.setOnClickListener(this);
