@@ -47,21 +47,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         userDAO = new UserDAO(this);
     }
 
-    private final BroadcastReceiver loginBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String statusLogin = intent.getStringExtra(STATUS_LOGIN);
-            switch (statusLogin) {
-                case STATUS_LOGIN_SUCCESS:
-                    MyToast.successfulToast(LoginActivity.this, "Login Successfully!");
-                case STATUS_LOGIN_FAILED:
-                    MyToast.errorToast(LoginActivity.this, "Login Failed! Please try again later!");
-                case STATUS_LOGIN_ERROR:
-                    MyToast.warningToast(LoginActivity.this, "All Field must be filled!");
-            }
-        }
-    };
-
     private void initActivity(){
         til_username = findViewById(R.id.til_username);
         til_password = findViewById(R.id.til_password);
@@ -78,6 +63,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private String getText(TextInputLayout textInputLayout) {
         return Objects.requireNonNull(textInputLayout.getEditText()).getText().toString().trim();
     }
+
+    private void sendLoginStatusToBoardcast(String statusLoginStr) {
+        Intent loginIntent = new Intent();
+        loginIntent.setAction(ACTION_LOGIN);
+        loginIntent.putExtra(STATUS_LOGIN, statusLoginStr);
+        sendBroadcast(loginIntent);
+    }
+    private final BroadcastReceiver loginBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String statusLogin = intent.getStringExtra(STATUS_LOGIN);
+            switch (statusLogin) {
+                case STATUS_LOGIN_SUCCESS:
+                    MyToast.successfulToast(LoginActivity.this, "Login Successfully!");
+                case STATUS_LOGIN_FAILED:
+                    MyToast.errorToast(LoginActivity.this, "Login Failed! Please try again later!");
+                case STATUS_LOGIN_ERROR:
+                    MyToast.warningToast(LoginActivity.this, "All Field must be filled!");
+            }
+        }
+    };
+
+    private void openPageAfterLoginSuccess(){
+
+    }
+
+
 
     @Override
     public void onClick(View view) {
