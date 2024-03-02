@@ -1,49 +1,99 @@
 package fpt.edu.fumic.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import fpt.edu.fumic.R;
+import com.google.android.material.textfield.TextInputLayout;
 
-public class LoginActivity extends AppCompatActivity {
-    EditText edit_username, edit_password;
+import java.util.Objects;
+
+import fpt.edu.fumic.R;
+import fpt.edu.fumic.dao.UserDAO;
+import fpt.edu.fumic.utils.MyToast;
+
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    public static final String ACTION_LOGIN = "action login"
+            , STATUS_LOGIN = "status login"
+            , STATUS_LOGIN_SUCCESS = "login successful"
+            , STATUS_LOGIN_FAILED = "login failed"
+            , STATUS_LOGIN_ERROR = "login error"
+            , KEY_LOGIN_USER = "keyUser";
+    TextInputLayout til_username, til_password;
     CheckBox check_box_remember;
-    Button bt_login, bt_register;
+    Button bt_login;
+    TextView tv_Register;
+    IntentFilter intentFilter;
+    UserDAO userDAO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //Connect elements
-        edit_username = findViewById(R.id.edit_username);
-        edit_password = findViewById(R.id.edit_password);
-        check_box_remember = findViewById(R.id.check_box_remember);
+        initActivity();
+        //Connect DAO database
+        userDAO = new UserDAO(this);
+    }
+
+    private void initActivity(){
+        til_username = findViewById(R.id.til_username);
+        til_password = findViewById(R.id.til_password);
+        check_box_remember = findViewById(R.id.chkbox_remember_me);
         bt_login = findViewById(R.id.bt_login);
-        bt_register = findViewById(R.id.bt_register);
-        bt_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String username = edit_username.getText().toString();
-                String password = edit_password.getText().toString();
-                if (username.length() == 0) {
-                    edit_username.setError("This field can not empty!");
-                } else if(password.length() == 0) {
-                    edit_password.setError("This field can not empty!");
-                }else {
-                    Toast.makeText(LoginActivity.this, "Login successfully!", Toast.LENGTH_SHORT).show();
-                }
+        tv_Register = findViewById(R.id.tv_register);
+    }
+
+    private void initIntentFilter() {
+        intentFilter = new IntentFilter();
+        intentFilter.addAction(ACTION_LOGIN);
+    }
+    @NonNull
+    private String getText(TextInputLayout textInputLayout) {
+        return Objects.requireNonNull(textInputLayout.getEditText()).getText().toString().trim();
+    }
+
+    private void sendLoginStatusToBoardcast(String statusLoginStr) {
+        Intent loginIntent = new Intent();
+        loginIntent.setAction(ACTION_LOGIN);
+        loginIntent.putExtra(STATUS_LOGIN, statusLoginStr);
+        sendBroadcast(loginIntent);
+    }
+    private final BroadcastReceiver loginBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String statusLogin = intent.getStringExtra(STATUS_LOGIN);
+            switch (statusLogin) {
+                case STATUS_LOGIN_SUCCESS:
+                    MyToast.successfulToast(LoginActivity.this, "Login Successfully!");
+                case STATUS_LOGIN_FAILED:
+                    MyToast.errorToast(LoginActivity.this, "Login Failed! Please try again later!");
+                case STATUS_LOGIN_ERROR:
+                    MyToast.warningToast(LoginActivity.this, "All Field must be filled!");
             }
-        });
-        bt_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(LoginActivity.this, "Register page", Toast.LENGTH_SHORT).show();
-            }
-        });
+        }
+    };
+
+    private void openPageAfterLoginSuccess(){
+
+    }
+
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+        }
     }
 }
