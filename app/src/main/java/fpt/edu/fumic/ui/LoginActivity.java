@@ -17,7 +17,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Objects;
 
 import fpt.edu.fumic.R;
-import fpt.edu.fumic.dao.UserDAO;
+import fpt.edu.fumic.database.dao.UserDAO;
 import fpt.edu.fumic.utils.LoadingDialog;
 import fpt.edu.fumic.utils.MyToast;
 
@@ -44,7 +44,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //Init intent filter
         initIntentFilter();
         //Connect DAO database
-        userDAO = new UserDAO(this);
         //Setup function buttons of activity
         bt_login.setOnClickListener(this);
         tv_Register.setOnClickListener(this);
