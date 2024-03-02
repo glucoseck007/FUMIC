@@ -101,6 +101,7 @@
                             android:layout_height="wrap_content"
                             android:buttonTint="@color/DarkOrange"
                             android:checked="true"
+                            android:minHeight="48dp"
                             android:text="Male"
                             android:textColor="@color/Black"
                             android:textSize="14sp" />
@@ -110,6 +111,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
+                            android:minHeight="48dp"
                             android:buttonTint="@color/DarkOrange"
                             android:text="Female"
                             android:textColor="@color/Black"
