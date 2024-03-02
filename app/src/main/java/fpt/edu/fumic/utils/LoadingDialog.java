@@ -19,7 +19,7 @@ public class LoadingDialog {
     private Activity activity;
     private Dialog dialog;
 
-    LoadingDialog(Activity myActivity){
+    public LoadingDialog(Activity myActivity){
         this.activity = myActivity;
     }
     void startLoadingDialog(){
