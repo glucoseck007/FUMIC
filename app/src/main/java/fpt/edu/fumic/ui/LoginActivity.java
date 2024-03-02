@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         initIntentFilter();
         //Connect DAO database
         userDAO = new UserDAO(this);
-        //Setup functions of activity
+        //Setup function buttons of activity
         bt_login.setOnClickListener(this);
         tv_Register.setOnClickListener(this);
 
