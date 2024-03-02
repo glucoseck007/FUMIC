@@ -1,9 +1,7 @@
 package fpt.edu.fumic.ui;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,9 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -22,6 +18,7 @@ import java.util.Objects;
 
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.dao.UserDAO;
+import fpt.edu.fumic.utils.LoadingDialog;
 import fpt.edu.fumic.utils.MyToast;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -35,6 +32,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     CheckBox check_box_remember;
     Button bt_login;
     TextView tv_Register;
+    LoadingDialog loadingDialog;
     IntentFilter intentFilter;
     UserDAO userDAO;
     @Override
@@ -43,8 +41,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         //Connect elements
         initActivity();
+        //Init intent filter
+        initIntentFilter();
         //Connect DAO database
         userDAO = new UserDAO(this);
+        //Setup functions of activity
+        bt_login.setOnClickListener(this);
+        tv_Register.setOnClickListener(this);
+
+        loadingDialog = new LoadingDialog(LoginActivity.this);
     }
 
     private void initActivity(){
@@ -59,10 +64,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         intentFilter = new IntentFilter();
         intentFilter.addAction(ACTION_LOGIN);
     }
-    @NonNull
-    private String getText(TextInputLayout textInputLayout) {
-        return Objects.requireNonNull(textInputLayout.getEditText()).getText().toString().trim();
-    }
 
     private void sendLoginStatusToBoardcast(String statusLoginStr) {
         Intent loginIntent = new Intent();
@@ -74,26 +75,58 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         @Override
         public void onReceive(Context context, Intent intent) {
             String statusLogin = intent.getStringExtra(STATUS_LOGIN);
-            switch (statusLogin) {
+            switch (Objects.requireNonNull(statusLogin)) {
                 case STATUS_LOGIN_SUCCESS:
                     MyToast.successfulToast(LoginActivity.this, "Login Successfully!");
                 case STATUS_LOGIN_FAILED:
-                    MyToast.errorToast(LoginActivity.this, "Login Failed! Please try again later!");
+                    MyToast.warningToast(LoginActivity.this, "Login Failed! Check login information and try again!");
                 case STATUS_LOGIN_ERROR:
-                    MyToast.warningToast(LoginActivity.this, "All Field must be filled!");
+                    MyToast.errorToast(LoginActivity.this, "All Field must be filled!");
             }
         }
     };
-
-    private void openPageAfterLoginSuccess(){
-
+    private void loginSystem() {
+        loadingDialog.startLoadingDialog();
+        String username = getText(til_username);
+        String password = getText(til_password);
+        String statusLogin = STATUS_LOGIN_ERROR;
+        if(!username.isEmpty() && !password.isEmpty()){
+            statusLogin = STATUS_LOGIN_SUCCESS;
+            toUserProfileActivity(username);
+        }
+        sendLoginStatusToBoardcast(statusLogin);
     }
-
-
+    @NonNull
+    private String getText(TextInputLayout textInputLayout) {
+        return Objects.requireNonNull(textInputLayout.getEditText()).getText().toString().trim();
+    }
+    private void toUserProfileActivity(String username){
+        Intent intentUserProfile = new Intent(LoginActivity.this, UserProfileActivity.class);
+        intentUserProfile.putExtra(KEY_LOGIN_USER, username);
+        startActivity(intentUserProfile);
+    }
+    private void toRegisterActivity() {
+        Intent intentRegisterActivity = new Intent(LoginActivity.this, RegisterActivity.class);
+        startActivity(intentRegisterActivity);
+    }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        if(view.getId() == R.id.bt_login){
+            loginSystem();
+        } else if (view.getId() == R.id.tv_register) {
+            toRegisterActivity();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        registerReceiver(loginBroadcastReceiver, intentFilter);
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(loginBroadcastReceiver);
     }
 }
