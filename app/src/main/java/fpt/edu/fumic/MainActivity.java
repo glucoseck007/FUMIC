@@ -21,5 +21,4 @@ public class MainActivity extends AppCompatActivity {
         categoryDAO.getAllCategory();
         Log.d("MainActivity", "Database status: " + (mFumicDB.getReadableDatabase() != null ? "Created" : "Not created"));
     }
-
 }
