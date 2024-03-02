@@ -7,14 +7,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
 import androidx.room.Query;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import fpt.edu.fumic.database.FumicDB;
 import fpt.edu.fumic.database.entity.CategoryEntity;
 
+@Dao
 public interface CategoryDAO {
     @Query("SELECT * FROM CATEGORY")
     LiveData<List<CategoryEntity>> loadAllCategories();
