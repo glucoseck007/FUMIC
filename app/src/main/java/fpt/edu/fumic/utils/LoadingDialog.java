@@ -19,10 +19,10 @@ public class LoadingDialog {
     private Activity activity;
     private Dialog dialog;
 
-    LoadingDialog(Activity myActivity){
+    public LoadingDialog(Activity myActivity){
         this.activity = myActivity;
     }
-    void startLoadingDialog(){
+    public void startLoadingDialog(){
         LayoutInflater inflater = this.activity.getLayoutInflater();
         dialog = new Dialog(this.activity);
         dialog.setContentView(inflater.inflate(R.layout.layout_loading, null));
@@ -30,7 +30,7 @@ public class LoadingDialog {
         dialog.show();
     }
 
-    void stopLoadingDialog(){
+    public void stopLoadingDialog(){
         dialog.dismiss();
     }
 }
