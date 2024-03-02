@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mFumicDB = new FumicDB(this);
-        categoryDAO.getAll();
+        categoryDAO.getAllCategory();
         Log.d("MainActivity", "Database status: " + (mFumicDB.getReadableDatabase() != null ? "Created" : "Not created"));
     }
 
