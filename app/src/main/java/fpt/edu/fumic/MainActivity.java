@@ -2,13 +2,10 @@ package fpt.edu.fumic;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import fpt.edu.fumic.dao.CategoryDAO;
 import fpt.edu.fumic.database.FumicDB;
-import fpt.edu.fumic.ui.LoginActivity;
-
 
 public class MainActivity extends AppCompatActivity {
 
