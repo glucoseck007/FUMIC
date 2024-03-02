@@ -2,6 +2,7 @@ package fpt.edu.fumic;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 <<<<<<< HEAD
@@ -11,6 +12,7 @@ import fpt.edu.fumic.database.FumicDB;
 =======
 import fpt.edu.fumic.dao.CategoryDAO;
 import fpt.edu.fumic.database.FumicDB;
+import fpt.edu.fumic.ui.LoginActivity;
 
 >>>>>>> e6782aae32579da83e2f8654fab8f7eace06fcf0
 
@@ -33,5 +35,4 @@ public class MainActivity extends AppCompatActivity {
 >>>>>>> e6782aae32579da83e2f8654fab8f7eace06fcf0
         Log.d("MainActivity", "Database status: " + (mFumicDB.getReadableDatabase() != null ? "Created" : "Not created"));
     }
-
 }
