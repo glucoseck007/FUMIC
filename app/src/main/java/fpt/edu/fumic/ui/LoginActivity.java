@@ -137,7 +137,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (user.getPassword().equals(password)){
                     statusLogin = STATUS_LOGIN_SUCCESS;
                     toUserProfileActivity(username);
+                } else {
+                    statusLogin = STATUS_LOGIN_FAILED;
                 }
+            }else {
+                statusLogin = STATUS_LOGIN_FAILED;
             }
         }
         sendLoginStatusToBoardcast(statusLogin);
