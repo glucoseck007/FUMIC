@@ -256,7 +256,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         } else if (view.getId() == R.id.tie_dob) {
             showDateDialog();
         } else if (view.getId() == R.id.bt_register) {
-            registerSystem();
+            try {
+                registerSystem();
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
         } else if (view.getId() == R.id.tv_login) {
             toLoginActivity();
         }
