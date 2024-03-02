@@ -7,8 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
