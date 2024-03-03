@@ -166,7 +166,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             sendRegisterStatusToBoardcast(STATUS_REGISTER_FAILED);
         } else {
             Date xDob = DateConverterStrDate.stringToDate(dob);
-            userRepository.insertUser(new UserEntity(username, password, fullName, xDob, gender, email, phone, 0));
+            userRepository.insertUser(new UserEntity(username, password, fullName, xDob, gender, email, phone, 2));//0 admin 1 mod 2 user
             toLoginActivity();
             sendRegisterStatusToBoardcast(STATUS_REGISTER_SUCCESS);
         }

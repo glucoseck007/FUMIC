@@ -52,7 +52,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         bt_login.setOnClickListener(this);
         tv_Register.setOnClickListener(this);
         loadingDialog = new LoadingDialog(LoginActivity.this);
-        getPreferencesMemory();
+        //Get login saved information
+        SharedPreferences sharedPreferences = getSharedPreferences("login_info", Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", null);
+        String password = sharedPreferences.getString("password", null);
+        if(username != null && password != null){
+            Objects.requireNonNull(til_username.getEditText()).setText(username);
+            Objects.requireNonNull(til_password.getEditText()).setText(password);
+            check_box_remember.setChecked(true);
+        }else {
+            check_box_remember.setChecked(false);
+        }
     }
 
     private void initActivity(){
@@ -76,19 +86,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editor.putString("password", getText(til_password));
         editor.putBoolean("remember_me", true); // Lưu trạng thái "Remember Me"
         editor.apply();
-    }
-    private void getPreferencesMemory(){
-        SharedPreferences sharedPreferences = getSharedPreferences("login_info", Context.MODE_PRIVATE);
-        String savedUsername = sharedPreferences.getString("username", null);
-        String savedPassword = sharedPreferences.getString("password", null);
-        if(savedUsername != null && savedPassword != null){
-            Objects.requireNonNull(til_username.getEditText()).setText(savedUsername);
-            Objects.requireNonNull(til_password.getEditText()).setText(savedPassword);
-            check_box_remember.setChecked(true);
-            loginSystem();
-        }else {
-            check_box_remember.setChecked(false);
-        }
     }
     private void sendLoginStatusToBoardcast(String statusLoginStr) {
         Intent loginIntent = new Intent();
@@ -122,19 +119,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String username = getText(til_username);
         String password = getText(til_password);
         String statusLogin = STATUS_LOGIN_ERROR;
-        if(check_box_remember.isChecked()){
-            setPreferencesMemory();
-        }else {
-            SharedPreferences sharedPreferences = getSharedPreferences("login_info", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.clear();
-            editor.apply();
-        }
+
         if(!username.isEmpty() && !password.isEmpty()){
             UserEntity user = userRepository.getUserById(username);
             if(user != null){
                 if (user.getPassword().equals(password)){
                     statusLogin = STATUS_LOGIN_SUCCESS;
+                    if(check_box_remember.isChecked()){
+                        setPreferencesMemory();
+                    }else {
+                        SharedPreferences sharedPreferences = getSharedPreferences("login_info", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.clear();
+                        editor.apply();
+                    }
                     toMainPage(username);
                 } else {
                     statusLogin = STATUS_LOGIN_FAILED;
@@ -150,8 +148,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return Objects.requireNonNull(textInputLayout.getEditText()).getText().toString().trim();
     }
     private void toMainPage(String username){
-        loadingDialog.stopLoadingDialog();
-        finish();
         Intent intentMainPage = new Intent(LoginActivity.this, MainActivity.class);
         intentMainPage.putExtra(KEY_LOGIN_USER, username);
         startActivity(intentMainPage);
