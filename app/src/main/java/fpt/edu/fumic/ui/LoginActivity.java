@@ -18,8 +18,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Objects;
 
 import fpt.edu.fumic.R;
-import fpt.edu.fumic.database.AppDatabase;
-import fpt.edu.fumic.database.dao.UserDAO;
 import fpt.edu.fumic.database.entity.UserEntity;
 import fpt.edu.fumic.repository.UserRepository;
 import fpt.edu.fumic.utils.LoadingDialog;
@@ -38,8 +36,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView tv_Register;
     LoadingDialog loadingDialog;
     IntentFilter intentFilter;
-    UserRepository userDAO;
-    boolean rememberMe = false;
+    UserRepository userRepository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +46,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //Init intent filter
         initIntentFilter();
         //Connect DAO database
-
+        userRepository = new UserRepository(getApplicationContext());
         //Setup function buttons of activity
         bt_login.setOnClickListener(this);
         tv_Register.setOnClickListener(this);
@@ -90,6 +87,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Objects.requireNonNull(til_password.getEditText()).setText(savedPassword);
             check_box_remember.setChecked(true);
             loginSystem();
+        }else {
+            check_box_remember.setChecked(false);
         }
     }
     private void sendLoginStatusToBoardcast(String statusLoginStr) {
@@ -133,7 +132,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             editor.apply();
         }
         if(!username.isEmpty() && !password.isEmpty()){
-            UserEntity user = userDAO.getUserById(username);
+            UserEntity user = userRepository.getUserById(username);
             if(user != null){
                 if (user.getPassword().equals(password)){
                     statusLogin = STATUS_LOGIN_SUCCESS;
