@@ -194,6 +194,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
         return true;
     }
+    private boolean isPhone(String phone) {
+        if (!phone.matches(UserEntity.MATCHES_PHONENUMBER)) {
+            tilEmail.setError("Wrong email format!");
+            return false;
+        }
+        return true;
+    }
     private boolean isDate(String dateStr) {
         try {
             Date date = DateConverterStrDate.stringToDate(dateStr);
