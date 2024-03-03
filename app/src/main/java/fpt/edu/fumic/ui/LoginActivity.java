@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             , STATUS_LOGIN_SUCCESS = "login successful"
             , STATUS_LOGIN_FAILED = "login failed"
             , STATUS_LOGIN_ERROR = "login error"
-            , KEY_LOGIN_USER = "keyUser";
+            , KEY_USER = "keyUser";
     TextInputLayout til_username, til_password;
     CheckBox check_box_remember;
     Button bt_login;
@@ -125,6 +125,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if(user != null){
                 if (user.getPassword().equals(password)){
                     statusLogin = STATUS_LOGIN_SUCCESS;
+                    toMainPage(username);
                     if(check_box_remember.isChecked()){
                         setPreferencesMemory();
                     }else {
@@ -133,7 +134,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         editor.clear();
                         editor.apply();
                     }
-                    toMainPage(username);
                 } else {
                     statusLogin = STATUS_LOGIN_FAILED;
                 }
@@ -149,8 +149,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
     private void toMainPage(String username){
         Intent intentMainPage = new Intent(LoginActivity.this, MainActivity.class);
-        intentMainPage.putExtra(KEY_LOGIN_USER, username);
+        intentMainPage.putExtra(KEY_USER, username);
         startActivity(intentMainPage);
+        finish();
     }
     private void toRegisterActivity() {
         Intent intentRegisterActivity = new Intent(LoginActivity.this, RegisterActivity.class);
