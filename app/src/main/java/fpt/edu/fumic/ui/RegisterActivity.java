@@ -1,6 +1,7 @@
 package fpt.edu.fumic.ui;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -8,6 +9,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +29,7 @@ import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.AppDatabase;
 import fpt.edu.fumic.database.dao.UserDAO;
 import fpt.edu.fumic.database.entity.UserEntity;
+import fpt.edu.fumic.repository.UserRepository;
 import fpt.edu.fumic.utils.DateConverterStrDate;
 import fpt.edu.fumic.utils.LoadingDialog;
 import fpt.edu.fumic.utils.MyToast;
@@ -48,7 +51,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private IntentFilter intentFilter;
     private LoadingDialog loadingDialog;
 
-    UserDAO userDAO;
+    UserRepository userDAO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +61,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         //Init intent filter
         initIntentFilter();
         //Connect DAO database
-        AppDatabase appDatabase = AppDatabase.getInstance(this);
-        userDAO = appDatabase.userDAO();
         //Setup function buttons of activity
         ivBack.setOnClickListener(this);
         tvLogin.setOnClickListener(this);
@@ -188,10 +189,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private boolean isEmail(String email) {
-//        if (!email.matches(User.MATCHES_EMAIL)) {
-//            tilEmail.setError("Wrong email format!");
-//            return false;
-//        }
+        if (!email.matches(UserEntity.MATCHES_EMAIL)) {
+            tilEmail.setError("Wrong email format!");
+            return false;
+        }
         return true;
     }
     private boolean isDate(String dateStr) {
@@ -236,10 +237,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         Objects.requireNonNull(tilEmail.getEditText()).setText("");
         Objects.requireNonNull(tilPassword.getEditText()).setText("");
     }
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     @Override
     protected void onStart() {
         super.onStart();
-        registerReceiver(registerBroadcastReceiver, intentFilter);
+        registerReceiver(registerBroadcastReceiver, intentFilter, Context.RECEIVER_NOT_EXPORTED);
     }
 
     @Override
