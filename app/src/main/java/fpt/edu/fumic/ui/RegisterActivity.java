@@ -26,8 +26,6 @@ import java.util.Date;
 import java.util.Objects;
 
 import fpt.edu.fumic.R;
-import fpt.edu.fumic.database.AppDatabase;
-import fpt.edu.fumic.database.dao.UserDAO;
 import fpt.edu.fumic.database.entity.UserEntity;
 import fpt.edu.fumic.repository.UserRepository;
 import fpt.edu.fumic.utils.DateConverterStrDate;
@@ -51,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private IntentFilter intentFilter;
     private LoadingDialog loadingDialog;
 
-    UserRepository userDAO;
+    UserRepository userRepository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +59,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         //Init intent filter
         initIntentFilter();
         //Connect DAO database
+        userRepository = new UserRepository(getApplicationContext());
         //Setup function buttons of activity
         ivBack.setOnClickListener(this);
         tvLogin.setOnClickListener(this);
@@ -167,7 +166,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             sendRegisterStatusToBoardcast(STATUS_REGISTER_FAILED);
         } else {
             Date xDob = DateConverterStrDate.stringToDate(dob);
-            userDAO.insertUser(new UserEntity(username, password, fullName, xDob, gender, email, phone, 0));
+            userRepository.insertUser(new UserEntity(username, password, fullName, xDob, gender, email, phone, 0));
             toLoginActivity();
             sendRegisterStatusToBoardcast(STATUS_REGISTER_SUCCESS);
         }
