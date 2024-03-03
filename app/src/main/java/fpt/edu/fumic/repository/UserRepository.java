@@ -29,6 +29,6 @@ public class UserRepository {
         return userDAO.getAllUser();
     }
     public UserEntity getUserById(String username){
-        return getUserById(username);
+        return userDAO.getUserById(username);
     }
 }
