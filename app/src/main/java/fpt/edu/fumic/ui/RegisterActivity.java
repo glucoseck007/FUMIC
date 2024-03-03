@@ -159,7 +159,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 tilPhone.setError(EMPTY_FIELD_WARNING);
             }
             sendRegisterStatusToBoardcast(STATUS_REGISTER_ERROR);
-        } else if(!isDate(dob) || !isEmail(email)) {
+        } else if(!isDate(dob) || !isEmail(email) || isPhone(phone)) {
             sendRegisterStatusToBoardcast(STATUS_REGISTER_FAILED);
         } else if (!rePassword.equals(password)) {
             tilRepassword.setError("Password not matched!");
@@ -196,7 +196,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
     private boolean isPhone(String phone) {
         if (!phone.matches(UserEntity.MATCHES_PHONENUMBER)) {
-            tilEmail.setError("Wrong email format!");
+            tilEmail.setError("Wrong phone format!");
             return false;
         }
         return true;
