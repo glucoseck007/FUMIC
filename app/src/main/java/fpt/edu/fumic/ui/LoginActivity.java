@@ -17,6 +17,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
 
+import fpt.edu.fumic.MainActivity;
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.entity.UserEntity;
 import fpt.edu.fumic.repository.UserRepository;
@@ -50,10 +51,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //Setup function buttons of activity
         bt_login.setOnClickListener(this);
         tv_Register.setOnClickListener(this);
-
-        getPreferencesMemory();
-
         loadingDialog = new LoadingDialog(LoginActivity.this);
+        getPreferencesMemory();
     }
 
     private void initActivity(){
@@ -136,7 +135,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if(user != null){
                 if (user.getPassword().equals(password)){
                     statusLogin = STATUS_LOGIN_SUCCESS;
-                    toUserProfileActivity(username);
+                    toMainPage(username);
                 } else {
                     statusLogin = STATUS_LOGIN_FAILED;
                 }
@@ -150,10 +149,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private String getText(TextInputLayout textInputLayout) {
         return Objects.requireNonNull(textInputLayout.getEditText()).getText().toString().trim();
     }
-    private void toUserProfileActivity(String username){
-        Intent intentUserProfile = new Intent(LoginActivity.this, UserProfileActivity.class);
-        intentUserProfile.putExtra(KEY_LOGIN_USER, username);
-        startActivity(intentUserProfile);
+    private void toMainPage(String username){
+        loadingDialog.stopLoadingDialog();
+        finish();
+        Intent intentMainPage = new Intent(LoginActivity.this, MainActivity.class);
+        intentMainPage.putExtra(KEY_LOGIN_USER, username);
+        startActivity(intentMainPage);
     }
     private void toRegisterActivity() {
         Intent intentRegisterActivity = new Intent(LoginActivity.this, RegisterActivity.class);
