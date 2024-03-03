@@ -12,7 +12,7 @@ import fpt.edu.fumic.database.model.User;
 public class UserEntity implements User {
 
 //    public static final String MATCHES_PHONENUMBER = "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$";
-    public static final String MATCHES_PHONENUMBER = "^0\\d{9}$\n";
+    public static final String MATCHES_PHONENUMBER = "^0\\d{9}$";
     public static final String MATCHES_EMAIL = "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
 
     @PrimaryKey
