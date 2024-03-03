@@ -19,7 +19,7 @@ Reading book app.
 
 Introduce the members of the project team. Include their names, roles, and any other pertinent details about their contributions to the project.
 
-- **[Name](https://github.com/Khanh)** - Social interaction: manage cmt
+- **[Name](https://github.com/Khanh)** - Social interaction: manage cmt 
 - **[Name](https://github.com/LapNguyenn)** - Login page, Register Page, Forgot Password Page
 - **[Name](https://github.com/Phong)** - Home page, book list, filter book
 - - **[Name](https://github.com/Linh)** - CRUD book
