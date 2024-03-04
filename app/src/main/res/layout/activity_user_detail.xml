@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".ui.UserProfileActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -41,7 +42,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
-                android:id="@+id/tvName"
+                android:id="@+id/tvNameTitle"
                 style="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,19 +55,6 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvEmail"
-                style="@style/TextAppearance.MaterialComponents.Body2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lines="1"
-                android:maxLength="40"
-                android:singleLine="true"
-                android:text="bnbbinh@gmail.com"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                android:textStyle="normal" />
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
@@ -74,22 +62,79 @@
                 android:background="#80E6E6E6" />
 
             <TextView
+                android:id="@+id/viewInformation"
                 style="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lines="1"
                 android:padding="10dp"
-                android:singleLine="true"
-                android:text="Tools"
+                android:text="Information"
                 android:textAlignment="textStart"
-                android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:drawableEndCompat="@drawable/angle_right" />
+
             <LinearLayout
-                android:visibility="visible"
-                android:id="@+id/viewBrowseBooks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:weightSum="12">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:background="@color/Transparent1"
+                        android:padding="10dp"
+                        android:src="@drawable/user"
+                        app:tint="@color/OrangeRed" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="1"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:singleLine="true"
+                        android:text="Name"
+                        android:textAlignment="textStart"
+                        android:textSize="11sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="1"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:singleLine="true"
+                        android:text="Lê Ngọc Lương"
+                        android:textAlignment="textStart"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -110,7 +155,7 @@
                         android:layout_gravity="center"
                         android:background="@color/Transparent1"
                         android:padding="10dp"
-                        android:src="@drawable/book"
+                        android:src="@drawable/date"
                         app:tint="@color/OrangeRed" />
 
                 </LinearLayout>
@@ -122,6 +167,20 @@
                     android:orientation="vertical">
 
                     <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="1"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:singleLine="true"
+                        android:text="Date of birth"
+                        android:textAlignment="textStart"
+                        android:textSize="11sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/tvDob"
                         style="@style/TextAppearance.MaterialComponents.Subtitle1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -129,18 +188,15 @@
                         android:paddingStart="5dp"
                         android:paddingEnd="5dp"
                         android:singleLine="true"
-                        android:text="Browse Books"
+                        android:text="22/22/22"
                         android:textAlignment="textStart"
                         android:textSize="14sp"
-                        android:textStyle="bold"
-                        app:drawableEndCompat="@drawable/angle_right" />
-
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>
+
             <LinearLayout
-                android:layout_marginTop="5dp"
-                android:id="@+id/viewInformation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -161,7 +217,7 @@
                         android:layout_gravity="center"
                         android:background="@color/Transparent1"
                         android:padding="10dp"
-                        android:src="@drawable/edit_info"
+                        android:src="@drawable/email"
                         app:tint="@color/OrangeRed" />
 
                 </LinearLayout>
@@ -173,6 +229,20 @@
                     android:orientation="vertical">
 
                     <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="1"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:singleLine="true"
+                        android:text="Email"
+                        android:textAlignment="textStart"
+                        android:textSize="11sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/tvEmail"
                         style="@style/TextAppearance.MaterialComponents.Subtitle1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -180,21 +250,17 @@
                         android:paddingStart="5dp"
                         android:paddingEnd="5dp"
                         android:singleLine="true"
-                        android:text="Information"
+                        android:text="luongkk@gmail.com"
                         android:textAlignment="textStart"
                         android:textSize="14sp"
-                        android:textStyle="bold"
-                        app:drawableEndCompat="@drawable/angle_right" />
-
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/viewFavourite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:orientation="horizontal"
                 android:padding="5dp"
                 android:weightSum="12">
@@ -213,7 +279,7 @@
                         android:layout_gravity="center"
                         android:background="@color/Transparent1"
                         android:padding="10dp"
-                        android:src="@drawable/favourite"
+                        android:src="@drawable/gender"
                         app:tint="@color/OrangeRed" />
 
                 </LinearLayout>
@@ -225,6 +291,20 @@
                     android:orientation="vertical">
 
                     <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="1"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:singleLine="true"
+                        android:text="Gender"
+                        android:textAlignment="textStart"
+                        android:textSize="11sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/tvGender"
                         style="@style/TextAppearance.MaterialComponents.Subtitle1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -232,21 +312,17 @@
                         android:paddingStart="5dp"
                         android:paddingEnd="5dp"
                         android:singleLine="true"
-                        android:text="Favourite"
+                        android:text="Nam"
                         android:textAlignment="textStart"
                         android:textSize="14sp"
-                        android:textStyle="bold"
-                        app:drawableEndCompat="@drawable/angle_right" />
-
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/viewHistories"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:orientation="horizontal"
                 android:padding="5dp"
                 android:weightSum="12">
@@ -265,7 +341,7 @@
                         android:layout_gravity="center"
                         android:background="@color/Transparent1"
                         android:padding="10dp"
-                        android:src="@drawable/histories"
+                        android:src="@drawable/phone"
                         app:tint="@color/OrangeRed" />
 
                 </LinearLayout>
@@ -277,6 +353,20 @@
                     android:orientation="vertical">
 
                     <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="1"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:singleLine="true"
+                        android:text="Phone number"
+                        android:textAlignment="textStart"
+                        android:textSize="11sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/tvPhone"
                         style="@style/TextAppearance.MaterialComponents.Subtitle1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -284,20 +374,17 @@
                         android:paddingStart="5dp"
                         android:paddingEnd="5dp"
                         android:singleLine="true"
-                        android:text="Hisroties"
+                        android:text="0379214569"
                         android:textAlignment="textStart"
                         android:textSize="14sp"
-                        android:textStyle="bold"
-                        app:drawableEndCompat="@drawable/angle_right" />
-
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>
+
             <LinearLayout
-                android:id="@+id/viewChangePassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:orientation="horizontal"
                 android:padding="5dp"
                 android:weightSum="12">
@@ -316,7 +403,7 @@
                         android:layout_gravity="center"
                         android:background="@color/Transparent1"
                         android:padding="10dp"
-                        android:src="@drawable/password"
+                        android:src="@drawable/role"
                         app:tint="@color/OrangeRed" />
 
                 </LinearLayout>
@@ -328,6 +415,20 @@
                     android:orientation="vertical">
 
                     <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="1"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:singleLine="true"
+                        android:text="Role"
+                        android:textAlignment="textStart"
+                        android:textSize="11sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/tvRole"
                         style="@style/TextAppearance.MaterialComponents.Subtitle1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -335,15 +436,14 @@
                         android:paddingStart="5dp"
                         android:paddingEnd="5dp"
                         android:singleLine="true"
-                        android:text="Change password"
+                        android:text="Admin"
                         android:textAlignment="textStart"
                         android:textSize="14sp"
-                        android:textStyle="bold"
-                        app:drawableEndCompat="@drawable/angle_right" />
-
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>
+
 
         </LinearLayout>
     </ScrollView>

@@ -31,4 +31,11 @@ public class BookRepository {
         return bookDAO.loadAllBooks();
     }
 
+    public List<BookEntity> getBooks(int status, int limit, int offset) {
+        return bookDAO.getBooks(status, limit, offset);
+    }
+
+    public void updateBook(BookEntity book) {
+        bookDAO.updateBook(book);
+    }
 }

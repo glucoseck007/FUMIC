@@ -13,6 +13,8 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 
+import java.util.Objects;
+
 import fpt.edu.fumic.R;
 
 public class LoadingDialog {
@@ -26,7 +28,7 @@ public class LoadingDialog {
         LayoutInflater inflater = this.activity.getLayoutInflater();
         dialog = new Dialog(this.activity);
         dialog.setContentView(inflater.inflate(R.layout.layout_loading, null));
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
     }
 
