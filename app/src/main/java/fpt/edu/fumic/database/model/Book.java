@@ -13,5 +13,5 @@ public interface Book {
     public int getNoOfView();
     public Date getDateUpload();
     public int getStatus();
-    public int getUserId();
+    public String getUserId();
 }
