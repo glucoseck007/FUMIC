@@ -38,7 +38,7 @@ public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase sInstance;
     private static final String DB_NAME = "FUMIC";
 
-    public static AppDatabase getInstance(final Context context) {
+    public static synchronized AppDatabase getInstance(final Context context) {
         if (sInstance == null) {
             synchronized (AppDatabase.class) {
                 if (sInstance == null) {

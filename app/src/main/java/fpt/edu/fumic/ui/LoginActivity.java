@@ -17,9 +17,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
 
+import fpt.edu.fumic.MainActivity;
 import fpt.edu.fumic.R;
-import fpt.edu.fumic.database.AppDatabase;
-import fpt.edu.fumic.database.dao.UserDAO;
 import fpt.edu.fumic.database.entity.UserEntity;
 import fpt.edu.fumic.repository.UserRepository;
 import fpt.edu.fumic.utils.LoadingDialog;
@@ -31,15 +30,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             , STATUS_LOGIN_SUCCESS = "login successful"
             , STATUS_LOGIN_FAILED = "login failed"
             , STATUS_LOGIN_ERROR = "login error"
-            , KEY_LOGIN_USER = "keyUser";
+            , KEY_USER = "keyUser";
     TextInputLayout til_username, til_password;
     CheckBox check_box_remember;
     Button bt_login;
-    TextView tv_Register;
+    TextView tv_Register, tv_forget_password;
     LoadingDialog loadingDialog;
     IntentFilter intentFilter;
-    UserRepository userDAO;
-    boolean rememberMe = false;
+    UserRepository userRepository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,14 +47,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //Init intent filter
         initIntentFilter();
         //Connect DAO database
-
+        userRepository = new UserRepository(getApplicationContext());
         //Setup function buttons of activity
         bt_login.setOnClickListener(this);
         tv_Register.setOnClickListener(this);
-
-        getPreferencesMemory();
-
+        tv_forget_password.setOnClickListener(this);
         loadingDialog = new LoadingDialog(LoginActivity.this);
+        //Get login saved information
+        SharedPreferences sharedPreferences = getSharedPreferences("login_info", Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", null);
+        String password = sharedPreferences.getString("password", null);
+        if(username != null && password != null){
+            Objects.requireNonNull(til_username.getEditText()).setText(username);
+            Objects.requireNonNull(til_password.getEditText()).setText(password);
+            check_box_remember.setChecked(true);
+        }else {
+            check_box_remember.setChecked(false);
+        }
     }
 
     private void initActivity(){
@@ -65,14 +72,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         check_box_remember = findViewById(R.id.chkbox_remember_me);
         bt_login = findViewById(R.id.bt_login);
         tv_Register = findViewById(R.id.tv_register);
+        tv_forget_password = findViewById(R.id.tv_forget_password);
     }
-
-    private void initIntentFilter() {
-        intentFilter = new IntentFilter();
-        intentFilter.addAction(ACTION_LOGIN);
-    }
-
-
     private void setPreferencesMemory(){
         SharedPreferences sharedPreferences = getSharedPreferences("login_info", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -81,16 +82,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editor.putBoolean("remember_me", true); // Lưu trạng thái "Remember Me"
         editor.apply();
     }
-    private void getPreferencesMemory(){
-        SharedPreferences sharedPreferences = getSharedPreferences("login_info", Context.MODE_PRIVATE);
-        String savedUsername = sharedPreferences.getString("username", null);
-        String savedPassword = sharedPreferences.getString("password", null);
-        if(savedUsername != null && savedPassword != null){
-            Objects.requireNonNull(til_username.getEditText()).setText(savedUsername);
-            Objects.requireNonNull(til_password.getEditText()).setText(savedPassword);
-            check_box_remember.setChecked(true);
-            loginSystem();
-        }
+    private void initIntentFilter() {
+        intentFilter = new IntentFilter();
+        intentFilter.addAction(ACTION_LOGIN);
     }
     private void sendLoginStatusToBoardcast(String statusLoginStr) {
         Intent loginIntent = new Intent();
@@ -124,20 +118,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String username = getText(til_username);
         String password = getText(til_password);
         String statusLogin = STATUS_LOGIN_ERROR;
-        if(check_box_remember.isChecked()){
-            setPreferencesMemory();
-        }else {
-            SharedPreferences sharedPreferences = getSharedPreferences("login_info", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.clear();
-            editor.apply();
-        }
+
         if(!username.isEmpty() && !password.isEmpty()){
-            UserEntity user = userDAO.getUserById(username);
+            UserEntity user = userRepository.getUserById(username);
             if(user != null){
                 if (user.getPassword().equals(password)){
                     statusLogin = STATUS_LOGIN_SUCCESS;
-                    toUserProfileActivity(username);
+                    toMainPage(username);
+                    if(check_box_remember.isChecked()){
+                        setPreferencesMemory();
+                    }else {
+                        SharedPreferences sharedPreferences = getSharedPreferences("login_info", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.clear();
+                        editor.apply();
+                    }
                 } else {
                     statusLogin = STATUS_LOGIN_FAILED;
                 }
@@ -151,14 +146,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private String getText(TextInputLayout textInputLayout) {
         return Objects.requireNonNull(textInputLayout.getEditText()).getText().toString().trim();
     }
-    private void toUserProfileActivity(String username){
-        Intent intentUserProfile = new Intent(LoginActivity.this, UserProfileActivity.class);
-        intentUserProfile.putExtra(KEY_LOGIN_USER, username);
-        startActivity(intentUserProfile);
+    private void toMainPage(String username){
+        Intent intentMainPage = new Intent(LoginActivity.this, MainActivity.class);
+        intentMainPage.putExtra(KEY_USER, username);
+        startActivity(intentMainPage);
+        finish();
     }
     private void toRegisterActivity() {
         Intent intentRegisterActivity = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(intentRegisterActivity);
+    }
+
+    private void toForgetPasswordActivity() {
+        Intent intentForgetPassword = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
+        startActivity(intentForgetPassword);
     }
 
     @Override
@@ -167,6 +168,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             loginSystem();
         } else if (view.getId() == R.id.tv_register) {
             toRegisterActivity();
+        } else if (view.getId() == R.id.tv_forget_password) {
+            toForgetPasswordActivity();
         }
     }
 
