@@ -99,9 +99,11 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
         if(username.isEmpty() || password.isEmpty()){
             if(username.isEmpty()){
                 til_username.setError(EMPTY_FIELD_WARNING);
-            } else if (password.isEmpty()) {
+            }
+            if (password.isEmpty()) {
                 til_password.setError(EMPTY_FIELD_WARNING);
-            } else if (rePasword.isEmpty()) {
+            }
+            if (rePasword.isEmpty()) {
                 til_rePassword.setError(EMPTY_FIELD_WARNING);
             }
         } else {
