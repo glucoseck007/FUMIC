@@ -1,5 +1,6 @@
 package fpt.edu.fumic.database.entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 
@@ -10,7 +11,24 @@ import androidx.room.ForeignKey;
         })
 public class ReadEntity {
 
+    @NonNull
     private String userId;
+    @NonNull
     private int bookId;
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public int getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
+    }
 }

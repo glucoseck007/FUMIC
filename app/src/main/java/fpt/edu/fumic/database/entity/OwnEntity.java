@@ -7,11 +7,11 @@ import androidx.room.ForeignKey;
         foreignKeys = {
                 @ForeignKey(entity = AuthorEntity.class,
                         parentColumns = "id",
-                        childColumns = "AuthorId",
+                        childColumns = "authorId",
                         onDelete = ForeignKey.CASCADE),
                 @ForeignKey(entity = BookEntity.class,
                         parentColumns = "id",
-                        childColumns = "BookId",
+                        childColumns = "bookId",
                         onDelete = ForeignKey.CASCADE)
         })
 public class OwnEntity {
