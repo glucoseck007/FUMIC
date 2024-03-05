@@ -72,13 +72,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         bt_login = findViewById(R.id.bt_login);
         tv_Register = findViewById(R.id.tv_register);
     }
-
-    private void initIntentFilter() {
-        intentFilter = new IntentFilter();
-        intentFilter.addAction(ACTION_LOGIN);
-    }
-
-
     private void setPreferencesMemory(){
         SharedPreferences sharedPreferences = getSharedPreferences("login_info", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -86,6 +79,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editor.putString("password", getText(til_password));
         editor.putBoolean("remember_me", true); // Lưu trạng thái "Remember Me"
         editor.apply();
+    }
+    private void initIntentFilter() {
+        intentFilter = new IntentFilter();
+        intentFilter.addAction(ACTION_LOGIN);
     }
     private void sendLoginStatusToBoardcast(String statusLoginStr) {
         Intent loginIntent = new Intent();
