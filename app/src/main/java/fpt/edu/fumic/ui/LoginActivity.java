@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextInputLayout til_username, til_password;
     CheckBox check_box_remember;
     Button bt_login;
-    TextView tv_Register;
+    TextView tv_Register, tv_forget_password;
     LoadingDialog loadingDialog;
     IntentFilter intentFilter;
     UserRepository userRepository;
@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //Setup function buttons of activity
         bt_login.setOnClickListener(this);
         tv_Register.setOnClickListener(this);
+        tv_forget_password.setOnClickListener(this);
         loadingDialog = new LoadingDialog(LoginActivity.this);
         //Get login saved information
         SharedPreferences sharedPreferences = getSharedPreferences("login_info", Context.MODE_PRIVATE);
@@ -71,6 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         check_box_remember = findViewById(R.id.chkbox_remember_me);
         bt_login = findViewById(R.id.bt_login);
         tv_Register = findViewById(R.id.tv_register);
+        tv_forget_password = findViewById(R.id.tv_forget_password);
     }
     private void setPreferencesMemory(){
         SharedPreferences sharedPreferences = getSharedPreferences("login_info", Context.MODE_PRIVATE);
@@ -155,12 +157,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         startActivity(intentRegisterActivity);
     }
 
+    private void toForgetPasswordActivity() {
+
+    }
+
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.bt_login){
             loginSystem();
         } else if (view.getId() == R.id.tv_register) {
             toRegisterActivity();
+        } else if (view.getId() == R.id.tv_forget_password) {
+            toForgetPasswordActivity();
         }
     }
 
