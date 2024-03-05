@@ -233,6 +233,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void toLoginActivity(){
         Intent intentRegisterActivity = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(intentRegisterActivity);
+        finish();
     }
 
     //Activity Function
