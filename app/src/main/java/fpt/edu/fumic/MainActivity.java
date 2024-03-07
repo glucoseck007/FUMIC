@@ -10,6 +10,7 @@ import android.view.View;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.Random;
 
 import fpt.edu.fumic.database.entity.BookEntity;
 import fpt.edu.fumic.database.entity.UserEntity;
@@ -26,5 +27,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
+
 }
+

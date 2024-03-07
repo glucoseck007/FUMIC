@@ -23,6 +23,7 @@ public class BookEntity implements Book {
     private int noOfView;
     private Date dateUpload;
     private int status;
+    private int authorId;
 
     public BookEntity() {};
 
@@ -119,5 +120,6 @@ public class BookEntity implements Book {
     public void setStatus(int status) {
         this.status = status;
     }
+
 
 }
