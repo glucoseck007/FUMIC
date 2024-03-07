@@ -24,7 +24,7 @@ import fpt.edu.fumic.database.entity.UserEntity;
         CategoryEntity.class,
         UserEntity.class,
         OwnEntity.class,
-        ReadEntity.class}, version = 1)
+        ReadEntity.class}, version = 4,exportSchema = true)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDAO userDAO();
@@ -49,5 +49,6 @@ public abstract class AppDatabase extends RoomDatabase {
         }
         return sInstance;
     }
+    
 
 }
