@@ -19,6 +19,7 @@ public class BookRepository {
         bookDAO = appDatabase.bookDAO();
     }
 
+
     public void createBook(List<BookEntity> bookEntities) {
         bookDAO.insertAllBooks(bookEntities);
     }
@@ -37,5 +38,29 @@ public class BookRepository {
 
     public void updateBook(BookEntity book) {
         bookDAO.updateBook(book);
+    }
+
+    /*
+Date 6/3/2024
+List book
+ */
+    public LiveData<List<BookEntity>> getBooksSortedByViews() {
+        return bookDAO.getBooksSortedByViews();
+    }
+
+    /*
+Date 6/3/2024
+List book
+ */
+    public LiveData<List<BookEntity>> getBooksSortedByDate() {
+        return bookDAO.loadBooksSortedByDate();
+    }
+
+    /*
+    Date 6/3/2024
+    List book
+     */
+    public LiveData<List<BookEntity>> getBooksSortedById() {
+        return bookDAO.loadBooksSortedById();
     }
 }

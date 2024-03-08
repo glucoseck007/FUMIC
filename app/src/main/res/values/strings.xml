@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">FUMIC</string>
+    <!--
+Date 6/3/2024
+List book
+-->
+    <string name="sort_by_views">Sort by Views</string>
+    <string name="sort_by_date">Sort by Date</string>
+    <string name="sort_by_id">Sort by ID</string>
 </resources>

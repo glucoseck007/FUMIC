@@ -59,17 +59,17 @@ public class BrowseBookAdapter extends RecyclerView.Adapter<BrowseBookAdapter.VH
         switch (book.getStatus()) {
 
             case 0: {
-                holder.tvStatus.setText("Đã từ chối");
+                holder.tvStatus.setText("Reject");
                 holder.tvStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.FireBrick));
                 break;
             }
             case 1: {
-                holder.tvStatus.setText("Đã duyệt");
+                holder.tvStatus.setText("Approve");
                 holder.tvStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.Chartreuse));
                 break;
             }
             case 2: {
-                holder.tvStatus.setText("Đang chờ duyệt");
+                holder.tvStatus.setText("Pending");
                 holder.tvStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.Chocolate));
                 break;
             }

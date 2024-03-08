@@ -23,11 +23,11 @@ public class BookEntity implements Book {
     private int noOfView;
     private Date dateUpload;
     private int status;
-    private int userId;
+    private int authorId;
 
     public BookEntity() {};
 
-    public BookEntity(int id, String title, int noOfChapter, String description, String imageURL, int categoryId, int rating, int noOfView, Date dateUpload, int status, int userId) {
+    public BookEntity(int id, String title, int noOfChapter, String description, String imageURL, int categoryId, int rating, int noOfView, Date dateUpload, int status) {
         this.id = id;
         this.title = title;
         this.noOfChapter = noOfChapter;
@@ -38,7 +38,6 @@ public class BookEntity implements Book {
         this.noOfView = noOfView;
         this.dateUpload = dateUpload;
         this.status = status;
-        this.userId = userId;
     }
 
     public int getId() {
@@ -81,9 +80,6 @@ public class BookEntity implements Book {
         return status;
     }
 
-    public int getUserId() {
-        return userId;
-    }
 
     public void setId(int id) {
         this.id = id;
@@ -125,7 +121,5 @@ public class BookEntity implements Book {
         this.status = status;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+
 }
