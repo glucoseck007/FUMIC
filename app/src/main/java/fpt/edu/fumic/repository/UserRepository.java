@@ -31,12 +31,12 @@ public class UserRepository {
         return userDAO.getAllUser();
     }
     public UserEntity getUserById(String username){
-        return userDAO.getUserById(username);
-    }
-    public void updateUser(UserEntity userEntity){
-        userDAO.updateUser(userEntity);
+        return getUserById(username);
     }
     public void deleteUser(UserEntity user) {
         userDAO.deleteUser(user);
+    }
+    public void updateUser(UserEntity user) {
+        userDAO.updateUser(user);
     }
 }
