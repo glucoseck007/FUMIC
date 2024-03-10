@@ -51,8 +51,6 @@ public class HomepageFragment extends Fragment {
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(bookAdapter);
 
-
-
 //        bookAdapter.setOnItemClickListener(new BookAdapter.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(Book book) {
