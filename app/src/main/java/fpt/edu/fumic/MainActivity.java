@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.prm_project.adapter.ViewPagerAdapter;
+import fpt.edu.fumic.adapters.ViewPagerAdapter;
+import fpt.edu.fumic.ui.SearchActivity;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

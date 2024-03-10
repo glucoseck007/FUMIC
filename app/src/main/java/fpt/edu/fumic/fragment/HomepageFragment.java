@@ -19,20 +19,21 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import fpt.edu.fumic.adapters.BookAdapter;
+import fpt.edu.fumic.adapters.BookMainAdapter;
 import fpt.edu.fumic.database.entity.BookEntity;
 import fpt.edu.fumic.repository.BookRepository;
+import fpt.edu.fumic.ui.BookDetailActivity;
 
 public class HomepageFragment extends Fragment {
     private BookRepository bookRepository;
-    BookAdapter bookAdapter;
+    BookMainAdapter bookAdapter;
     private RecyclerView recyclerView;
     List<BookEntity> bookList = new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         bookRepository = new BookRepository(getActivity().getApplicationContext());
-        bookAdapter = new BookAdapter();
+        bookAdapter = new BookMainAdapter(getContext(), bookList);
         return inflater.inflate(R.layout.activity_homepage, container, false);
     }
 
@@ -51,14 +52,14 @@ public class HomepageFragment extends Fragment {
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(bookAdapter);
 
-//        bookAdapter.setOnItemClickListener(new BookAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(Book book) {
-//                Intent intent = new Intent(getActivity(), BookDetailActivity.class);
-//                intent.putExtra("BookDetail", (Serializable) book);
-//                getActivity().startActivity(intent);
-//            }
-//        });
+        bookAdapter.setOnItemClickListener(new BookMainAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BookEntity book) {
+                Intent intent = new Intent(getActivity(), BookDetailActivity.class);
+                intent.putExtra("BookDetail", (Serializable) book);
+                getActivity().startActivity(intent);
+            }
+        });
 
     }
 }
