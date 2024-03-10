@@ -93,7 +93,7 @@ public class HistoriesActivity extends AppCompatActivity implements View.OnClick
     private void loadBook(boolean isLoadMore) {
         isLoading = true;
         runOnUiThread(() -> {
-            List<BookEntity> list = bookRepository.getBooks(1, 10, offset);
+            List<BookEntity> list = bookRepository.getBookListAvailable(1, 10, offset);
             offset += list.size();
             isLoading = false;
             isLastItemReached = list.size() < 10;

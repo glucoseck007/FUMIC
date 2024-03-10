@@ -22,7 +22,7 @@ public interface BookDAO {
     LiveData<List<BookEntity>> loadAllBooks();
 
     @Query("select * from BOOK where status =:status order by dateUpload asc limit :limit offset :offset")
-    List<BookEntity> getBooks(int status,int limit, int offset);
+    List<BookEntity> getBookListAvailable(int status,int limit, int offset);
     /*
     Date 6/3/2024
     List book

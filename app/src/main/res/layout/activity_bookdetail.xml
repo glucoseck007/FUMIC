@@ -29,7 +29,7 @@
         android:text="Book Title"
         android:layout_marginLeft="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:textColor="@color/white"
+        android:textColor="@color/White"
         android:id="@+id/tv_title"/>
     <TextView
         android:layout_width="wrap_content"

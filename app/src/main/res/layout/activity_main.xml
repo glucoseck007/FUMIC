@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_gravity="center"
     tools:context=".MainActivity">
 
-    <androidx.viewpager.widget.ViewPager
-        android:layout_width="match_parent"
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnProfile"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/navigation_button"
-        android:id="@+id/view_pager"/>
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/navigation_button"
-        app:menu="@menu/navigation"
-        app:itemTextColor="@color/navigation_color"
-        app:itemIconTint="@color/navigation_color"/>
-</RelativeLayout>
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Profile"
+        android:textColor="@color/White"
+        app:cornerRadius="10dp" />
+
+</LinearLayout>
