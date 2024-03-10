@@ -1,5 +1,6 @@
 package fpt.edu.fumic.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +23,18 @@ List book
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
     private List<BookEntity> books = new ArrayList<>();
-
+    private Context context;
     public void setBooks(List<BookEntity> books) {
         this.books = books;
         notifyDataSetChanged();
+    }
+
+    public BookAdapter() {
+    }
+
+    public BookAdapter(List<BookEntity> books, Context context) {
+        this.books = books;
+        this.context = context;
     }
 
     @NonNull
@@ -53,6 +64,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             super(itemView);
             txtTitle = itemView.findViewById(R.id.text_title);
             txtDescription = itemView.findViewById(R.id.text_views);
+
         }
 
         public void bind(BookEntity book) {
