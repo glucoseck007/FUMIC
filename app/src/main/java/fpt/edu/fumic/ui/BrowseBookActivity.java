@@ -97,7 +97,7 @@ public class BrowseBookActivity extends AppCompatActivity implements View.OnClic
     private void loadBook(boolean isLoadMore) {
         isLoading = true;
         runOnUiThread(() -> {
-            List<BookEntity> list = bookRepository.getBooks(2, 10, offset);
+            List<BookEntity> list = bookRepository.getBookListAvailable(2, 10, offset);
             offset += list.size();
             isLoading = false;
             isLastItemReached = list.size() < 10;
