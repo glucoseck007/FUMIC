@@ -2,7 +2,6 @@ package fpt.edu.fumic.database.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
@@ -16,28 +15,29 @@ public class BookEntity implements Book {
     @NonNull
     private int id;
     private String title;
+    private int noOfChapter;
     private String description;
-    private byte[] image;
+    private String imageURL;
     private int categoryId;
     private int rating;
     private int noOfView;
     private Date dateUpload;
     private int status;
-    private String contentURI;
+
 
     public BookEntity() {};
 
-    public BookEntity(int id, String title, String description, byte[] image, int categoryId, int rating, int noOfView, Date dateUpload, int status, String contentURI) {
+    public BookEntity(int id, String title, int noOfChapter, String description, String imageURL, int categoryId, int rating, int noOfView, Date dateUpload, int status) {
         this.id = id;
         this.title = title;
+        this.noOfChapter = noOfChapter;
         this.description = description;
-        this.image = image;
+        this.imageURL = imageURL;
         this.categoryId = categoryId;
         this.rating = rating;
         this.noOfView = noOfView;
         this.dateUpload = dateUpload;
         this.status = status;
-        this.contentURI = contentURI;
     }
 
     public int getId() {
@@ -48,13 +48,16 @@ public class BookEntity implements Book {
         return title;
     }
 
+    public int getNoOfChapter() {
+        return noOfChapter;
+    }
 
     public String getDescription() {
         return description;
     }
 
-    public byte[] getImage() {
-        return image;
+    public String getImageURL() {
+        return imageURL;
     }
 
     public int getCategoryId() {
@@ -77,7 +80,7 @@ public class BookEntity implements Book {
         return status;
     }
 
-    public String getContentURI() {return contentURI;}
+
 
     public void setId(int id) {
         this.id = id;
@@ -87,13 +90,16 @@ public class BookEntity implements Book {
         this.title = title;
     }
 
+    public void setNoOfChapter(int noOfChapter) {
+        this.noOfChapter = noOfChapter;
+    }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public void setCategoryId(int categoryId) {
@@ -115,7 +121,5 @@ public class BookEntity implements Book {
     public void setStatus(int status) {
         this.status = status;
     }
-
-    public void setContentURI(String contentURI) {this.contentURI = contentURI; }
 
 }
