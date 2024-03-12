@@ -42,6 +42,9 @@ public interface BookDAO {
     @Query("SELECT * FROM BOOK ORDER BY dateUpload DESC")
     LiveData<List<BookEntity>> loadBooksSortedByDate();
 
+    @Query("SELECT * FROM BOOK WHERE TITLE LIKE :key")
+    List<BookEntity> searchByTitle(String key);
+
     @Update
     void updateBook(BookEntity book);
 }

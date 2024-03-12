@@ -20,7 +20,7 @@ import fpt.edu.fumic.database.entity.UserEntity;
 @Database(entities = {BookEntity.class,
                     AuthorEntity.class,
                     CategoryEntity.class,
-                    UserEntity.class}, version = 1)
+                    UserEntity.class}, version = 2)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDAO userDAO();
