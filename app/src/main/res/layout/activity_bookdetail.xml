@@ -29,7 +29,7 @@
         android:text="Book Title"
         android:layout_marginLeft="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:textColor="@color/White"
+        android:textColor="@color/white"
         android:id="@+id/tv_title"/>
     <TextView
         android:layout_width="wrap_content"
@@ -71,6 +71,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/tv_view"
+        android:text="Date Upload"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_date"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_date"
         android:text="Category"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
