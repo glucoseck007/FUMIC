@@ -19,28 +19,24 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_title"
         android:layout_marginTop="10dp"
         android:text="Chapter content"
-        android:id="@+id/tv_content"
-        android:orientation="horizontal"/>
+        android:id="@+id/tv_content"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:weightSum="3">
+        android:weightSum="2">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Previous"/>
+            android:text="Back"
+            android:id="@+id/bt_back"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Home"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Next"/>
+            android:text="Home"
+            android:id="@+id/bt_home"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
