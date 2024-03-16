@@ -21,6 +21,7 @@ import fpt.edu.fumic.database.dao.AuthorDAO;
 import fpt.edu.fumic.database.dao.BookDAO;
 import fpt.edu.fumic.database.dao.CategoryDAO;
 import fpt.edu.fumic.database.dao.ChapterDAO;
+import fpt.edu.fumic.database.dao.FavouriteDao;
 import fpt.edu.fumic.database.dao.OwnDAO;
 import fpt.edu.fumic.database.dao.UserDAO;
 import fpt.edu.fumic.database.entity.AuthorEntity;
@@ -52,6 +53,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract OwnDAO ownDAO();
     public abstract ChapterDAO chapterDAO();
+    public abstract FavouriteDao favouriteDao();
 
     private static AppDatabase sInstance;
     private static Context sAppContext;
