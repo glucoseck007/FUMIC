@@ -4,7 +4,6 @@ import android.app.UiAutomation;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -27,9 +26,4 @@ public interface UserDAO {
 
     @Update
     void updateUser(UserEntity userEntity);
-    /*
-    Date : 5/3/2024
-    */
-    @Delete
-    void deleteUser(UserEntity user);
 }

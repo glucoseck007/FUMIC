@@ -1,7 +1,6 @@
 package fpt.edu.fumic.adapters;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +18,6 @@ import java.util.List;
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.converter.ImageToByte;
 import fpt.edu.fumic.database.entity.BookEntity;
-import fpt.edu.fumic.fragment.BookFragment;
-import fpt.edu.fumic.ui.UpdateBookActivity;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
@@ -64,15 +61,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             imageView = itemView.findViewById(R.id.imageViewBookCover);
             tvTitle = itemView.findViewById(R.id.tvBookTitle);
             tvAuthor = itemView.findViewById(R.id.tvBookAuthor);
-
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(itemView.getContext(), UpdateBookActivity.class);
-                    intent.putExtra("title", tvTitle.getText().toString());
-                    itemView.getContext().startActivity(intent);
-                }
-            });
         }
     }
 
