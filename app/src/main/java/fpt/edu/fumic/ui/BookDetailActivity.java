@@ -1,5 +1,6 @@
 package fpt.edu.fumic.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,12 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.squareup.picasso.Picasso;
 
 import fpt.edu.fumic.R;
+import fpt.edu.fumic.database.converter.ImageToByte;
 import fpt.edu.fumic.database.model.Book;
 
 public class BookDetailActivity extends AppCompatActivity {
     private ImageView cover, back;
     private TextView tvTitle, tvNoOfView, tvRating, tvDescription;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,14 +27,11 @@ public class BookDetailActivity extends AppCompatActivity {
         initView();
         Intent intent = getIntent();
         Book book = (Book) intent.getSerializableExtra("BookDetail");
-        Picasso.with(this)
-                .load(book.getImageURL())
-                .placeholder(R.drawable.load)
-                .error(R.drawable.error)
-                .into(cover);
+        assert book != null;
         tvTitle.setText(book.getTitle());
         tvNoOfView.setText(""+book.getNoOfView()+" views");
         tvDescription.setText(book.getDescription());
+        cover.setImageBitmap(ImageToByte.getBitmapFromByteArray((book.getImage())));
 
         tvRating.setOnClickListener(new View.OnClickListener() {
             @Override

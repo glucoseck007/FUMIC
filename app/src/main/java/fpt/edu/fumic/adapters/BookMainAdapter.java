@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import fpt.edu.fumic.database.converter.ImageToByte;
 import fpt.edu.fumic.database.entity.BookEntity;
 
 public class BookMainAdapter extends RecyclerView.Adapter<BookMainAdapter.ViewHolder> {
@@ -60,11 +61,7 @@ public class BookMainAdapter extends RecyclerView.Adapter<BookMainAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         BookEntity book = list.get(position);
         holder.title.setText(book.getTitle());
-        Picasso.with(context)
-                .load(book.getImageURL())
-                .placeholder(R.drawable.load)
-                .error(R.drawable.error)
-                .into(holder.cover);
+        holder.cover.setImageBitmap(ImageToByte.getBitmapFromByteArray(book.getImage()));;
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

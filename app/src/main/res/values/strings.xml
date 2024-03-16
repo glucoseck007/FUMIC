@@ -10,4 +10,8 @@
         <item>Historical Fiction</item>
         <item>Biography</item>
     </string-array>
+
+    <string name="sort_by_views">Sort by Views</string>
+    <string name="sort_by_date">Sort by Date</string>
+    <string name="sort_by_id">Sort by ID</string>
 </resources>

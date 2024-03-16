@@ -2,9 +2,12 @@ package fpt.edu.fumic.repository;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import androidx.lifecycle.LiveData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fpt.edu.fumic.database.AppDatabase;
@@ -44,7 +47,7 @@ public class BookRepository {
     }
 
     public List<BookEntity> getBooks(int status, int limit, int offset) {
-        return bookDAO.getBooks(status, limit, offset);
+        return bookDAO.getBookListAvailable(status, limit, offset);
     }
 
     public void updateBook(BookEntity book) {
@@ -80,5 +83,28 @@ public class BookRepository {
 
     public int insertChapterContent(List<ChapterEntity> chapter) {
         return chapterDAO.insert(chapter).size();
+    }
+
+    public LiveData<List<BookEntity>> getBooksSortedByViews() {
+        return bookDAO.getBooksSortedByViews();
+    }
+
+    /*
+Date 6/3/2024
+List book
+ */
+    public LiveData<List<BookEntity>> getBooksSortedByDate() {
+        return bookDAO.loadBooksSortedByDate();
+    }
+
+    public List<BookEntity> getBookListAvailable(int status, int limit, int offset) {
+        return bookDAO.getBookListAvailable(status, limit, offset);
+    }
+
+    public LiveData<List<BookEntity>> getBooksSortedById() {
+        return bookDAO.loadBooksSortedById();
+    }
+    public List<BookEntity> searchByTitle(String key) {
+        return bookDAO.searchByTitle(key);
     }
 }
