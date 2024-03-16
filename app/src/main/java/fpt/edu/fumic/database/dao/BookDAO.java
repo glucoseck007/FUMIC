@@ -26,7 +26,22 @@ public interface BookDAO {
     List<BookEntity> getBookListAvailable(int status,int limit, int offset);
 
     @Update
-    int updateBook(BookEntity book);
+    void updateBook(BookEntity book);
+
+    @Query("SELECT * FROM BOOK ORDER BY noOfView DESC")
+    LiveData<List<BookEntity>> getBooksSortedByViews();
+
+    @Query("SELECT * FROM BOOK ORDER BY id")
+    LiveData<List<BookEntity>> loadBooksSortedById();
+
+    @Query("SELECT * FROM BOOK ORDER BY dateUpload DESC")
+    LiveData<List<BookEntity>> loadBooksSortedByDate();
+
+    @Query("SELECT * FROM BOOK WHERE title like :key")
+    List<BookEntity> searchByTitle(String key);
+
+    @Query("SELECT * FROM BOOK WHERE title = :title")
+    BookEntity getBookByTitle(String title);
 
     @Query("SELECT id FROM CATEGORY WHERE name = :name")
     int getCategoryId(String name);
@@ -42,18 +57,4 @@ public interface BookDAO {
 
     @Query("DELETE FROM BOOK where id = :id")
     void deleteBook(int id);
-
-    @Query("SELECT * FROM BOOK ORDER BY noOfView DESC")
-    LiveData<List<BookEntity>> getBooksSortedByViews();
-    @Query("SELECT * FROM BOOK ORDER BY id")
-    LiveData<List<BookEntity>> loadBooksSortedById();
-
-    @Query("SELECT * FROM BOOK ORDER BY dateUpload DESC")
-    LiveData<List<BookEntity>> loadBooksSortedByDate();
-
-    @Query("SELECT * FROM BOOK WHERE title like :key")
-    List<BookEntity> searchByTitle(String key);
-
-    @Query("SELECT * FROM BOOK WHERE title = :title")
-    BookEntity getBookByTitle(String title);
 }
