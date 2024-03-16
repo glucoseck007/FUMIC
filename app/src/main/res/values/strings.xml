@@ -17,4 +17,9 @@ List book
         <item>Historical Fiction</item>
         <item>Biography</item>
     </string-array>
+    <string-array name="sort_options_array">
+        <item>Sort by Views</item>
+        <item>Sort by Date</item>
+        <item>Sort by ID</item>
+    </string-array>
 </resources>
