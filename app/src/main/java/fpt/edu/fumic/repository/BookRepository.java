@@ -70,6 +70,7 @@ public class BookRepository {
         OwnEntity own = new OwnEntity(authorId, bookId);
         return ownDAO.insert(own);
     }
+
     public long insertAuthor(int authorId, String name) {
         AuthorEntity author = new AuthorEntity(authorId, name);
         return authorDAO.insertAuthor(author);
@@ -79,6 +80,7 @@ public class BookRepository {
         return bookDAO.loadBooksSortedByDate();
     }
     public Integer getLatestAuthorId() {return authorDAO.getLatestAuthorId(); }
+
     public Integer getExistAuthor(String name) {return authorDAO.getExistAuthor(name); }
 
     public int getCategoryId(String name) {return bookDAO.getCategoryId(name); }
