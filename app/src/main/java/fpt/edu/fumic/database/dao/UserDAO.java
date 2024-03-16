@@ -1,9 +1,12 @@
 package fpt.edu.fumic.database.dao;
 
+import android.app.UiAutomation;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -19,7 +22,7 @@ public interface UserDAO {
     @Query("SELECT * FROM USER WHERE Id = :username")
     UserEntity getUserById(String username);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertUser(UserEntity user);
 
     @Update
