@@ -21,8 +21,8 @@ Introduce the members of the project team. Include their names, roles, and any o
 
 - **[Name](https://github.com/Khanh)** - Social interaction: manage cmt 
 - **[Name](https://github.com/LapNguyenn)** - Login page, Register Page, Forgot Password Page
-- **[Name](https://github.com/Phong)** - Home page, book list, search book
-- - **[Name](https://github.com/Linh)** - CRUD book, filter book
+- **[Name](https://github.com/Phong)** - Home page, book list, filter book
+- - **[Name](https://github.com/Linh)** - CRUD book
   - - **[Name](https://github.com/Luong)** - Edit profile, favourite, approve
 ## Installation
 
