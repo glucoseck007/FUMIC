@@ -1,0 +1,12 @@
+<resources>
+    <string-array name="sort_options_array">
+        <item>Sort by Views</item>
+        <item>Sort by Date</item>
+        <item>Sort by ID</item>
+    </string-array>
+
+</resources>
+    <!--
+    Date 6/3/2024
+    List book
+    -->
