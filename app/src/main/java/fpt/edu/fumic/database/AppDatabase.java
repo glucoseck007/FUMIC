@@ -11,22 +11,31 @@ import fpt.edu.fumic.database.converter.DateConverter;
 import fpt.edu.fumic.database.dao.AuthorDAO;
 import fpt.edu.fumic.database.dao.BookDAO;
 import fpt.edu.fumic.database.dao.CategoryDAO;
+import fpt.edu.fumic.database.dao.FavouriteDao;
 import fpt.edu.fumic.database.dao.UserDAO;
 import fpt.edu.fumic.database.entity.AuthorEntity;
 import fpt.edu.fumic.database.entity.BookEntity;
 import fpt.edu.fumic.database.entity.CategoryEntity;
+import fpt.edu.fumic.database.entity.FavouriteEntity;
 import fpt.edu.fumic.database.entity.UserEntity;
 
 @Database(entities = {BookEntity.class,
-                    AuthorEntity.class,
-                    CategoryEntity.class,
-                    UserEntity.class}, version = 2)
+        AuthorEntity.class,
+        CategoryEntity.class,
+        FavouriteEntity.class,
+        UserEntity.class}, version = 3)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDAO userDAO();
+
     public abstract BookDAO bookDAO();
+
+    public abstract FavouriteDao favouriteDao();
+
     public abstract AuthorDAO authorDAO();
+
     public abstract CategoryDAO categoryDAO();
+
     private static AppDatabase sInstance;
     private static final String DB_NAME = "FUMIC";
 

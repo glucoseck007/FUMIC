@@ -16,7 +16,9 @@ import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.entity.UserEntity;
 import fpt.edu.fumic.repository.UserRepository;
 import fpt.edu.fumic.utils.DateConverterStrDate;
-
+/*
+ * luong_123
+ */
 public class UserDetailActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView ivBack;
     private UserRepository userRepository;

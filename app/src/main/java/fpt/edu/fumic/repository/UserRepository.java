@@ -36,6 +36,7 @@ public class UserRepository {
     public void deleteUser(UserEntity user) {
         userDAO.deleteUser(user);
     }
+
     public void updateUser(UserEntity user) {
         userDAO.updateUser(user);
     }

@@ -1,6 +1,8 @@
 package fpt.edu.fumic.database.entity;
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+
 
 
 @Entity(tableName = "FAVOURITE", primaryKeys = {"userId", "bookId"},
@@ -15,8 +17,11 @@ import androidx.room.ForeignKey;
                         onDelete = ForeignKey.CASCADE)
         })
 public class FavouriteEntity {
+    @NonNull
     private String userId;
+    @NonNull
     private int bookId;
+
 
     public String getUserId() {
         return userId;
@@ -34,4 +39,3 @@ public class FavouriteEntity {
         this.bookId = bookId;
     }
 }
-

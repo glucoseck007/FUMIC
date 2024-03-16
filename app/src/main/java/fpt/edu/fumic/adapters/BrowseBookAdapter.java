@@ -19,7 +19,9 @@ import fpt.edu.fumic.interfaces.BrowseBook;
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.entity.BookEntity;
 
-
+/*
+ * luong_123
+ */
 public class BrowseBookAdapter extends RecyclerView.Adapter<BrowseBookAdapter.VH> {
     private List<BookEntity> bookList = new ArrayList<>();
     private BrowseBook browseBookInterface;
@@ -55,28 +57,11 @@ public class BrowseBookAdapter extends RecyclerView.Adapter<BrowseBookAdapter.VH
     public void onBindViewHolder(@NonNull BrowseBookAdapter.VH holder, int position) {
         BookEntity book = bookList.get(holder.getAdapterPosition());
 
-        holder.tvTitle.setText(book.getTitle());
-        switch (book.getStatus()) {
-
-            case 0: {
-                holder.tvStatus.setText("Reject");
-                holder.tvStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.FireBrick));
-                break;
-            }
-            case 1: {
-                holder.tvStatus.setText("Approve");
-                holder.tvStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.Chartreuse));
-                break;
-            }
-            case 2: {
-                holder.tvStatus.setText("Pending");
-                holder.tvStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.Chocolate));
-                break;
-            }
-        }
-
+        holder.bind(book);
         holder.btnAccept.setOnClickListener(v -> browseBookInterface.onAccept(holder.getAdapterPosition(), book));
         holder.btnRefuse.setOnClickListener(v -> browseBookInterface.onRefuse(holder.getAdapterPosition(), book));
+
+
 
     }
 
@@ -89,15 +74,41 @@ public class BrowseBookAdapter extends RecyclerView.Adapter<BrowseBookAdapter.VH
         private Button btnAccept;
         private Button btnRefuse;
 
-        private TextView tvTitle, tvStatus;
+        private TextView  tvStatus;
+        private TextView txtTitle;
+        private TextView txtDescription;
 
         @SuppressLint("WrongViewCast")
         public VH(@NonNull View itemView) {
             super(itemView);
             btnAccept = itemView.findViewById(R.id.btnAccept);
             btnRefuse = itemView.findViewById(R.id.btnRefuse);
-            tvTitle = itemView.findViewById(R.id.tvTitle);
+
             tvStatus = itemView.findViewById(R.id.tvStatus);
+            txtTitle = itemView.findViewById(R.id.text_title);
+            txtDescription = itemView.findViewById(R.id.text_views);
+        }
+        void bind(BookEntity book){
+            txtTitle.setText(book.getTitle());
+            txtDescription.setText(book.getDescription());
+            switch (book.getStatus()) {
+
+                case 0: {
+                    tvStatus.setText("Reject");
+                    tvStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.FireBrick));
+                    break;
+                }
+                case 1: {
+                    tvStatus.setText("Approve");
+                    tvStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.Chartreuse));
+                    break;
+                }
+                case 2: {
+                    tvStatus.setText("Pending");
+                    tvStatus.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.Chocolate));
+                    break;
+                }
+            }
         }
     }
 }

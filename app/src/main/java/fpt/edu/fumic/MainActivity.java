@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 1:
                         break;
-                    case 2:
+                    case 2:navigationView.getMenu().findItem(R.id.nav_profile).setChecked(true);
                         break;
                 }
             }
@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 if(id==R.id.nav_home){
                     viewPager.setCurrentItem(0);
+                }else if (id == R.id.nav_profile){
+                    viewPager.setCurrentItem(2);
                 }
                 return true;
             }
