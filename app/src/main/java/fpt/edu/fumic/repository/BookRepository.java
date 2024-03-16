@@ -43,25 +43,14 @@ public class BookRepository {
         return bookDAO.loadAllBooks();
     }
 
-    public List<BookEntity> getBookListAvailable(int status, int limit, int offset) {
-        return bookDAO.getBookListAvailable(status, limit, offset);
-    }
-
-    public List<BookEntity> searchByTitle(String key) {
-        return bookDAO.searchByTitle(key);
+    public List<BookEntity> getBooks(int status, int limit, int offset) {
+        return bookDAO.getBooks(status, limit, offset);
     }
 
     public void updateBook(BookEntity book) {
         bookDAO.updateBook(book);
     }
 
-    /*
-Date 6/3/2024
-List book
- */
-    public LiveData<List<BookEntity>> getBooksSortedByViews() {
-        return bookDAO.getBooksSortedByViews();
-    }
     public int getLatestBookId() {return bookDAO.getLatestBookId();}
 
     public Integer getExistBook(String title) {return bookDAO.getExistBook(title); }
@@ -74,18 +63,13 @@ List book
         OwnEntity own = new OwnEntity(authorId, bookId);
         return ownDAO.insert(own);
     }
+
     public long insertAuthor(int authorId, String name) {
         AuthorEntity author = new AuthorEntity(authorId, name);
         return authorDAO.insertAuthor(author);
     }
-    /*
-Date 6/3/2024
-List book
- */
-    public LiveData<List<BookEntity>> getBooksSortedByDate() {
-        return bookDAO.loadBooksSortedByDate();
-    }
     public Integer getLatestAuthorId() {return authorDAO.getLatestAuthorId(); }
+
     public Integer getExistAuthor(String name) {return authorDAO.getExistAuthor(name); }
 
     public int getCategoryId(String name) {return bookDAO.getCategoryId(name); }
@@ -96,12 +80,5 @@ List book
 
     public int insertChapterContent(List<ChapterEntity> chapter) {
         return chapterDAO.insert(chapter).size();
-    }
-    /*
-    Date 6/3/2024
-    List book
-     */
-    public LiveData<List<BookEntity>> getBooksSortedById() {
-        return bookDAO.loadBooksSortedById();
     }
 }

@@ -21,7 +21,6 @@ import fpt.edu.fumic.database.dao.AuthorDAO;
 import fpt.edu.fumic.database.dao.BookDAO;
 import fpt.edu.fumic.database.dao.CategoryDAO;
 import fpt.edu.fumic.database.dao.ChapterDAO;
-import fpt.edu.fumic.database.dao.FavouriteDao;
 import fpt.edu.fumic.database.dao.OwnDAO;
 import fpt.edu.fumic.database.dao.UserDAO;
 import fpt.edu.fumic.database.entity.AuthorEntity;
@@ -53,7 +52,6 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract OwnDAO ownDAO();
     public abstract ChapterDAO chapterDAO();
-    public abstract FavouriteDao favouriteDao();
 
     private static AppDatabase sInstance;
     private static Context sAppContext;
@@ -67,7 +65,6 @@ public abstract class AppDatabase extends RoomDatabase {
                     // Create a new database instance or get the existing one
                     sInstance = Room.databaseBuilder(sAppContext,
                                     AppDatabase.class, DB_NAME)
-                            .allowMainThreadQueries()
                             .addCallback(roomCallback) // Add a callback to handle database operations
                             .addMigrations(MIGRATION_1_2)
                             .build();
@@ -83,9 +80,8 @@ public abstract class AppDatabase extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             Executors.newSingleThreadExecutor().execute(() -> {
-                DataGenerator.readBookCSV(sAppContext, "book.csv", sInstance);
-                DataGenerator.readCategoryCSV(sAppContext, "category.csv", sInstance);
-                DataGenerator.readUserCSV(sAppContext, "user.csv", sInstance);
+                //DataGenerator.readBookCSV(sAppContext, "book.csv", sInstance);
+                //DataGenerator.readCategoryCSV(sAppContext, "category.csv", sInstance);
             });
         }
 
@@ -93,9 +89,8 @@ public abstract class AppDatabase extends RoomDatabase {
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onOpen(db);
             Executors.newSingleThreadExecutor().execute(() -> {
-                DataGenerator.readBookCSV(sAppContext, "book.csv", sInstance);
-                DataGenerator.readCategoryCSV(sAppContext, "category.csv", sInstance);
-                DataGenerator.readUserCSV(sAppContext, "user.csv", sInstance);
+                //DataGenerator.readBookCSV(sAppContext, "book.csv", sInstance);
+                //DataGenerator.readCategoryCSV(sAppContext, "category.csv", sInstance);
             });
         }
     };

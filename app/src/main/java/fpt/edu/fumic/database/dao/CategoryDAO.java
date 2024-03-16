@@ -9,7 +9,6 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public interface CategoryDAO {
     @Query("SELECT * FROM CATEGORY")
     LiveData<List<CategoryEntity>> loadAllCategories();
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     long insert(CategoryEntity category);
 
 }

@@ -11,6 +11,7 @@ import fpt.edu.fumic.database.model.Book;
 
 @Entity(tableName = "BOOK")
 public class BookEntity implements Book {
+
     @PrimaryKey
     @NonNull
     private int id;
@@ -47,19 +48,9 @@ public class BookEntity implements Book {
         return title;
     }
 
-    @Override
-    public int getNoOfChapter() {
-        return 0;
-    }
-
 
     public String getDescription() {
         return description;
-    }
-
-    @Override
-    public String getImageURL() {
-        return null;
     }
 
     public byte[] getImage() {
