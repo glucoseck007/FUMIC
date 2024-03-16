@@ -67,6 +67,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     // Create a new database instance or get the existing one
                     sInstance = Room.databaseBuilder(sAppContext,
                                     AppDatabase.class, DB_NAME)
+                            .allowMainThreadQueries()
                             .addCallback(roomCallback) // Add a callback to handle database operations
                             .addMigrations(MIGRATION_1_2)
                             .build();
