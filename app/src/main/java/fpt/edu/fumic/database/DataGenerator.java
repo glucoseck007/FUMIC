@@ -2,9 +2,13 @@ package fpt.edu.fumic.database;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -40,13 +44,15 @@ public class DataGenerator {
                 int noOfView = Integer.parseInt(data[6]);
                 Date dateUpload = StringToDate(data[7]);
                 int status = Integer.parseInt(data[8]);
-
+                Bitmap bitmap = Picasso.get().load("https://images.booksense.com/images/472/839/9781954839472.jpg").get();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                image = stream.toByteArray();
                 BookEntity book = new BookEntity();
                 book.setId(id); book.setTitle(title); book.setDescription(description);
                 book.setImage(image); book.setCategoryId(categoryId); book.setRating(rating);
                 book.setStatus(status); book.setNoOfView(noOfView); book.setDateUpload(Date.from(Instant.now()));
                 book.setContentURI(null);
-
                 instance.bookDAO().insertBook(book);
 
             }

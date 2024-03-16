@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import fpt.edu.fumic.adapters.BookMainAdapter;
 import fpt.edu.fumic.adapters.ViewPagerAdapter;
 import fpt.edu.fumic.ui.SearchActivity;
 
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         navigationView = findViewById(R.id.navigation_button);
+        navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
         viewPager = findViewById(R.id.view_pager);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(),
                 FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
@@ -36,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 switch (position){
-                    case 0: navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
+                    case 0:
+
                         break;
                     case 1:
                         break;
