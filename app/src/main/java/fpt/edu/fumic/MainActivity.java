@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 switch (position){
                     case 0:
-
                         break;
                     case 1:
                         break;
