@@ -1,2 +1,4 @@
-id;title;description;image;categoryId;rating;noOfView;dateUpload;status;contentURI
-1;THE CALL OF THE WILD;"The Call of the Wild" is a classic adventure novel by Jack London, exploring the journey of a domesticated dog named Buck as he returns to his primal instincts in the wilds of the Yukon during the Klondike Gold Rush.;;1;4;0;16/03/2024 8:56:33;1;NULL
+﻿id;title;noOfChapter;description;imageURL;categoryId;rating;noOfView;dateUpload;status
+1;The Call of Wild;7;"The Call of the Wild is a gripping adventure novel by Jack London, following the journey of a domesticated dog named Buck as he adapts to the wilds of Alaska during the Klondike Gold Rush.";1.png;1;4;1000;3/5/2024;1
+2;The Old Man and The Sea;5;The Old Man and the Sea: Hemingway's timeless tale of a Cuban fisherman's epic battle against nature and himself.;2.png;1;4;1000;3/5/2024;1
+3;The Alchemist;18;"The Alchemist is a philosophical novel by Paulo Coelho that follows Santiago, a young Andalusian shepherd, on his journey to find his Personal Legend. Through his travels across the desert, Santiago learns about the importance of following one's dreams, listening to the heart, and understanding the language of the universe.";3.png;1;4;1000;3/5/2024;1
