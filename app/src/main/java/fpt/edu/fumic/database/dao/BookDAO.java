@@ -24,7 +24,7 @@ public interface BookDAO {
     LiveData<List<BookEntity>> loadAllBooks();
 
     @Query("select * from BOOK where status =:status order by dateUpload asc limit :limit offset :offset")
-    List<BookEntity> getBooks(int status,int limit, int offset);
+    List<BookEntity> getBookListAvailable(int status,int limit, int offset);
 
     @Update
     void updateBook(BookEntity book);
@@ -43,4 +43,15 @@ public interface BookDAO {
 
     @Query("DELETE FROM BOOK where id = :id")
     void deleteBook(int id);
+
+    @Query("SELECT * FROM BOOK ORDER BY noOfView DESC")
+    LiveData<List<BookEntity>> getBooksSortedByViews();
+    @Query("SELECT * FROM BOOK ORDER BY id")
+    LiveData<List<BookEntity>> loadBooksSortedById();
+
+    @Query("SELECT * FROM BOOK ORDER BY dateUpload DESC")
+    LiveData<List<BookEntity>> loadBooksSortedByDate();
+
+    @Query("SELECT * FROM BOOK WHERE title like :key")
+    List<BookEntity> searchByTitle(String key);
 }
