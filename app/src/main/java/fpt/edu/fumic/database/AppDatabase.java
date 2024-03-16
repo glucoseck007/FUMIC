@@ -83,8 +83,8 @@ public abstract class AppDatabase extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             Executors.newSingleThreadExecutor().execute(() -> {
-                //DataGenerator.readBookCSV(sAppContext, "book.csv", sInstance);
-                //DataGenerator.readCategoryCSV(sAppContext, "category.csv", sInstance);
+                DataGenerator.readBookCSV(sAppContext, "book.csv", sInstance);
+                DataGenerator.readCategoryCSV(sAppContext, "category.csv", sInstance);
             });
         }
 
@@ -92,8 +92,8 @@ public abstract class AppDatabase extends RoomDatabase {
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onOpen(db);
             Executors.newSingleThreadExecutor().execute(() -> {
-                //DataGenerator.readBookCSV(sAppContext, "book.csv", sInstance);
-                //DataGenerator.readCategoryCSV(sAppContext, "category.csv", sInstance);
+                DataGenerator.readBookCSV(sAppContext, "book.csv", sInstance);
+                DataGenerator.readCategoryCSV(sAppContext, "category.csv", sInstance);
             });
         }
     };
