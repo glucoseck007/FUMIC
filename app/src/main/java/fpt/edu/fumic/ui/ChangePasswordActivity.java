@@ -19,7 +19,9 @@ import fpt.edu.fumic.database.entity.UserEntity;
 import fpt.edu.fumic.repository.UserRepository;
 import fpt.edu.fumic.utils.LoadingDialog;
 import fpt.edu.fumic.utils.MyToast;
-
+/*
+ * luong_123
+ */
 public class ChangePasswordActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String PASSWORD_ERROR = "Incorrect password", EMPTY_FIELD_WARNING = "This field can not empty!";
     private TextInputLayout tilPassword, tilNewPassword, tilRePassword;

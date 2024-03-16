@@ -18,6 +18,9 @@ import fpt.edu.fumic.adapters.BrowseBookAdapter;
 import fpt.edu.fumic.database.entity.BookEntity;
 import fpt.edu.fumic.repository.BookRepository;
 
+/*
+ * luong_123
+ */
 public class BrowseBookActivity extends AppCompatActivity implements View.OnClickListener {
     private RecyclerView recyclerView;
     private BrowseBookAdapter browseBookAdapter;
@@ -51,7 +54,6 @@ public class BrowseBookActivity extends AppCompatActivity implements View.OnClic
 
         layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         browseBookAdapter = new BrowseBookAdapter();
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(browseBookAdapter);
