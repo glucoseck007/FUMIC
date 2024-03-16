@@ -1,84 +1,47 @@
 package fpt.edu.fumic;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import java.text.ParseException;
+import java.util.Date;
 
-import fpt.edu.fumic.adapters.ViewPagerAdapter;
-import fpt.edu.fumic.ui.SearchActivity;
+import fpt.edu.fumic.database.AppDatabase;
+import fpt.edu.fumic.database.entity.BookEntity;
+import fpt.edu.fumic.database.entity.UserEntity;
+import fpt.edu.fumic.fragments.BookFragment;
+import fpt.edu.fumic.repository.BookRepository;
+import fpt.edu.fumic.repository.UserRepository;
+import fpt.edu.fumic.ui.AddBookActivity;
+import fpt.edu.fumic.ui.RegisterActivity;
+import fpt.edu.fumic.ui.UserProfileActivity;
+import fpt.edu.fumic.utils.DateConverterStrDate;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    private BottomNavigationView navigationView;
-    private ViewPager viewPager;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        navigationView = findViewById(R.id.navigation_button);
-        viewPager = findViewById(R.id.view_pager);
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(),
-                FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+        Button button = findViewById(R.id.btnProfile);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                switch (position){
-                    case 0: navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, AddBookActivity.class));
             }
         });
-        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                if(id==R.id.nav_home){
-                    viewPager.setCurrentItem(0);
-                }
-                return true;
-            }
-        });
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.m_search){
-            Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-            startActivity(intent);
-        }
-        else if(id == R.id.m_category){
-
-        }
-
-
-        return super.onOptionsItemSelected(item);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new BookFragment())
+                .commit();
     }
 }

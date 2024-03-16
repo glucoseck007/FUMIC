@@ -1,7 +1,6 @@
 package fpt.edu.fumic.ui;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -9,7 +8,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,8 +24,9 @@ import java.util.Date;
 import java.util.Objects;
 
 import fpt.edu.fumic.R;
+import fpt.edu.fumic.database.AppDatabase;
+import fpt.edu.fumic.database.dao.UserDAO;
 import fpt.edu.fumic.database.entity.UserEntity;
-import fpt.edu.fumic.repository.UserRepository;
 import fpt.edu.fumic.utils.DateConverterStrDate;
 import fpt.edu.fumic.utils.LoadingDialog;
 import fpt.edu.fumic.utils.MyToast;
@@ -49,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private IntentFilter intentFilter;
     private LoadingDialog loadingDialog;
 
-    UserRepository userRepository;
+    UserDAO userDAO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +58,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         //Init intent filter
         initIntentFilter();
         //Connect DAO database
-        userRepository = new UserRepository(getApplicationContext());
+        AppDatabase appDatabase = AppDatabase.getInstance(this);
+        userDAO = appDatabase.userDAO();
         //Setup function buttons of activity
         ivBack.setOnClickListener(this);
         tvLogin.setOnClickListener(this);
@@ -90,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     //Intent PROCESS
-    private void sendRegisterStatusToBoardcast(String statusRegisterStr) {
+    private void sendRegisterStatusToBroadcast(String statusRegisterStr) {
         Intent registerIntent = new Intent();
         registerIntent.setAction(ACTION_REGISTER);
         registerIntent.putExtra(STATUS_REGISTER, statusRegisterStr);
@@ -158,17 +158,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             if (phone.isEmpty()) {
                 tilPhone.setError(EMPTY_FIELD_WARNING);
             }
-            sendRegisterStatusToBoardcast(STATUS_REGISTER_ERROR);
-        } else if(!isDate(dob) || !isEmail(email) || !isPhone(phone)) {
-            sendRegisterStatusToBoardcast(STATUS_REGISTER_FAILED);
+            sendRegisterStatusToBroadcast(STATUS_REGISTER_ERROR);
+        } else if(!isDate(dob) || !isEmail(email)) {
+            sendRegisterStatusToBroadcast(STATUS_REGISTER_FAILED);
         } else if (!rePassword.equals(password)) {
             tilRepassword.setError("Password not matched!");
-            sendRegisterStatusToBoardcast(STATUS_REGISTER_FAILED);
+            sendRegisterStatusToBroadcast(STATUS_REGISTER_FAILED);
         } else {
             Date xDob = DateConverterStrDate.stringToDate(dob);
-            userRepository.insertUser(new UserEntity(username, password, fullName, xDob, gender, email, phone, 2));//0 admin 1 mod 2 user
+            userDAO.insertUser(new UserEntity(username, password, fullName, xDob, gender, email, phone, 0));
             toLoginActivity();
-            sendRegisterStatusToBoardcast(STATUS_REGISTER_SUCCESS);
+            sendRegisterStatusToBroadcast(STATUS_REGISTER_SUCCESS);
         }
     }
     // VERIFY INPUT FUNCTIONS
@@ -188,17 +188,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private boolean isEmail(String email) {
-        if (!email.matches(UserEntity.MATCHES_EMAIL)) {
-            tilEmail.setError("Wrong email format!");
-            return false;
-        }
-        return true;
-    }
-    private boolean isPhone(String phone) {
-        if (!phone.matches(UserEntity.MATCHES_PHONENUMBER)) {
-            tilPhone.setError("Wrong phone format!");
-            return false;
-        }
+//        if (!email.matches(User.MATCHES_EMAIL)) {
+//            tilEmail.setError("Wrong email format!");
+//            return false;
+//        }
         return true;
     }
     private boolean isDate(String dateStr) {
@@ -233,7 +226,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void toLoginActivity(){
         Intent intentRegisterActivity = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(intentRegisterActivity);
-        finish();
     }
 
     //Activity Function
@@ -244,7 +236,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         Objects.requireNonNull(tilEmail.getEditText()).setText("");
         Objects.requireNonNull(tilPassword.getEditText()).setText("");
     }
-    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     @Override
     protected void onStart() {
         super.onStart();

@@ -18,6 +18,11 @@ public class AuthorEntity implements Author {
 
     public AuthorEntity() {};
 
+    public AuthorEntity(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public AuthorEntity(int id, String name, int age, String information) {
         this.id = id;
         this.name = name;
