@@ -55,10 +55,6 @@ public class BookRepository {
         bookDAO.updateBook(book);
     }
 
-    /*
-Date 6/3/2024
-List book
- */
     public LiveData<List<BookEntity>> getBooksSortedByViews() {
         return bookDAO.getBooksSortedByViews();
     }
@@ -78,10 +74,7 @@ List book
         AuthorEntity author = new AuthorEntity(authorId, name);
         return authorDAO.insertAuthor(author);
     }
-    /*
-Date 6/3/2024
-List book
- */
+
     public LiveData<List<BookEntity>> getBooksSortedByDate() {
         return bookDAO.loadBooksSortedByDate();
     }
@@ -97,10 +90,7 @@ List book
     public int insertChapterContent(List<ChapterEntity> chapter) {
         return chapterDAO.insert(chapter).size();
     }
-    /*
-    Date 6/3/2024
-    List book
-     */
+
     public LiveData<List<BookEntity>> getBooksSortedById() {
         return bookDAO.loadBooksSortedById();
     }

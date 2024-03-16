@@ -1,11 +1,5 @@
 package fpt.edu.fumic.database.dao;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
