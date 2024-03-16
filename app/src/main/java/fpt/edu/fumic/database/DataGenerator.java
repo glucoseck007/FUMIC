@@ -53,6 +53,7 @@ public class DataGenerator {
                 book.setImage(image); book.setCategoryId(categoryId); book.setRating(rating);
                 book.setStatus(status); book.setNoOfView(noOfView); book.setDateUpload(Date.from(Instant.now()));
                 book.setContentURI(null);
+
                 instance.bookDAO().insertBook(book);
 
             }
