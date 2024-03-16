@@ -1,0 +1,2 @@
+id;password;name;dob;gender;email;phone;role;notification
+admin;123;admin;12/12/2003;male;abcxyz@gmail.com;0865388283;admin;hello world

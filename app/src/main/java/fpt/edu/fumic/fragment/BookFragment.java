@@ -1,4 +1,4 @@
-package fpt.edu.fumic.fragments;
+package fpt.edu.fumic.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
