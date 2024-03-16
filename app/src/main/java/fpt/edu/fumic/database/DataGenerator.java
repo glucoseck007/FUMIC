@@ -18,7 +18,6 @@ import java.util.List;
 import fpt.edu.fumic.database.entity.BookEntity;
 import fpt.edu.fumic.database.entity.CategoryEntity;
 import fpt.edu.fumic.database.entity.ChapterEntity;
-import fpt.edu.fumic.database.entity.UserEntity;
 import fpt.edu.fumic.repository.BookRepository;
 
 public class DataGenerator {
@@ -109,36 +108,7 @@ public class DataGenerator {
         }
     }
 
-    public static void readUserCSV(Context context, String fileName, AppDatabase instance) {
-        try {
-            InputStream inputStream = context.getAssets().open(fileName);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            reader.readLine();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] data = line.split(";");
-                String id = data[0];
-                String password = data[1];
-                String name = data[2];
-                Date dob = StringToDate(data[3]);
-                int gender = data[4].equals("male") ? 1 : 2;
-                String email = data[5];
-                String phone = data[6];
-                int role = data[7].equals("admin") ? 0 : data[7].equals("mod") ? 1 : 2;
-                String notification = data[8];
 
-                UserEntity user = new UserEntity(id, password, name, dob, gender, email, phone, role);
-
-                instance.userDAO().insertUser(user);
-            }
-            reader.close();
-            inputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     private static String DateToString(Date date) {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
