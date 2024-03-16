@@ -1,9 +1,6 @@
 package fpt.edu.fumic.repository;
 
 import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import androidx.lifecycle.LiveData;
 
