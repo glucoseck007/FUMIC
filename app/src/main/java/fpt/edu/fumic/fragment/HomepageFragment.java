@@ -47,7 +47,6 @@ public class HomepageFragment extends Fragment {
 
         bookList = bookRepository.getBookListAvailable(1, 9, 0);
         GridLayoutManager manager = new GridLayoutManager(getContext(), 3);
-
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(bookAdapter);
 
