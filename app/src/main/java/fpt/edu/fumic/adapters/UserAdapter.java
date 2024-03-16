@@ -20,12 +20,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     */
 
     private List<UserEntity> userList;
-    private OnUserClickListener onUserClickListener;
+//    private OnUserClickListener onUserClickListener;
 
-    public UserAdapter(OnUserClickListener onUserClickListener) {
-        this.onUserClickListener = onUserClickListener;
+//    public UserAdapter(OnUserClickListener onUserClickListener) {
+//        this.onUserClickListener = onUserClickListener;
+//    }
+    public UserAdapter() {
+
     }
-
     // Method to set user list to the adapter
     public void setUserList(List<UserEntity> userList) {
         this.userList = userList;
@@ -33,10 +35,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     }
 
     // Method to remove a user from the list
-    public void removeUser(UserEntity user) {
-        userList.remove(user);
-        notifyDataSetChanged();
-    }
+//    public void removeUser(UserEntity user) {
+//        userList.remove(user);
+//        notifyDataSetChanged();
+//    }
 
     @NonNull
     @Override
@@ -49,13 +51,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         UserEntity user = userList.get(position);
         holder.txtUserName.setText(user.getName());
+        holder.txtID.setText(user.getId());
 
         // Set click listener for delete icon
-        holder.imgDelete.setOnClickListener(v -> {
-            if (onUserClickListener != null) {
-                onUserClickListener.onUserClick(user);
-            }
-        });
+//        holder.imgDelete.setOnClickListener(v -> {
+//            if (onUserClickListener != null) {
+//                onUserClickListener.onUserClick(user);
+//            }
+//        });
     }
 
     @Override
@@ -65,19 +68,20 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     // Define your UserViewHolder class here
     public static class UserViewHolder extends RecyclerView.ViewHolder {
-        TextView txtUserName;
+        TextView txtUserName, txtID;
         ImageView imgDelete;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
             txtUserName = itemView.findViewById(R.id.txt_user_name);
-            imgDelete = itemView.findViewById(R.id.img_delete);
+            txtID= itemView.findViewById(R.id.txt_user_id);
+//            imgDelete = itemView.findViewById(R.id.img_delete);
         }
     }
 
-    // Interface to handle user click events
-    public interface OnUserClickListener {
-        void onUserClick(UserEntity user);
-    }
+//    // Interface to handle user click events
+//    public interface OnUserClickListener {
+//        void onUserClick(UserEntity user);
+//    }
 }
 
