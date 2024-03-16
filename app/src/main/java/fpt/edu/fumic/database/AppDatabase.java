@@ -85,6 +85,7 @@ public abstract class AppDatabase extends RoomDatabase {
             Executors.newSingleThreadExecutor().execute(() -> {
                 DataGenerator.readBookCSV(sAppContext, "book.csv", sInstance);
                 DataGenerator.readCategoryCSV(sAppContext, "category.csv", sInstance);
+                DataGenerator.readUserCSV(sAppContext, "user.csv", sInstance);
             });
         }
 
@@ -94,6 +95,7 @@ public abstract class AppDatabase extends RoomDatabase {
             Executors.newSingleThreadExecutor().execute(() -> {
                 DataGenerator.readBookCSV(sAppContext, "book.csv", sInstance);
                 DataGenerator.readCategoryCSV(sAppContext, "category.csv", sInstance);
+                DataGenerator.readUserCSV(sAppContext, "user.csv", sInstance);
             });
         }
     };
