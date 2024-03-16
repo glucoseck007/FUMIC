@@ -24,7 +24,7 @@ public class BookDetailActivity extends AppCompatActivity {
         initView();
         Intent intent = getIntent();
         Book book = (Book) intent.getSerializableExtra("BookDetail");
-        Picasso.with(this)
+        Picasso.get()
                 .load(book.getImageURL())
                 .placeholder(R.drawable.load)
                 .error(R.drawable.error)

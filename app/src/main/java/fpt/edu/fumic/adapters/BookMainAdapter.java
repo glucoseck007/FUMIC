@@ -60,7 +60,7 @@ public class BookMainAdapter extends RecyclerView.Adapter<BookMainAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         BookEntity book = list.get(position);
         holder.title.setText(book.getTitle());
-        Picasso.with(context)
+        Picasso.get()
                 .load(book.getImageURL())
                 .placeholder(R.drawable.load)
                 .error(R.drawable.error)

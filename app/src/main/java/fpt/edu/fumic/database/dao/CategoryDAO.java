@@ -8,6 +8,7 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Insert;
 import androidx.room.Query;
 
 import java.util.ArrayList;
@@ -19,5 +20,8 @@ import fpt.edu.fumic.database.entity.CategoryEntity;
 public interface CategoryDAO {
     @Query("SELECT * FROM CATEGORY")
     LiveData<List<CategoryEntity>> loadAllCategories();
+
+    @Insert
+    long insert(CategoryEntity category);
 
 }
