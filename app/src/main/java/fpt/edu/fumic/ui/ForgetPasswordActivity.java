@@ -111,6 +111,8 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
             if(user != null){
                 if(password.equals(rePasword)) {
                     statusRecovery = STATUS_RECOVERY_SUCCESS;
+                    user.setPassword(password);
+                    userRepository.updateUser(user);
                     toLoginActivity();
                 } else {
                     statusRecovery = STATUS_RECOVERY_FAILED;
