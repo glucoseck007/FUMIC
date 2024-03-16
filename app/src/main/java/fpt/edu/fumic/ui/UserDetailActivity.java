@@ -20,7 +20,6 @@ import fpt.edu.fumic.utils.UserInformation;
 
 public class UserDetailActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView ivBack;
-    private UserRepository userRepository;
     private UserEntity userEntity;
     private boolean isChange;
     private TextView tvNameTitle, tvName, tvEmail, tvDob, tvPhone, tvRole, tvGender, viewInformation;
@@ -30,9 +29,8 @@ public class UserDetailActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_detail);
         initActivity();
-        userRepository = new UserRepository(this);
-        loadView();
         userEntity = UserInformation.getInstance().getUser();
+        loadView();
         ivBack.setOnClickListener(this);
         viewInformation.setOnClickListener(this);
 
