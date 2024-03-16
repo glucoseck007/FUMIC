@@ -5,7 +5,9 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,12 +16,15 @@ import android.widget.TextView;
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.entity.UserEntity;
 import fpt.edu.fumic.repository.UserRepository;
-import fpt.edu.fumic.utils.UserInformation;
 
+/*
+ * luong_123
+ */
 public class UserProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private View viewInformation, viewChangePassword, viewBrowseBooks,viewHistories,viewFavourite;
+    private View viewInformation, viewChangePassword, viewBrowseBooks, viewHistories, viewFavourite;
     private ImageView ivBack;
+    private UserRepository userRepository;
     private UserEntity userEntity;
 
     private TextView tvName, tvEmail;
@@ -28,9 +33,11 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-
         initActivity();
-        userEntity = UserInformation.getInstance().getUser();
+
+
+        userRepository = new UserRepository(this);
+        loadUser();
         viewInformation.setOnClickListener(this);
         viewChangePassword.setOnClickListener(this);
         viewBrowseBooks.setOnClickListener(this);
@@ -38,8 +45,27 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         viewFavourite.setOnClickListener(this);
         ivBack.setOnClickListener(this);
 
+
     }
 
+
+    private void loadUser() {
+
+        userEntity = userRepository.getUserById("luong123");
+        if (userEntity == null) {
+            return;
+        }
+        loadView();
+
+//        SharedPreferences sharedPreferences = getSharedPreferences("login_info", Context.MODE_PRIVATE);
+//        String username = sharedPreferences.getString("username", null);
+//        if (username != null) {
+//
+//        } else {
+//            finish();
+//        }
+
+    }
 
     private void loadView() {
         tvName.setText(userEntity.getName());
@@ -68,12 +94,12 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-//    ActivityResultLauncher<Intent> mStartForStoryResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-//            result -> {
-//                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-//                    loadUser();
-//                }
-//            });
+    ActivityResultLauncher<Intent> mStartForStoryResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    loadUser();
+                }
+            });
 
     @Override
     public void onClick(View view) {
@@ -81,17 +107,17 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
             finish();
         } else if (view.getId() == R.id.viewInformation) {
             Intent intent = new Intent(UserProfileActivity.this, UserDetailActivity.class);
-            startActivity(intent);
-//            mStartForStoryResult.launch(intent);
+            intent.putExtra("uid", userEntity.getId());
+            mStartForStoryResult.launch(intent);
         } else if (view.getId() == R.id.viewChangePassword) {
             Intent intent = new Intent(UserProfileActivity.this, ChangePasswordActivity.class);
-            startActivity(intent);
-//            mStartForStoryResult.launch(intent);
+            intent.putExtra("uid", userEntity.getId());
+            mStartForStoryResult.launch(intent);
         } else if (view.getId() == R.id.viewBrowseBooks) {
             startActivity(new Intent(UserProfileActivity.this, BrowseBookActivity.class));
-        }else if (view.getId() == R.id.viewFavourite){
+        } else if (view.getId() == R.id.viewFavourite) {
             startActivity(new Intent(UserProfileActivity.this, FavouriteActivity.class));
-        }else if (view.getId() == R.id.viewHistories){
+        } else if (view.getId() == R.id.viewHistories) {
             startActivity(new Intent(UserProfileActivity.this, HistoriesActivity.class));
         }
     }

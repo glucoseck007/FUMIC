@@ -27,7 +27,6 @@ import fpt.edu.fumic.ui.FavouriteActivity;
 import fpt.edu.fumic.ui.HistoriesActivity;
 import fpt.edu.fumic.ui.UserDetailActivity;
 import fpt.edu.fumic.ui.UserProfileActivity;
-import fpt.edu.fumic.utils.UserInformation;
 
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
@@ -37,6 +36,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
 
     private View viewInformation, viewChangePassword, viewBrowseBooks, viewHistories, viewFavourite;
+    private ImageView ivBack;
     private UserRepository userRepository;
     private UserEntity userEntity;
 
@@ -45,15 +45,18 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_user_profile, container, false);
+        return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         initActivity(view);
+
+
         userRepository = new UserRepository(requireActivity());
-        loadView();
+        loadUser();
         viewInformation.setOnClickListener(this);
         viewChangePassword.setOnClickListener(this);
         viewBrowseBooks.setOnClickListener(this);
@@ -64,29 +67,33 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     }
 
-//    private void loadUser() {
-//        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("login_info", Context.MODE_PRIVATE);
-//        String username = sharedPreferences.getString("username", null);
-//        if (username != null) {
-//            userEntity = userRepository.getUserById(username);
-//            if (userEntity == null) {
-//                return;
-//            }
-//            loadView();
-//        }
-//    }
-//    ActivityResultLauncher<Intent> mStartForStoryResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-//            result -> {
-//                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-//                }
-//            });
+    private void loadUser() {
+
+
+
+
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("login_info", Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", null);
+        if (username != null) {
+            userEntity = userRepository.getUserById(username);
+            if (userEntity == null) {
+                return;
+            }
+            loadView();
+        }
+
+
+    }
+
+    ActivityResultLauncher<Intent> mStartForStoryResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    loadUser();
+                }
+            });
 
 
     private void loadView() {
-        userEntity = UserInformation.getInstance().getUser();
-        if (userEntity == null){
-            return;
-        }
         tvName.setText(userEntity.getName());
         tvEmail.setText(userEntity.getEmail());
 
@@ -105,20 +112,22 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         viewBrowseBooks = view.findViewById(R.id.viewBrowseBooks);
         viewHistories = view.findViewById(R.id.viewHistories);
         viewFavourite = view.findViewById(R.id.viewFavourite);
+        ivBack = view.findViewById(R.id.ivBack);
         tvName = view.findViewById(R.id.tvName);
         tvEmail = view.findViewById(R.id.tvEmail);
+
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.viewInformation) {
             Intent intent = new Intent(requireActivity(), UserDetailActivity.class);
-            startActivity(intent);
-//            mStartForStoryResult.launch(intent);
+            intent.putExtra("uid", userEntity.getId());
+            mStartForStoryResult.launch(intent);
         } else if (view.getId() == R.id.viewChangePassword) {
             Intent intent = new Intent(requireActivity(), ChangePasswordActivity.class);
-            startActivity(intent);
-//            mStartForStoryResult.launch(intent);
+            intent.putExtra("uid", userEntity.getId());
+            mStartForStoryResult.launch(intent);
         } else if (view.getId() == R.id.viewBrowseBooks) {
             startActivity(new Intent(requireActivity(), BrowseBookActivity.class));
         } else if (view.getId() == R.id.viewFavourite) {

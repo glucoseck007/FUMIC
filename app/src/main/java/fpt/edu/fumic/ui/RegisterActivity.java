@@ -239,7 +239,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onStart() {
         super.onStart();
-        registerReceiver(registerBroadcastReceiver, intentFilter);
+        registerReceiver(registerBroadcastReceiver, intentFilter, Context.RECEIVER_NOT_EXPORTED);
     }
 
     @Override

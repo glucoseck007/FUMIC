@@ -16,10 +16,12 @@ import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.entity.UserEntity;
 import fpt.edu.fumic.repository.UserRepository;
 import fpt.edu.fumic.utils.DateConverterStrDate;
-import fpt.edu.fumic.utils.UserInformation;
-
+/*
+ * luong_123
+ */
 public class UserDetailActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView ivBack;
+    private UserRepository userRepository;
     private UserEntity userEntity;
     private boolean isChange;
     private TextView tvNameTitle, tvName, tvEmail, tvDob, tvPhone, tvRole, tvGender, viewInformation;
@@ -29,8 +31,9 @@ public class UserDetailActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_detail);
         initActivity();
-        userEntity = UserInformation.getInstance().getUser();
-        loadView();
+        userRepository = new UserRepository(this);
+        loadUser();
+
         ivBack.setOnClickListener(this);
         viewInformation.setOnClickListener(this);
 
@@ -44,6 +47,17 @@ public class UserDetailActivity extends AppCompatActivity implements View.OnClic
 
     }
 
+    private void loadUser() {
+        String uid = getIntent().getStringExtra("uid");
+        if (uid == null || uid.isEmpty()) {
+            return;
+        }
+        userEntity = userRepository.getUserById(uid);
+        if (userEntity == null) {
+            return;
+        }
+        loadView();
+    }
 
     private void loadView() {
         tvName.setText(userEntity.getName());
@@ -100,12 +114,13 @@ public class UserDetailActivity extends AppCompatActivity implements View.OnClic
     }
 
 
-//    ActivityResultLauncher<Intent> mStartForStoryResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-//            result -> {
-//                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-//                    isChange = true;
-//                }
-//            });
+    ActivityResultLauncher<Intent> mStartForStoryResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    isChange = true;
+                    loadUser();
+                }
+            });
 
     @Override
     public void onClick(View view) {
@@ -113,8 +128,8 @@ public class UserDetailActivity extends AppCompatActivity implements View.OnClic
             handleFinish();
         } else if (view.getId() == R.id.viewInformation) {
             Intent intent = new Intent(UserDetailActivity.this, EditProfileActivity.class);
-            startActivity(intent);
-//            mStartForStoryResult.launch(intent);
+            intent.putExtra("uid", userEntity.getId());
+            mStartForStoryResult.launch(intent);
         }
     }
 

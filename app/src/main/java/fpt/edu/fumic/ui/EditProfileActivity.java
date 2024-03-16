@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,8 +30,9 @@ import fpt.edu.fumic.repository.UserRepository;
 import fpt.edu.fumic.utils.DateConverterStrDate;
 import fpt.edu.fumic.utils.LoadingDialog;
 import fpt.edu.fumic.utils.MyToast;
-import fpt.edu.fumic.utils.UserInformation;
-
+/*
+ * luong_123
+ */
 public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String ACTION_REGISTER = "action register", STATUS_REGISTER = "status register", STATUS_REGISTER_SUCCESS = "register successful", STATUS_REGISTER_FAILED = "register failed", STATUS_REGISTER_ERROR = "register error", EMPTY_FIELD_WARNING = "This field can not empty!";
     private TextInputLayout tilFullname, tilEmail, tilPhone, tilDoB;
@@ -52,7 +55,14 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         //Init user repository
         userRepository = new UserRepository(this);
-        userEntity = UserInformation.getInstance().getUser();
+
+        //get user
+        String uid = getIntent().getStringExtra("uid");
+        if (uid == null || uid.isEmpty()) {
+            return;
+        }
+
+        userEntity = userRepository.getUserById(uid);
         if (userEntity == null) {
             return;
         }

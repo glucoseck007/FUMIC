@@ -9,28 +9,25 @@
     android:orientation="vertical"
     app:cardElevation="1dp"
     app:strokeWidth="0dp">
-
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
+        android:layout_height="wrap_content">
         <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
             android:layout_margin="10dp"
-            app:cardCornerRadius="20dp">
-
+            android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="170dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/img_coverbookdetail" />
-        </com.google.android.material.card.MaterialCardView>
 
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_coverbookdetail"
+                android:layout_width="100dp"
+                android:layout_height="200dp"/>
+        </com.google.android.material.card.MaterialCardView>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -43,10 +40,10 @@
                 android:textAlignment="textStart" />
 
             <TextView
+                android:layout_marginTop="10dp"
                 android:id="@+id/text_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -55,54 +52,56 @@
                 android:id="@+id/text_views"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="14sp" />
-
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray" />
             <TextView
-                android:id="@+id/tvStatus"
-                style="@style/TextAppearance.MaterialComponents.Body2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Đang chờ duyệt"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:id="@+id/tvStatus"
+                android:textStyle="bold"
                 android:textAlignment="textStart"
-                android:textStyle="bold" />
+                android:text="Đang chờ duyệt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <LinearLayout
-
-                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="start">
 
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnAccept"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:padding="10dp"
+                    app:backgroundTint="@color/LightSeaGreen"
                     android:text="Accept"
                     android:textColor="@color/White"
-                    app:backgroundTint="@color/LightSeaGreen"
                     app:cornerRadius="10dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnRefuse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_marginStart="10dp"
                     android:padding="10dp"
+                    app:backgroundTint="@color/Red"
                     android:text="Refuse"
                     android:textColor="@color/White"
-                    app:backgroundTint="@color/Red"
                     app:cornerRadius="10dp" />
 
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
+
 
 
 </com.google.android.material.card.MaterialCardView>

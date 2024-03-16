@@ -10,7 +10,9 @@ import fpt.edu.fumic.database.AppDatabase;
 import fpt.edu.fumic.database.dao.UserDAO;
 import fpt.edu.fumic.database.entity.BookEntity;
 import fpt.edu.fumic.database.entity.UserEntity;
-
+/*
+Date : 5/3/2024
+*/
 public class UserRepository {
 
     private final UserDAO userDAO;
@@ -31,7 +33,11 @@ public class UserRepository {
     public UserEntity getUserById(String username){
         return userDAO.getUserById(username);
     }
-    public void updateUser(UserEntity userEntity){
-        userDAO.updateUser(userEntity);
+    public void deleteUser(UserEntity user) {
+        userDAO.deleteUser(user);
+    }
+
+    public void updateUser(UserEntity user) {
+        userDAO.updateUser(user);
     }
 }

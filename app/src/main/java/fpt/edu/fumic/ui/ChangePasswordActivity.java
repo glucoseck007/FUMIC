@@ -19,14 +19,17 @@ import fpt.edu.fumic.database.entity.UserEntity;
 import fpt.edu.fumic.repository.UserRepository;
 import fpt.edu.fumic.utils.LoadingDialog;
 import fpt.edu.fumic.utils.MyToast;
-import fpt.edu.fumic.utils.UserInformation;
-
+/*
+ * luong_123
+ */
 public class ChangePasswordActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String PASSWORD_ERROR = "Incorrect password", EMPTY_FIELD_WARNING = "This field can not empty!";
     private TextInputLayout tilPassword, tilNewPassword, tilRePassword;
 
     private ImageView ivBack;
     private Button btSave;
+
+
     private UserRepository userRepository;
     private UserEntity userEntity;
 
@@ -39,7 +42,13 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
 
         //Init user repository
         userRepository = new UserRepository(this);
-        userEntity = UserInformation.getInstance().getUser();
+
+        //get user
+        String uid = getIntent().getStringExtra("uid");
+        if (uid == null || uid.isEmpty()) {
+            return;
+        }
+        userEntity = userRepository.getUserById(uid);
         if (userEntity == null) {
             return;
         }
@@ -47,6 +56,9 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
 
         ivBack.setOnClickListener(this);
         btSave.setOnClickListener(this);
+
+
+
 
     }
 
