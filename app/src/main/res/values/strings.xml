@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">FUMIC</string>
+    <string-array name="Category">
+        <item>Novel</item>
+        <item>Science Fiction</item>
+        <item>Fantasy</item>
+        <item>Mystery</item>
+        <item>Thriller</item>
+        <item>Romance</item>
+        <item>Historical Fiction</item>
+        <item>Biography</item>
+    </string-array>
 </resources>

@@ -18,6 +18,14 @@ public class OwnEntity {
     private int authorId;
     private int bookId;
 
+    public OwnEntity() {
+    }
+
+    public OwnEntity(int authorId, int bookId) {
+        this.authorId = authorId;
+        this.bookId = bookId;
+    }
+
     public int getAuthorId() {
         return authorId;
     }

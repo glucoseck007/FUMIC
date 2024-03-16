@@ -29,7 +29,10 @@ android {
 }
 
 dependencies {
+    implementation("com.squareup.picasso:picasso:2.71828")
+    //noinspection GradleCompatible
     implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.gridlayout:gridlayout:1.0.0")
     annotationProcessor("androidx.room:room-compiler:2.6.1")
     androidTestImplementation("androidx.room:room-testing:2.6.1")
     implementation("androidx.appcompat:appcompat:1.6.1")

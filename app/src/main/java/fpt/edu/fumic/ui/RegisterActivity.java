@@ -90,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     //Intent PROCESS
-    private void sendRegisterStatusToBoardcast(String statusRegisterStr) {
+    private void sendRegisterStatusToBroadcast(String statusRegisterStr) {
         Intent registerIntent = new Intent();
         registerIntent.setAction(ACTION_REGISTER);
         registerIntent.putExtra(STATUS_REGISTER, statusRegisterStr);
@@ -158,17 +158,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             if (phone.isEmpty()) {
                 tilPhone.setError(EMPTY_FIELD_WARNING);
             }
-            sendRegisterStatusToBoardcast(STATUS_REGISTER_ERROR);
+            sendRegisterStatusToBroadcast(STATUS_REGISTER_ERROR);
         } else if(!isDate(dob) || !isEmail(email)) {
-            sendRegisterStatusToBoardcast(STATUS_REGISTER_FAILED);
+            sendRegisterStatusToBroadcast(STATUS_REGISTER_FAILED);
         } else if (!rePassword.equals(password)) {
             tilRepassword.setError("Password not matched!");
-            sendRegisterStatusToBoardcast(STATUS_REGISTER_FAILED);
+            sendRegisterStatusToBroadcast(STATUS_REGISTER_FAILED);
         } else {
             Date xDob = DateConverterStrDate.stringToDate(dob);
             userDAO.insertUser(new UserEntity(username, password, fullName, xDob, gender, email, phone, 0));
             toLoginActivity();
-            sendRegisterStatusToBoardcast(STATUS_REGISTER_SUCCESS);
+            sendRegisterStatusToBroadcast(STATUS_REGISTER_SUCCESS);
         }
     }
     // VERIFY INPUT FUNCTIONS
