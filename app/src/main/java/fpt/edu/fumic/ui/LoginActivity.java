@@ -177,7 +177,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onStart() {
         super.onStart();
-        registerReceiver(loginBroadcastReceiver, intentFilter);
+        registerReceiver(loginBroadcastReceiver, intentFilter, Context.RECEIVER_NOT_EXPORTED);
     }
     @Override
     protected void onStop() {

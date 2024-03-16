@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,18 +13,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/ivBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:src="@drawable/ic_back_home_1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ContentDescription" />
-
+            android:orientation="vertical"
+            android:padding="10dp">
 
 
             <com.google.android.material.card.MaterialCardView
@@ -64,7 +53,7 @@
                 android:lines="1"
                 android:maxLength="40"
                 android:singleLine="true"
-                android:text="bnbbinh@gmail.com"
+                android:text="luonkk@gmail.com"
                 android:textAlignment="center"
                 android:textSize="12sp"
                 android:textStyle="normal" />
@@ -89,13 +78,14 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <LinearLayout
-                android:visibility="visible"
                 android:id="@+id/viewBrowseBooks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="5dp"
+                android:visibility="visible"
                 android:weightSum="12">
 
                 <LinearLayout
@@ -139,11 +129,12 @@
                 </LinearLayout>
 
             </LinearLayout>
+
             <LinearLayout
-                android:layout_marginTop="5dp"
                 android:id="@+id/viewInformation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal"
                 android:padding="5dp"
                 android:weightSum="12">
@@ -294,6 +285,7 @@
                 </LinearLayout>
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/viewChangePassword"
                 android:layout_width="match_parent"

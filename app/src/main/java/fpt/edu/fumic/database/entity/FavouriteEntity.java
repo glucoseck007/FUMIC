@@ -4,6 +4,7 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 
 
+
 @Entity(tableName = "FAVOURITE", primaryKeys = {"userId", "bookId"},
         foreignKeys = {
                 @ForeignKey(entity = UserEntity.class,
@@ -18,7 +19,9 @@ import androidx.room.ForeignKey;
 public class FavouriteEntity {
     @NonNull
     private String userId;
+    @NonNull
     private int bookId;
+
 
     public String getUserId() {
         return userId;
@@ -36,4 +39,3 @@ public class FavouriteEntity {
         this.bookId = bookId;
     }
 }
-

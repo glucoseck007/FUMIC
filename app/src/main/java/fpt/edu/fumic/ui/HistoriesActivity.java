@@ -12,16 +12,19 @@ import android.widget.ImageView;
 
 import java.util.List;
 
+import fpt.edu.fumic.adapters.HistoriesAdapter;
 import fpt.edu.fumic.interfaces.BrowseBook;
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.adapters.BrowseBookAdapter;
 import fpt.edu.fumic.database.entity.BookEntity;
 import fpt.edu.fumic.repository.BookRepository;
-
+/*
+ * luong_123
+ */
 public class HistoriesActivity extends AppCompatActivity implements View.OnClickListener{
 
     private RecyclerView recyclerView;
-    private BrowseBookAdapter browseBookAdapter;
+    private HistoriesAdapter historiesAdapter;
     private BookRepository bookRepository;
     private LinearLayoutManager layoutManager;
     private ImageView ivBack;
@@ -39,7 +42,7 @@ public class HistoriesActivity extends AppCompatActivity implements View.OnClick
 
         initActivity();
 
-        loadBook(false);
+        loadBook();
 
         ivBack.setOnClickListener(this);
 
@@ -51,57 +54,26 @@ public class HistoriesActivity extends AppCompatActivity implements View.OnClick
 
 
         layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        browseBookAdapter = new BrowseBookAdapter();
+        historiesAdapter = new HistoriesAdapter();
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(browseBookAdapter);
+        recyclerView.setAdapter(historiesAdapter);
 
-        browseBookAdapter.setBrowseBookInterface(new BrowseBook() {
-            @Override
-            public void onAccept(int p, BookEntity book) {
 
-            }
 
-            @Override
-            public void onRefuse(int p, BookEntity book) {
-
-            }
-        });
-
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
-                int totalItemCount = layoutManager.getItemCount();
-                if (dy > 0) {
-                    if (!isLoading && !isLastItemReached) {
-                        if (totalItemCount - 1 == lastVisibleItemPosition) {
-                            Log.d("__note", "load more");
-                            loadBook(true);
-                        }
-                    }
-                }
-            }
-        });
 
     }
 
 
-    private void loadBook(boolean isLoadMore) {
+    private void loadBook() {
         isLoading = true;
         runOnUiThread(() -> {
-            List<BookEntity> list = bookRepository.getBookListAvailable(1, 10, offset);
+            List<BookEntity> list = bookRepository.getBookListAvailable(1, 3, offset);
             offset += list.size();
             isLoading = false;
-            isLastItemReached = list.size() < 10;
-            if (!isLoadMore) {
-                browseBookAdapter.setData(list);
-            } else {
-                browseBookAdapter.addData(list);
-            }
+            isLastItemReached = list.size() < 3;
+            historiesAdapter.setBooks(list);
         });
 
 
