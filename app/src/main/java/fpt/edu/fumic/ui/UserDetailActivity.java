@@ -16,9 +16,8 @@ import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.entity.UserEntity;
 import fpt.edu.fumic.repository.UserRepository;
 import fpt.edu.fumic.utils.DateConverterStrDate;
-/*
- * luong_123
- */
+import fpt.edu.fumic.utils.UserInformation;
+
 public class UserDetailActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView ivBack;
     private UserRepository userRepository;
@@ -32,8 +31,8 @@ public class UserDetailActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_user_detail);
         initActivity();
         userRepository = new UserRepository(this);
-        loadUser();
-
+        loadView();
+        userEntity = UserInformation.getInstance().getUser();
         ivBack.setOnClickListener(this);
         viewInformation.setOnClickListener(this);
 
@@ -47,17 +46,6 @@ public class UserDetailActivity extends AppCompatActivity implements View.OnClic
 
     }
 
-    private void loadUser() {
-        String uid = getIntent().getStringExtra("uid");
-        if (uid == null || uid.isEmpty()) {
-            return;
-        }
-        userEntity = userRepository.getUserById(uid);
-        if (userEntity == null) {
-            return;
-        }
-        loadView();
-    }
 
     private void loadView() {
         tvName.setText(userEntity.getName());
@@ -114,13 +102,12 @@ public class UserDetailActivity extends AppCompatActivity implements View.OnClic
     }
 
 
-    ActivityResultLauncher<Intent> mStartForStoryResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-                    isChange = true;
-                    loadUser();
-                }
-            });
+//    ActivityResultLauncher<Intent> mStartForStoryResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+//            result -> {
+//                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+//                    isChange = true;
+//                }
+//            });
 
     @Override
     public void onClick(View view) {
@@ -128,8 +115,8 @@ public class UserDetailActivity extends AppCompatActivity implements View.OnClic
             handleFinish();
         } else if (view.getId() == R.id.viewInformation) {
             Intent intent = new Intent(UserDetailActivity.this, EditProfileActivity.class);
-            intent.putExtra("uid", userEntity.getId());
-            mStartForStoryResult.launch(intent);
+            startActivity(intent);
+//            mStartForStoryResult.launch(intent);
         }
     }
 

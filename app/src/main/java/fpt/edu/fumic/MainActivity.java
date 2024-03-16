@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
                     viewPager.setCurrentItem(0);
                 } else if (id == R.id.nav_manage) {
                     viewPager.setCurrentItem(1);
+                } else if (id == R.id.nav_profile) {
+                    viewPager.setCurrentItem(2);
                 }
                 return true;
             }

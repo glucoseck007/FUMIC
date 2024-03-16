@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -24,6 +23,7 @@ import fpt.edu.fumic.database.entity.UserEntity;
 import fpt.edu.fumic.repository.UserRepository;
 import fpt.edu.fumic.utils.LoadingDialog;
 import fpt.edu.fumic.utils.MyToast;
+import fpt.edu.fumic.utils.UserInformation;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String ACTION_LOGIN = "action login"
@@ -125,7 +125,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if(user != null){
                 if (user.getPassword().equals(password)){
                     statusLogin = STATUS_LOGIN_SUCCESS;
-                    toMainPage(username);
+                    UserInformation.getInstance().setUser(user);
+                    toMainPage();
                     if(check_box_remember.isChecked()){
                         setPreferencesMemory();
                     }else {
@@ -147,9 +148,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private String getText(TextInputLayout textInputLayout) {
         return Objects.requireNonNull(textInputLayout.getEditText()).getText().toString().trim();
     }
-    private void toMainPage(String username){
+    private void toMainPage(){
         Intent intentMainPage = new Intent(LoginActivity.this, MainActivity.class);
-        intentMainPage.putExtra(KEY_USER, username);
         startActivity(intentMainPage);
         finish();
     }

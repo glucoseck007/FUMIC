@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import fpt.edu.fumic.fragment.BookFragment;
 import fpt.edu.fumic.fragment.HomepageFragment;
 import fpt.edu.fumic.fragment.ManagerFragment;
+import fpt.edu.fumic.fragment.ProfileFragment;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
@@ -22,13 +23,13 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         switch (position){
             case 0: return new BookFragment();
             case 1: return new ManagerFragment();
-            case 2:
+            case 2: return new ProfileFragment();
         }
         return null;
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 }
