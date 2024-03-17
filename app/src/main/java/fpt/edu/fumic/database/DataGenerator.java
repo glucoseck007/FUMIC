@@ -34,7 +34,7 @@ public class DataGenerator {
                 int id = Integer.parseInt(data[0]);
                 String title = data[1];
                 String description = data[2];
-                byte[] image = null;
+                byte[] image;
                 int categoryId = Integer.parseInt(data[4]);
                 int rating = Integer.parseInt(data[5]);
                 int noOfView = Integer.parseInt(data[6]);
@@ -44,7 +44,7 @@ public class DataGenerator {
                 BookEntity book = new BookEntity();
                 book.setId(id); book.setTitle(title); book.setDescription(description);
                 book.setImage(image); book.setCategoryId(categoryId); book.setRating(rating);
-                book.setStatus(status); book.setNoOfView(noOfView); book.setDateUpload(Date.from(Instant.now()));
+                book.setStatus(status); book.setNoOfView(noOfView); book.setDateUpload(dateUpload);
                 book.setContentURI(null);
 
                 instance.bookDAO().insertBook(book);
