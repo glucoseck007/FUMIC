@@ -42,7 +42,6 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         viewFavourite.setOnClickListener(this);
         viewLogout.setOnClickListener(this);
         ivBack.setOnClickListener(this);
-
         mStartForProfileResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == android.app.Activity.RESULT_OK) {
@@ -70,7 +69,6 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         } else {
             viewBrowseBooks.setVisibility(View.GONE);
         }
-
     }
 
     private void initActivity() {
@@ -86,7 +84,6 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         tvEmail = findViewById(R.id.tvEmail);
     }
     private void logout(){
-        MyToast.successfulToast(getApplicationContext(), "Logged out!");
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         UserInformation.getInstance().setUser(null);
@@ -104,7 +101,6 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         } else if (view.getId() == R.id.viewChangePassword) {
             Intent intent = new Intent(UserProfileActivity.this, ChangePasswordActivity.class);
             startActivity(intent);
-            mStartForProfileResult.launch(intent);
         } else if (view.getId() == R.id.viewBrowseBooks) {
             startActivity(new Intent(UserProfileActivity.this, BrowseBookActivity.class));
         } else if (view.getId() == R.id.viewFavourite) {

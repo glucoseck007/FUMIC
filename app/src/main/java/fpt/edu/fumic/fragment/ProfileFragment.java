@@ -25,6 +25,7 @@ import fpt.edu.fumic.ui.BrowseBookActivity;
 import fpt.edu.fumic.ui.ChangePasswordActivity;
 import fpt.edu.fumic.ui.FavouriteActivity;
 import fpt.edu.fumic.ui.HistoriesActivity;
+import fpt.edu.fumic.ui.LoginActivity;
 import fpt.edu.fumic.ui.UserDetailActivity;
 import fpt.edu.fumic.ui.UserProfileActivity;
 import fpt.edu.fumic.utils.MyToast;
@@ -37,7 +38,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         return new ProfileFragment();
     }
 
-    private View viewInformation, viewChangePassword, viewBrowseBooks, viewHistories, viewFavourite;
+    private View viewInformation, viewChangePassword, viewBrowseBooks, viewHistories, viewFavourite, viewLogout;
     private UserRepository userRepository;
     private UserEntity userEntity;
 
@@ -60,9 +61,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         viewBrowseBooks.setOnClickListener(this);
         viewHistories.setOnClickListener(this);
         viewFavourite.setOnClickListener(this);
-
-
-
+        viewLogout.setOnClickListener(this);
     }
 
     private void loadUser() {
@@ -100,19 +99,24 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         viewBrowseBooks = view.findViewById(R.id.viewBrowseBooks);
         viewHistories = view.findViewById(R.id.viewHistories);
         viewFavourite = view.findViewById(R.id.viewFavourite);
+        viewLogout = view.findViewById(R.id.viewLogout);
         tvName = view.findViewById(R.id.tvName);
         tvEmail = view.findViewById(R.id.tvEmail);
     }
-
+    private void logout(){
+        Intent intent = new Intent(requireActivity(), LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        UserInformation.getInstance().setUser(null);
+        startActivity(intent);
+        requireActivity().finish();
+    }
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.viewInformation) {
             Intent intent = new Intent(requireActivity(), UserDetailActivity.class);
-            startActivity(intent);
             mStartForStoryResult.launch(intent);
         } else if (view.getId() == R.id.viewChangePassword) {
             Intent intent = new Intent(requireActivity(), ChangePasswordActivity.class);
-            startActivity(intent);
             mStartForStoryResult.launch(intent);
         } else if (view.getId() == R.id.viewBrowseBooks) {
             startActivity(new Intent(requireActivity(), BrowseBookActivity.class));
@@ -121,6 +125,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         } else if (view.getId() == R.id.viewHistories) {
             MyToast.confusingToast(getContext(), "This function is coming soon!");
 //            startActivity(new Intent(requireActivity(), HistoriesActivity.class));
+        } else if (view.getId() == R.id.viewLogout) {
+            logout();
         }
     }
 }

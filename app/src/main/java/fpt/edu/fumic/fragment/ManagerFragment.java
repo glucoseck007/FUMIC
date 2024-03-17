@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.ui.BookListActivity;
+import fpt.edu.fumic.ui.BookListActivity2;
+import fpt.edu.fumic.ui.CategoryListActivity;
 import fpt.edu.fumic.ui.ManageActivity;
 import fpt.edu.fumic.ui.ManageUserActivity;
 import fpt.edu.fumic.utils.MyToast;
@@ -44,13 +46,13 @@ public class ManagerFragment extends Fragment implements View.OnClickListener{
         Intent intent = null;
         int viewId = v.getId();
         if (viewId == R.id.iv_book) {
-            intent = new Intent(getActivity(), BookListActivity.class);
+            intent = new Intent(getActivity(), BookListActivity2.class);
         } else if (viewId == R.id.iv_user) {
             intent = new Intent(getActivity(), ManageUserActivity.class);
         }
         else if (viewId == R.id.iv_category) {
             MyToast.confusingToast(getContext(), "This function is coming soon!");
-//            intent = new Intent(ManageActivity.this, CategoryActivity.class);
+            intent = new Intent(getActivity(), CategoryListActivity.class);
         } else if (viewId == R.id.iv_notification) {
             MyToast.confusingToast(getContext(), "This function is coming soon!");
 //            intent = new Intent(ManageActivity.this, NotificationActivity.class);
