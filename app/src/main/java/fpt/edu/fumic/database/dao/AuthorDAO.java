@@ -21,4 +21,7 @@ public interface AuthorDAO {
 
     @Query("DELETE FROM AUTHOR where id = :id")
     void deleteAuthor(int id);
+
+    @Query("SELECT name FROM AUTHOR where id = :id")
+    String getAuthorById(int id);
 }
