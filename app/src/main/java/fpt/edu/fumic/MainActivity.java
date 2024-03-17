@@ -13,6 +13,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import fpt.edu.fumic.adapters.BookMainAdapter;
 import fpt.edu.fumic.adapters.ViewPagerAdapter;
+import fpt.edu.fumic.ui.AddBookActivity;
+import fpt.edu.fumic.ui.CategoryListActivity;
 import fpt.edu.fumic.ui.SearchActivity;
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.utils.UserInformation;
@@ -111,15 +113,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.m_search){
-            Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+        if (id == R.id.m_add){
+            Intent intent = new Intent(MainActivity.this, AddBookActivity.class);
             startActivity(intent);
         }
         else if(id == R.id.m_category){
-
+            Intent intent = new Intent(getApplicationContext(), CategoryListActivity.class);
+            startActivity(intent);
         }
-
-
         return super.onOptionsItemSelected(item);
     }
 }

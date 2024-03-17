@@ -22,6 +22,10 @@ public class FavouriteEntity {
     @NonNull
     private int bookId;
 
+    public FavouriteEntity(@NonNull String userId, int bookId) {
+        this.userId = userId;
+        this.bookId = bookId;
+    }
 
     public String getUserId() {
         return userId;

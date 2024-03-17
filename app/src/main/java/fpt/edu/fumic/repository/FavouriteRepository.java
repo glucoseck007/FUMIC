@@ -28,7 +28,7 @@ public class FavouriteRepository {
     public void deleteFavourite(int bookId) {
         favouriteDao.deleteBookById(bookId);
     }
-    public boolean isBookInFavourites(String userId, int bookId) {
+    public boolean isBookInFavourites(String userId, int bookId) { 
         return favouriteDao.isBookInFavourites(userId, bookId) > 0;
     }
 
