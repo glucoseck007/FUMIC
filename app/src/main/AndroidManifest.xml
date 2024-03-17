@@ -28,6 +28,15 @@
                 android:value=".ui.ManageActivity" />
         </activity>
         <activity
+            android:name=".ui.BookListActivity"
+            android:exported="true"
+            android:label="Book in Category"
+            android:parentActivityName=".ui.CategoryListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.ManageActivity" />
+        </activity>
+        <activity
             android:name=".ui.CategoryListActivity"
             android:exported="true"
             android:label="Manage Category"
