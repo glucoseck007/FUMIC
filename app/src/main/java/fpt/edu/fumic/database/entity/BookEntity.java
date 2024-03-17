@@ -5,12 +5,13 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import fpt.edu.fumic.database.model.Book;
 
 @Entity(tableName = "BOOK")
-public class BookEntity implements Book {
+public class BookEntity implements Book , Serializable {
     @PrimaryKey
     @NonNull
     private int id;

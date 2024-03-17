@@ -178,6 +178,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             userEntity.setGender(gender);
             userEntity.setPhone(phone);
             userRepository.updateUser(userEntity);
+            UserInformation.getInstance().setUser(userEntity);
             loadingDialog.stopLoadingDialog();
             MyToast.successfulToast(EditProfileActivity.this, "Successfully updated!");
             Intent intent = new Intent();
@@ -187,10 +188,10 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
     private boolean isEmail(String email) {
-//        if (!email.matches(User.MATCHES_EMAIL)) {
-//            tilEmail.setError("Wrong email format!");
-//            return false;
-//        }
+        if (!email.matches(UserEntity.MATCHES_EMAIL)) {
+            tilEmail.setError("Wrong email format!");
+            return false;
+        }
         return true;
     }
 

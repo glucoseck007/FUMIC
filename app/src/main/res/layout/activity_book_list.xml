@@ -1,64 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-Date 6/3/2024
-List book
--->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.BookListActivity">
-    <ImageView
-        android:id="@+id/ivBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_back_home_1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
-    <TextView
-        android:id="@+id/tvManage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Manage Book"
-        android:layout_marginStart="24sp"
-        android:layout_below="@+id/ivBack"
-        android:textSize="32sp"
-        tools:ignore="HardcodedText" />
     <!-- Spinner for sorting options -->
-
-    <ImageView
-        android:id="@+id/iv_addBook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="250dp"
-        android:padding="10dp"
-        android:src="@drawable/ic_upload"
-        android:layout_alignBottom="@+id/tvManage"/>
-
     <Spinner
         android:id="@+id/spinner_sort_options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/tvManage"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:minHeight="48dp" />
+
 
     <!-- RecyclerView to display books -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_books"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tvManage"
+        android:layout_below="@+id/spinner_sort_options"
         android:layout_marginTop="48dp"
-        android:layout_alignTop="@+id/spinner_sort_options"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:padding="8dp"
         android:scrollbars="vertical" />
+
 
 </RelativeLayout>
