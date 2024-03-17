@@ -43,6 +43,7 @@ public class UpdateBookActivity extends AppCompatActivity implements View.OnClic
 
     private static final int PICK_IMAGE = 1;
     private static final int PICK_FILE = 2;
+    int flag = 0;
     boolean pickImageStatus = true;
     int noti = 0, defaultPosition = 0;
     ImageView ivBack, ivUpload;
@@ -239,6 +240,7 @@ public class UpdateBookActivity extends AppCompatActivity implements View.OnClic
             return id;
         } else {
             repository.insertAuthor(repository.getLatestAuthorId() + 1, name);
+            flag = 1;
             return repository.getLatestAuthorId() + 1;
         }
     }
@@ -265,9 +267,10 @@ public class UpdateBookActivity extends AppCompatActivity implements View.OnClic
 
         own.setAuthorId(authorId);
         own.setBookId(bookId);
+        if (flag == 1) repository.insertRelationship(authorId, bookId);
         boolean isUpdatedBook = repository.updateBook(book) > 0;
         boolean isUpdatedOwn = repository.updateOwn(own) > 0;
-        return isUpdatedBook && isUpdatedOwn;
+        return isUpdatedBook || isUpdatedOwn;
     }
 
     private boolean chapterContentHandler(String title) {
