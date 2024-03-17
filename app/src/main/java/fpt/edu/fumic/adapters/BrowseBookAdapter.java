@@ -1,15 +1,19 @@
 package fpt.edu.fumic.adapters;
 
 import android.annotation.SuppressLint;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +78,8 @@ public class BrowseBookAdapter extends RecyclerView.Adapter<BrowseBookAdapter.VH
         private Button btnAccept;
         private Button btnRefuse;
 
+        private ImageView image;
+
         private TextView  tvStatus;
         private TextView txtTitle;
         private TextView txtDescription;
@@ -87,10 +93,16 @@ public class BrowseBookAdapter extends RecyclerView.Adapter<BrowseBookAdapter.VH
             tvStatus = itemView.findViewById(R.id.tvStatus);
             txtTitle = itemView.findViewById(R.id.text_title);
             txtDescription = itemView.findViewById(R.id.text_views);
+            image = itemView.findViewById(R.id.image);
         }
         void bind(BookEntity book){
             txtTitle.setText(book.getTitle());
             txtDescription.setText(book.getDescription());
+            Glide.with(itemView.getContext())
+                    .load(book.getImage())
+                    .error(R.drawable.img_coverbookdetail)
+                    .into(image);
+
             switch (book.getStatus()) {
 
                 case 0: {
