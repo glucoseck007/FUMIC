@@ -21,6 +21,8 @@ import fpt.edu.fumic.adapters.FavouriteAdapter;
 import fpt.edu.fumic.database.entity.BookEntity;
 import fpt.edu.fumic.interfaces.FavouriteBook;
 import fpt.edu.fumic.repository.FavouriteRepository;
+import fpt.edu.fumic.utils.UserInformation;
+
 /*
  * luong_123
  */
@@ -109,7 +111,7 @@ public class FavouriteActivity extends AppCompatActivity implements View.OnClick
     private void loadBook(boolean isLoadMore) {
         isLoading = true;
         runOnUiThread(() -> {
-            List<BookEntity> list = favouriteRepository.getFavourite("luong123", 10, offset);
+            List<BookEntity> list = favouriteRepository.getFavourite(UserInformation.getInstance().getUser().getId(), 10, offset);
             offset += list.size();
             isLoading = false;
             isLastItemReached = list.size() < 10;
