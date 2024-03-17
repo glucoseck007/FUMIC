@@ -1,6 +1,7 @@
 package fpt.edu.fumic.database.dao;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -12,6 +13,9 @@ import fpt.edu.fumic.database.entity.OwnEntity;
 
 @Dao
 public interface OwnDAO {
+
+    @Query("DELETE FROM OWN WHERE bookId = :bookId")
+    void deleteRelationship(int bookId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(OwnEntity own);

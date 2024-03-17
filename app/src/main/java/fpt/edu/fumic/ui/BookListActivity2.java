@@ -128,14 +128,15 @@ public class BookListActivity2 extends AppCompatActivity {
                 new AlertDialog1.OnConfirmationListener() {
                     @Override
                     public void onConfirm() {
+                        repository.deleteRelationship(book.getId());
+                        repository.deleteChapterByBookId(book.getId());
+                        repository.deleteFavouriteBookById(book.getId());
+                        repository.deleteReadByBookId(book.getId());
                         repository.deleteBook(book);
                     }
 
-
                     @Override
                     public void onCancel() {
-
-
                     }
                 });
     }
