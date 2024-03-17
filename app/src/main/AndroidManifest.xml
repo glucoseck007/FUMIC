@@ -17,24 +17,53 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FUMIC"
         tools:targetApi="31">
+
+        <activity
+            android:name=".ui.BookListActivity2"
+            android:exported="true"
+            android:label="Manage Book"
+            android:parentActivityName=".ui.ManageActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.ManageActivity" />
+        </activity>
         <activity
             android:name=".ui.CategoryListActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:label="Manage Category"
+            android:parentActivityName=".ui.ManageActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.ManageActivity" />
+        </activity>
+        <activity
+            android:name=".ui.ManageUserActivity"
+            android:exported="true"
+            android:label="Manage User"
+            android:parentActivityName=".ui.ManageActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.ManageActivity" />
+        </activity>
+
+<!--        <activity-->
+<!--            android:name=".ui.CategoryListActivity"-->
+<!--            android:exported="true" />-->
         <activity
             android:name=".ui.BookDetailActivity"
             android:exported="true" />
         <activity
             android:name=".ui.ManageActivity"
             android:exported="true" />
-        <activity
-            android:name=".ui.BookListActivity2"
-            android:exported="true" />
+<!--        <activity-->
+<!--            android:name=".ui.BookListActivity2"-->
+<!--            android:exported="true" />-->
         <activity
             android:name=".ui.BookListActivity"
             android:exported="true" />
-        <activity
-            android:name=".ui.ManageUserActivity"
-            android:exported="true" />
+<!--        <activity-->
+<!--            android:name=".ui.ManageUserActivity"-->
+<!--            android:exported="true" />-->
         <activity
             android:name=".ui.AddBookActivity"
             android:exported="true" />
