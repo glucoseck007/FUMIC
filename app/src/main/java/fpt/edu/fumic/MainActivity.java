@@ -51,16 +51,29 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void onPageSelected(int position) {
-                switch (position){
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
+                if (isAdmin){
+                    switch (position){
+                        case 0:
+                            navigationView.setSelectedItemId(R.id.nav_home);
+                            break;
+                        case 1:
+                            navigationView.setSelectedItemId(R.id.nav_manage);
+                            break;
+                        case 2:
+                            navigationView.setSelectedItemId(R.id.nav_profile);
+                            break;
+                    }
+                } else {
+                    switch (position){
+                        case 0:
+                            navigationView.setSelectedItemId(R.id.nav_home);
+                            break;
+                        case 1:
+                            navigationView.setSelectedItemId(R.id.nav_profile);
+                            break;
+                    }
                 }
             }
-
             @Override
             public void onPageScrollStateChanged(int state) {
 

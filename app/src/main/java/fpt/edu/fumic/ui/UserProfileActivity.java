@@ -16,11 +16,12 @@ import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.entity.UserEntity;
 import fpt.edu.fumic.database.model.User;
 import fpt.edu.fumic.repository.UserRepository;
+import fpt.edu.fumic.utils.MyToast;
 import fpt.edu.fumic.utils.UserInformation;
 
 public class UserProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private View viewInformation, viewChangePassword, viewBrowseBooks,viewHistories,viewFavourite;
+    private View viewInformation, viewChangePassword, viewBrowseBooks,viewHistories,viewFavourite, viewLogout;
     private ImageView ivBack;
     private UserEntity userEntity;
 
@@ -39,7 +40,9 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         viewBrowseBooks.setOnClickListener(this);
         viewHistories.setOnClickListener(this);
         viewFavourite.setOnClickListener(this);
+        viewLogout.setOnClickListener(this);
         ivBack.setOnClickListener(this);
+
         mStartForProfileResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == android.app.Activity.RESULT_OK) {
@@ -77,11 +80,18 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         viewBrowseBooks = findViewById(R.id.viewBrowseBooks);
         viewHistories = findViewById(R.id.viewHistories);
         viewFavourite = findViewById(R.id.viewFavourite);
+        viewLogout = findViewById(R.id.viewLogout);
         ivBack = findViewById(R.id.ivBack);
         tvName = findViewById(R.id.tvName);
         tvEmail = findViewById(R.id.tvEmail);
-
-
+    }
+    private void logout(){
+        MyToast.successfulToast(getApplicationContext(), "Logged out!");
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        UserInformation.getInstance().setUser(null);
+        startActivity(intent);
+        finish();
     }
     @Override
     public void onClick(View view) {
@@ -101,6 +111,8 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
             startActivity(new Intent(UserProfileActivity.this, FavouriteActivity.class));
         } else if (view.getId() == R.id.viewHistories) {
             startActivity(new Intent(UserProfileActivity.this, HistoriesActivity.class));
+        } else if (view.getId() == R.id.viewLogout) {
+            logout();
         }
     }
 }
