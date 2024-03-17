@@ -15,10 +15,12 @@ import java.util.Objects;
 import fpt.edu.fumic.MainActivity;
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.entity.ChapterEntity;
+import fpt.edu.fumic.repository.ChapterRepository;
 
-public class ChapterContentActivity extends AppCompatActivity {
+public class ChapterContentActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView tvChapterNumber, tvChapterContent;
     private Button btBack, btHome;
+    ChapterRepository repository;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -26,34 +28,38 @@ public class ChapterContentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chapter_content);
         initView();
-        //set button
-        btHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentHome = new Intent(ChapterContentActivity.this, MainActivity.class);
-                startActivity(intentHome);
-            }
-        });
-        btBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        repository = new ChapterRepository(this);
+
+        btHome.setOnClickListener(this);
+        btBack.setOnClickListener(this);
 
         //show chapter content
         Intent intent = getIntent();
-        ChapterEntity chapter = (ChapterEntity) intent.getSerializableExtra("ChapterContent");
-        tvChapterNumber.setText(Objects.requireNonNull(chapter).getChapterTitle() + " " + chapter.getChapterNo());
-        tvChapterContent.setText(chapter.getContent());
+        int chapterNo = intent.getIntExtra("ChapterNo", 1);
+        int bookId = intent.getIntExtra("BookId", 1);
+        String chapterTitle = "Chapter " + chapterNo + ": " + intent.getStringExtra("ChapterTitle");
+        String content = repository.getChapterPerContent(bookId, chapterNo);
+        tvChapterNumber.setText(chapterTitle);
+        tvChapterContent.setText(standardizeData(content));
     }
-    public void initView(){
+    public void initView() {
         tvChapterNumber = findViewById(R.id.tv_title);
         tvChapterContent = findViewById(R.id.tv_content);
         btBack = findViewById(R.id.bt_back);
         btHome = findViewById(R.id.bt_home);
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.bt_home) {
+            Intent intentHome = new Intent(ChapterContentActivity.this, MainActivity.class);
+            startActivity(intentHome);
+        } else if (v.getId() == R.id.bt_back) {
+            finish();
+        }
+    }
 
-
+    private static String standardizeData(String data) {
+        return data.replace("|||", "\n");
+    }
 }
