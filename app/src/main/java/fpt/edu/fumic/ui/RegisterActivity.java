@@ -159,6 +159,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 tilPhone.setError(EMPTY_FIELD_WARNING);
             }
             sendRegisterStatusToBroadcast(STATUS_REGISTER_ERROR);
+        } else if (userDAO.getUserById(username) != null){
+            tilUsername.setError("This username has already exist!");
+            sendRegisterStatusToBroadcast(STATUS_REGISTER_FAILED);
         } else if(!isDate(dob) || !isEmail(email)) {
             sendRegisterStatusToBroadcast(STATUS_REGISTER_FAILED);
         } else if (!rePassword.equals(password)) {
@@ -166,7 +169,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             sendRegisterStatusToBroadcast(STATUS_REGISTER_FAILED);
         } else {
             Date xDob = DateConverterStrDate.stringToDate(dob);
-            userDAO.insertUser(new UserEntity(username, password, fullName, xDob, gender, email, phone, 0));
+            userDAO.insertUser(new UserEntity(username, password, fullName, xDob, gender, email, phone, 2));
             toLoginActivity();
             sendRegisterStatusToBroadcast(STATUS_REGISTER_SUCCESS);
         }

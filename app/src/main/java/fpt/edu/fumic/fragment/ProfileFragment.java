@@ -27,6 +27,7 @@ import fpt.edu.fumic.ui.FavouriteActivity;
 import fpt.edu.fumic.ui.HistoriesActivity;
 import fpt.edu.fumic.ui.UserDetailActivity;
 import fpt.edu.fumic.ui.UserProfileActivity;
+import fpt.edu.fumic.utils.MyToast;
 import fpt.edu.fumic.utils.UserInformation;
 
 
@@ -64,24 +65,17 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     }
 
-//    private void loadUser() {
-//        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("login_info", Context.MODE_PRIVATE);
-//        String username = sharedPreferences.getString("username", null);
-//        if (username != null) {
-//            userEntity = userRepository.getUserById(username);
-//            if (userEntity == null) {
-//                return;
-//            }
-//            loadView();
-//        }
-//    }
+    private void loadUser() {
+        userEntity = UserInformation.getInstance().getUser();
+        loadView();
+    }
+
     ActivityResultLauncher<Intent> mStartForStoryResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-
+                    loadUser();
                 }
             });
-
 
     private void loadView() {
         userEntity = UserInformation.getInstance().getUser();
@@ -115,17 +109,18 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         if (view.getId() == R.id.viewInformation) {
             Intent intent = new Intent(requireActivity(), UserDetailActivity.class);
             startActivity(intent);
-//            mStartForStoryResult.launch(intent);
+            mStartForStoryResult.launch(intent);
         } else if (view.getId() == R.id.viewChangePassword) {
             Intent intent = new Intent(requireActivity(), ChangePasswordActivity.class);
             startActivity(intent);
-//            mStartForStoryResult.launch(intent);
+            mStartForStoryResult.launch(intent);
         } else if (view.getId() == R.id.viewBrowseBooks) {
             startActivity(new Intent(requireActivity(), BrowseBookActivity.class));
         } else if (view.getId() == R.id.viewFavourite) {
             startActivity(new Intent(requireActivity(), FavouriteActivity.class));
         } else if (view.getId() == R.id.viewHistories) {
-            startActivity(new Intent(requireActivity(), HistoriesActivity.class));
+            MyToast.confusingToast(getContext(), "This function is coming soon!");
+//            startActivity(new Intent(requireActivity(), HistoriesActivity.class));
         }
     }
 }

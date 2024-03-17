@@ -26,7 +26,6 @@ public class UserDetailActivity extends AppCompatActivity implements View.OnClic
     private UserEntity userEntity;
     private boolean isChange;
     private TextView tvNameTitle, tvName, tvEmail, tvDob, tvPhone, tvRole, tvGender, viewInformation;
-    ActivityResultLauncher<Intent> mStartForResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +33,7 @@ public class UserDetailActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_user_detail);
         initActivity();
         Intent intent = getIntent();
+        isChange = false;
         if (intent != null) {
             if (intent.hasExtra("userEntity")) {
                 userEntity = (UserEntity) intent.getSerializableExtra("userEntity");
@@ -57,13 +57,6 @@ public class UserDetailActivity extends AppCompatActivity implements View.OnClic
             Toast.makeText(this, "Intent is null", Toast.LENGTH_SHORT).show();
             finish();
         }
-        mStartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-                        isChange = true;
-                        loadUser();
-                    }
-                });
         ivBack.setOnClickListener(this);
         viewInformation.setOnClickListener(this);
 
@@ -133,15 +126,22 @@ public class UserDetailActivity extends AppCompatActivity implements View.OnClic
         tvRole = findViewById(R.id.tvRole);
         tvGender = findViewById(R.id.tvGender);
         viewInformation = findViewById(R.id.viewInformation);
-
     }
+    ActivityResultLauncher<Intent> mStartForStoryResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    isChange = true;
+                    loadUser();
+                }
+            });
+
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.ivBack) {
             handleFinish();
         } else if (view.getId() == R.id.viewInformation) {
             Intent intent = new Intent(UserDetailActivity.this, EditProfileActivity.class);
-            mStartForResult.launch(intent);
+            mStartForStoryResult.launch(intent);
         }
     }
 
