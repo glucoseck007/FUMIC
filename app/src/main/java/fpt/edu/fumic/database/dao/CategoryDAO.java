@@ -22,4 +22,6 @@ public interface CategoryDAO {
 
     @Query("SELECT name FROM CATEGORY WHERE id = :id")
     String getCategoryNameById(int id);
+    @Query("SELECT * FROM CATEGORY WHERE id = :id")
+    LiveData<List<CategoryEntity>> getCategoryByID(int id);
 }

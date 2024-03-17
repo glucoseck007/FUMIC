@@ -1,15 +1,15 @@
 package fpt.edu.fumic.database.entity;
-
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import fpt.edu.fumic.database.model.User;
 
 @Entity(tableName = "USER")
-public class UserEntity implements User {
+public class UserEntity implements User, Serializable {
 
 //    public static final String MATCHES_PHONENUMBER = "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$";
     public static final String MATCHES_PHONENUMBER = "^0\\d{9}$";

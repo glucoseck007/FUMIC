@@ -18,6 +18,7 @@ import fpt.edu.fumic.database.dao.ChapterDAO;
 import fpt.edu.fumic.database.dao.OwnDAO;
 import fpt.edu.fumic.database.entity.AuthorEntity;
 import fpt.edu.fumic.database.entity.BookEntity;
+import fpt.edu.fumic.database.entity.CategoryEntity;
 import fpt.edu.fumic.database.entity.ChapterEntity;
 import fpt.edu.fumic.database.entity.OwnEntity;
 
@@ -97,20 +98,41 @@ public class BookRepository {
     public int insertChapterContent(List<ChapterEntity> chapter) {
         return chapterDAO.insert(chapter).size();
     }
-
-    public LiveData<List<BookEntity>> getBooksSortedByViews() {
-        return bookDAO.getBooksSortedByViews();
+    ////////////////
+    public LiveData<List<BookEntity> >getBooksByStatus(int status) {
+        return bookDAO.getBooksByStatus(status);
+    }
+    public void deleteBook(BookEntity book) {
+        bookDAO.deleteBook(book);
+    }
+    public LiveData<List<BookEntity>> getBooksSortedByViews(int categoryId) {
+        return bookDAO.getBooksSortedByViews(categoryId);
     }
 
-    public LiveData<List<BookEntity>> getBooksSortedByDate() {
-        return bookDAO.loadBooksSortedByDate();
+    public LiveData<CategoryEntity> getCategoryById(int categoryId) {
+        // Perform database query to get category by categoryId
+        LiveData<CategoryEntity> category = bookDAO.getCategoryById(categoryId);
+        return category;
+    }
+    public LiveData<List<BookEntity>> getBooksByCategoryId(int categoryId) {
+        return bookDAO.getBooksByCategoryId(categoryId);
+    }
+    public LiveData<List<BookEntity>> getBooksSortedByDateDESC(int categoryId) {
+        return bookDAO.loadBooksSortedByDateDESC(categoryId);
+    }
+
+
+    public LiveData<List<BookEntity>> getBooksSortedByDateASC(int categoryId) {
+        return bookDAO.loadBooksSortedByDateASC(categoryId);
+    }
+
+
+    public LiveData<List<BookEntity>> getBooksSortedByRatingDESC(int categoryId) {
+        return bookDAO.loadBooksSortedByRatingDESC(categoryId);
     }
 
     public List<BookEntity> getBookListAvailable(int status, int limit, int offset) {
         return bookDAO.getBookListAvailable(status, limit, offset);
-    }
-    public LiveData<List<BookEntity>> getBooksSortedById() {
-        return bookDAO.loadBooksSortedById();
     }
 
     public List<BookEntity> searchByTitle(String key) {
