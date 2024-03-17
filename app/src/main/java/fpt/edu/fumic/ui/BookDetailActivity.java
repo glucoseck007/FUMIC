@@ -5,30 +5,31 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
-
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.converter.ImageToByte;
 import fpt.edu.fumic.adapters.ChapterAdapter;
 import fpt.edu.fumic.database.entity.BookEntity;
 import fpt.edu.fumic.database.entity.ChapterEntity;
-import fpt.edu.fumic.database.model.Book;
 import fpt.edu.fumic.repository.BookRepository;
 import fpt.edu.fumic.repository.ChapterRepository;
 
 public class BookDetailActivity extends AppCompatActivity {
-    private ImageView cover, back;
-    private TextView tvTitle, tvNoOfView, tvRating, tvDescription, tvDateUpload;
+    ImageView cover, back;
+    TextView tvTitle, tvNoOfView, tvRating, tvDescription, tvDateUpload, tvCategory;
     ChapterRepository chapterRepository;
     ChapterAdapter chapterAdapter;
     BookRepository bookRepository;
@@ -49,11 +50,15 @@ public class BookDetailActivity extends AppCompatActivity {
         String title = intent.getStringExtra("title");
         BookEntity book = bookRepository.getBookByTitle(title);
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String dateString = dateFormat.format(book.getDateUpload());
+
+        tvNoOfView.setText(String.valueOf(book.getNoOfView()));
         tvTitle.setText(book.getTitle());
-        tvNoOfView.setText(""+book.getNoOfView()+" views");
+        tvCategory.setText(bookRepository.getCategoryNameById(book.getCategoryId()));
+        tvDateUpload.setText(dateString);
         tvDescription.setText(book.getDescription());
-        tvDateUpload.setText(book.getDateUpload().toString());
-        cover.setImageBitmap(ImageToByte.getBitmapFromByteArray((book.getImage())));
+        cover.setImageBitmap(ImageToByte.getBitmapFromByteArray(book.getImage()));
 
         tvRating.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,19 +75,19 @@ public class BookDetailActivity extends AppCompatActivity {
             }
         });
         //recycler view chapter list
-//        list = chapterRepository.getChaptersByBookId(book.getId());
-//        chapterAdapter.setList(list);
-//        GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 1);
-//        recyclerView.setLayoutManager(manager);
-//        recyclerView.setAdapter(chapterAdapter);
-//        chapterAdapter.setOnItemClickListener(new ChapterAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(ChapterEntity chapter) {
-//                Intent intent1 = new Intent(BookDetailActivity.this, ChapterContentActivity.class);
-//                intent1.putExtra("ChapterContent", (Serializable) chapter);
-//                startActivity(intent1);
-//            }
-//        });
+        list = chapterRepository.getChapterTitleById(book.getId());
+        chapterAdapter.setList(list);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(chapterAdapter);
+        chapterAdapter.setOnItemClickListener(new ChapterAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(ChapterEntity chapter) {
+                Intent intent1 = new Intent(BookDetailActivity.this, ChapterContentActivity.class);
+                intent1.putExtra("ChapterContent", (Serializable) chapter);
+                startActivity(intent1);
+            }
+        });
     }
 
     public void initView(){
@@ -93,6 +98,7 @@ public class BookDetailActivity extends AppCompatActivity {
         tvRating = findViewById(R.id.tv_rating);
         tvDescription = findViewById(R.id.tv_description);
         recyclerView = findViewById(R.id.rv_chapter);
+        tvCategory = findViewById(R.id.tv_category);
         tvDateUpload = findViewById(R.id.tv_date);
     }
 }

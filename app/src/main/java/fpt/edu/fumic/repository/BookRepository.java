@@ -53,6 +53,8 @@ public class BookRepository {
 
     public int updateOwn(OwnEntity own) {return ownDAO.updateOwn(own); }
 
+    public int updateContent(List<ChapterEntity> list) {return chapterDAO.updateContent(list); }
+
     public List<BookEntity> getBooks(int status, int limit, int offset) {
         return bookDAO.getBookListAvailable(status, limit, offset);
     }

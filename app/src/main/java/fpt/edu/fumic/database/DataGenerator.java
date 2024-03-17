@@ -82,7 +82,7 @@ public class DataGenerator {
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split("\t");
                 int chapterNo = Integer.parseInt(data[0]);
-                String chapterTitle = data[1];
+                String chapterTitle = data[3];
                 String content = data[2];
 
                 ChapterEntity chapter = new ChapterEntity();
