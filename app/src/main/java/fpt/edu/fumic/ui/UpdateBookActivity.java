@@ -122,11 +122,9 @@ public class UpdateBookActivity extends AppCompatActivity implements View.OnClic
         protected void onPostExecute(Boolean success) {
             if (success) {
                 MyToast.successfulToast(UpdateBookActivity.this, "Update successfully!");
+                onBackPressed();
             } else {
-                if (noti == 0)
-                    MyToast.errorToast(UpdateBookActivity.this, "Add unsuccessful, book exist!");
-                if (noti == 1)
-                    MyToast.errorToast(UpdateBookActivity.this, "Add unsuccessful, cannot read data from file!");
+                MyToast.errorToast(UpdateBookActivity.this, "Add unsuccessful, cannot read data from file!");
             }
         }
     }
@@ -251,7 +249,7 @@ public class UpdateBookActivity extends AppCompatActivity implements View.OnClic
 
     private void openFilePicker() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("*/*");  // You can restrict the type of files you want to choose here
+        intent.setType("text/csv");  // You can restrict the type of files you want to choose here
         startActivityForResult(intent, PICK_FILE);
     }
 

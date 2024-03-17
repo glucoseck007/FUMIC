@@ -3,9 +3,11 @@ package fpt.edu.fumic.ui;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,7 @@ public class ChapterContentActivity extends AppCompatActivity implements View.On
     private TextView tvChapterNumber, tvChapterContent;
     private ImageView ivPre, ivNext;
     ChapterRepository repository;
+    ScrollView scrollView;
     private int bookId, chapterNo, noOfChapters;
     private String chapterTitle;
 
@@ -32,6 +35,7 @@ public class ChapterContentActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_chapter_content);
         initView();
         repository = new ChapterRepository(this);
+        scrollView = findViewById(R.id.chapterContent);
 
         ivPre.setOnClickListener(this);
         ivNext.setOnClickListener(this);
@@ -63,6 +67,12 @@ public class ChapterContentActivity extends AppCompatActivity implements View.On
                 String content = repository.getChapterPerContent(bookId, chapterNo);
                 tvChapterNumber.setText(chapterTitle);
                 tvChapterContent.setText(standardizeData(content));
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        scrollView.smoothScrollTo(0, 0);
+                    }
+                }, 100);
             }
         } else if (v.getId() == R.id.iv_next) {
             if (chapterNo == noOfChapters) finish();
@@ -72,6 +82,12 @@ public class ChapterContentActivity extends AppCompatActivity implements View.On
                 String content = repository.getChapterPerContent(bookId, chapterNo);
                 tvChapterNumber.setText(chapterTitle);
                 tvChapterContent.setText(standardizeData(content));
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        scrollView.smoothScrollTo(0, 0);
+                    }
+                }, 100);
             }
         }
     }

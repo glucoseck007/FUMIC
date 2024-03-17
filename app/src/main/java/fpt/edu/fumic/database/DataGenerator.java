@@ -95,7 +95,7 @@ public class DataGenerator {
             }
             reader.close();
             inputStream.close();
-        } catch (IOException | NumberFormatException e) {
+        } catch (IOException | NumberFormatException | ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();
         }
         return list;
