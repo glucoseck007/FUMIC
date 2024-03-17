@@ -81,7 +81,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                 @Override
                 public void onClick(View v) {
                     Context context = imageView.getContext();
-                    Intent intent = new Intent(context, UpdateBookActivity.class);
+                    Intent intent = new Intent(context, BookDetailActivity.class);
                     intent.putExtra("title", tvTitle.getText().toString());
                     context.startActivity(intent);
                 }
