@@ -25,4 +25,6 @@ public interface CategoryDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(CategoryEntity category);
 
+    @Query("SELECT name FROM CATEGORY WHERE id = :id")
+    String getCategoryNameById(int id);
 }
