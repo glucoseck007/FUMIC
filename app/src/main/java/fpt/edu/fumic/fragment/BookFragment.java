@@ -35,6 +35,9 @@ public class BookFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_book, container, false);
 
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
+        //dùng adapter với layout item_book
+        adapter = new BookAdapter(BookAdapter.TYPE_BOOK_3);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         adapter = new BookAdapter();

@@ -1,32 +1,40 @@
 package fpt.edu.fumic.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+
+import java.io.Serializable;
 import java.util.List;
+
 
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.adapters.BookAdapter;
 import fpt.edu.fumic.database.entity.BookEntity;
 import fpt.edu.fumic.repository.BookRepository;
-/*
-Date 6/3/2024
-List book
- */
+
+
 public class BookListActivity extends AppCompatActivity {
+
 
     private Spinner spinnerSortOptions;
     private RecyclerView recyclerViewBooks;
     private BookAdapter bookAdapter;
     private BookRepository bookRepository;
+    private int categoryId;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,48 +42,82 @@ public class BookListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book_list);
 
 
-        spinnerSortOptions = findViewById(R.id.spinner_sort_options); // Find the spinner
-        recyclerViewBooks = findViewById(R.id.recycler_view_books);
+        categoryId = getIntent().getIntExtra("categoryId", -1);
 
-        // Initialize BookRepository
+
+
+        recyclerViewBooks = findViewById(R.id.recycler_view_books);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerViewBooks.setLayoutManager(layoutManager);
+
+
+        bookAdapter = new BookAdapter(BookAdapter.TYPE_BOOK_1);
+
+        bookAdapter.setOnItemClickListener(new BookAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BookEntity book) {
+                // Gửi Intent để mở Activity chi tiết sách
+                Intent intent = new Intent(BookListActivity.this, BookDetailActivity.class);
+                intent.putExtra("SelectedBook", book);
+                startActivity(intent);
+            }
+        });
+
+        recyclerViewBooks.setAdapter(bookAdapter);
+
+
         bookRepository = new BookRepository(this);
 
-        // Populate spinner with sorting options
+
+        fetchBooksByCategoryId(categoryId);
+
+
+        spinnerSortOptions = findViewById(R.id.spinner_sort_options);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.sort_options_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSortOptions.setAdapter(adapter);
 
-        // Set spinner item selection listener
+
         spinnerSortOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 String selectedItem = adapterView.getItemAtPosition(position).toString();
-                // Fetch books based on selected sorting option
                 if (selectedItem.equals(getString(R.string.sort_by_views))) {
                     fetchBooksSortedByViews();
-                } else if (selectedItem.equals(getString(R.string.sort_by_date))) {
-                    fetchBooksSortedByDate();
-                } else if (selectedItem.equals(getString(R.string.sort_by_id))) {
-                    fetchBooksSortedById();
+                } else if (selectedItem.equals(getString(R.string.sort_by_date_DESC))) {
+                    fetchBooksSortedByDateDESC();
+                } else if (selectedItem.equals(getString(R.string.sort_by_id_ASC))) {
+                    fetchBooksSortedByDateASC();
+                } else if (selectedItem.equals(getString(R.string.sort_by_rating_DESC))) {
+                    fetchBooksSortedByRatingDESC();
                 }
             }
 
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                // Do nothing
             }
         });
 
-        // Set up RecyclerView and adapter
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerViewBooks.setLayoutManager(layoutManager);
-        bookAdapter = new BookAdapter();
-        recyclerViewBooks.setAdapter(bookAdapter);
+
     }
+
+
+    private void fetchBooksByCategoryId(int categoryId) {
+        if (categoryId != -1) {
+            bookRepository.getBooksByCategoryId(categoryId).observe(this, new Observer<List<BookEntity>>() {
+                @Override
+                public void onChanged(List<BookEntity> books) {
+                    bookAdapter.setBooks(books);
+                }
+            });
+        }
+    }
+
 
     private void fetchBooksSortedByViews() {
-        bookRepository.getBooksSortedByViews().observe(this, new Observer<List<BookEntity>>() {
+        bookRepository.getBooksSortedByViews(categoryId).observe(this, new Observer<List<BookEntity>>() {
             @Override
             public void onChanged(List<BookEntity> books) {
                 bookAdapter.setBooks(books);
@@ -83,8 +125,9 @@ public class BookListActivity extends AppCompatActivity {
         });
     }
 
-    private void fetchBooksSortedByDate() {
-        bookRepository.getBooksSortedByDate().observe(this, new Observer<List<BookEntity>>() {
+
+    private void fetchBooksSortedByDateDESC() {
+        bookRepository.getBooksSortedByDateDESC(categoryId).observe(this, new Observer<List<BookEntity>>() {
             @Override
             public void onChanged(List<BookEntity> books) {
                 bookAdapter.setBooks(books);
@@ -92,12 +135,24 @@ public class BookListActivity extends AppCompatActivity {
         });
     }
 
-    private void fetchBooksSortedById() {
-        bookRepository.getBooksSortedById().observe(this, new Observer<List<BookEntity>>() {
+
+    private void fetchBooksSortedByDateASC() {
+        bookRepository.getBooksSortedByDateASC(categoryId).observe(this, new Observer<List<BookEntity>>() {
             @Override
             public void onChanged(List<BookEntity> books) {
                 bookAdapter.setBooks(books);
             }
         });
     }
+
+
+    private void fetchBooksSortedByRatingDESC() {
+        bookRepository.getBooksSortedByRatingDESC(categoryId).observe(this, new Observer<List<BookEntity>>() {
+            @Override
+            public void onChanged(List<BookEntity> books) {
+                bookAdapter.setBooks(books);
+            }
+        });
+    }
+
 }

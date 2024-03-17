@@ -23,7 +23,7 @@ public class ManageUserActivity extends AppCompatActivity implements  View.OnCli
     private RecyclerView recyclerViewUsers;
     private UserAdapter userAdapter;
     private UserRepository userRepository;
-    private ImageView ivBack;
+
     private TextView textNoOfUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +32,6 @@ public class ManageUserActivity extends AppCompatActivity implements  View.OnCli
 
         recyclerViewUsers = findViewById(R.id.recycler_view_users);
         recyclerViewUsers.setLayoutManager(new LinearLayoutManager(this));
-
-        ivBack = findViewById(R.id.ivBack);
-        ivBack.setOnClickListener(this);
 
         userAdapter = new UserAdapter();
         recyclerViewUsers.setAdapter(userAdapter);
@@ -71,8 +68,6 @@ public class ManageUserActivity extends AppCompatActivity implements  View.OnCli
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.ivBack){
-            finish();
-        }
+
     }
 }

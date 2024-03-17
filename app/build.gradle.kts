@@ -33,6 +33,7 @@ dependencies {
     //noinspection GradleCompatible
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.gridlayout:gridlayout:1.0.0")
+    implementation("androidx.activity:activity:1.8.2")
     annotationProcessor("androidx.room:room-compiler:2.6.1")
     androidTestImplementation("androidx.room:room-testing:2.6.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
