@@ -20,14 +20,18 @@ import java.util.List;
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.converter.ImageToByte;
 import fpt.edu.fumic.adapters.ChapterAdapter;
+import fpt.edu.fumic.database.entity.BookEntity;
 import fpt.edu.fumic.database.entity.ChapterEntity;
 import fpt.edu.fumic.database.model.Book;
+import fpt.edu.fumic.repository.BookRepository;
 import fpt.edu.fumic.repository.ChapterRepository;
 
 public class BookDetailActivity extends AppCompatActivity {
     private ImageView cover, back;
     private TextView tvTitle, tvNoOfView, tvRating, tvDescription, tvDateUpload;
     ChapterRepository chapterRepository;
+    ChapterAdapter chapterAdapter;
+    BookRepository bookRepository;
     RecyclerView recyclerView;
     List<ChapterEntity> list = new ArrayList<>();
 
@@ -37,9 +41,14 @@ public class BookDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookdetail);
         initView();
+        bookRepository = new BookRepository(this);
+        chapterRepository = new ChapterRepository(this);
+        chapterAdapter = new ChapterAdapter();
+
         Intent intent = getIntent();
-        Book book = (Book) intent.getSerializableExtra("BookDetail");
-        assert book != null;
+        String title = intent.getStringExtra("title");
+        BookEntity book = bookRepository.getBookByTitle(title);
+
         tvTitle.setText(book.getTitle());
         tvNoOfView.setText(""+book.getNoOfView()+" views");
         tvDescription.setText(book.getDescription());
