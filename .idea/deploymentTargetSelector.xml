@@ -11,10 +11,10 @@
       <SelectionState runConfigName="BookListActivity2">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="CategoryListActivity">
+      <SelectionState runConfigName="AddBookActivity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="AddBookActivity">
+      <SelectionState runConfigName="BookDetailActivity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

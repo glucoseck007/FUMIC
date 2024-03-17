@@ -14,6 +14,7 @@ import fpt.edu.fumic.database.dao.ChapterDAO;
 import fpt.edu.fumic.database.dao.OwnDAO;
 import fpt.edu.fumic.database.entity.AuthorEntity;
 import fpt.edu.fumic.database.entity.BookEntity;
+import fpt.edu.fumic.database.entity.CategoryEntity;
 import fpt.edu.fumic.database.entity.ChapterEntity;
 import fpt.edu.fumic.database.entity.OwnEntity;
 
@@ -96,7 +97,11 @@ public class BookRepository {
         return bookDAO.getBooksSortedByViews(categoryId);
     }
 
-
+    public LiveData<CategoryEntity> getCategoryById(int categoryId) {
+        // Perform database query to get category by categoryId
+        LiveData<CategoryEntity> category = bookDAO.getCategoryById(categoryId);
+        return category;
+    }
     public LiveData<List<BookEntity>> getBooksByCategoryId(int categoryId) {
         return bookDAO.getBooksByCategoryId(categoryId);
     }

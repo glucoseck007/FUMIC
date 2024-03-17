@@ -55,7 +55,15 @@ public class BookListActivity2 extends AppCompatActivity {
             }
         });
 
-
+        adapter.setOnItemClickListener(new BookAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BookEntity book) {
+                // Gửi Intent để mở Activity chi tiết sách
+                Intent intent = new Intent(BookListActivity2.this, BookDetailActivity.class);
+                intent.putExtra("SelectedBook", book);
+                startActivity(intent);
+            }
+        });
         Button acceptButton = findViewById(R.id.accept_button);
         Button rejectButton = findViewById(R.id.reject_button);
         Button pendingButton = findViewById(R.id.pending_button);

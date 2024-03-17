@@ -1,6 +1,7 @@
 package fpt.edu.fumic.ui;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -33,6 +35,7 @@ public class BookListActivity extends AppCompatActivity {
     private int categoryId;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,12 +45,24 @@ public class BookListActivity extends AppCompatActivity {
         categoryId = getIntent().getIntExtra("categoryId", -1);
 
 
+
         recyclerViewBooks = findViewById(R.id.recycler_view_books);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerViewBooks.setLayoutManager(layoutManager);
 
 
         bookAdapter = new BookAdapter(BookAdapter.TYPE_BOOK_1);
+
+        bookAdapter.setOnItemClickListener(new BookAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BookEntity book) {
+                // Gửi Intent để mở Activity chi tiết sách
+                Intent intent = new Intent(BookListActivity.this, BookDetailActivity.class);
+                intent.putExtra("SelectedBook", book);
+                startActivity(intent);
+            }
+        });
+
         recyclerViewBooks.setAdapter(bookAdapter);
 
 
@@ -139,4 +154,5 @@ public class BookListActivity extends AppCompatActivity {
             }
         });
     }
+
 }

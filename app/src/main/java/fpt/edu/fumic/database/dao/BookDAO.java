@@ -12,6 +12,7 @@ import androidx.room.Update;
 import java.util.List;
 
 import fpt.edu.fumic.database.entity.BookEntity;
+import fpt.edu.fumic.database.entity.CategoryEntity;
 
 @Dao
 public interface BookDAO {
@@ -67,4 +68,6 @@ public interface BookDAO {
     LiveData<List<BookEntity>> loadBooksSortedByRatingDESC(int categoryId);
     @Query("SELECT * FROM BOOK WHERE categoryId = :categoryId")
     LiveData<List<BookEntity>> getBooksByCategoryId(int categoryId);
+    @Query("SELECT * FROM CATEGORY WHERE id = :categoryId")
+    LiveData<CategoryEntity> getCategoryById(int categoryId);
 }

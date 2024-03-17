@@ -21,6 +21,9 @@
             android:name=".ui.CategoryListActivity"
             android:exported="true" />
         <activity
+            android:name=".ui.BookDetailActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.ManageActivity"
             android:exported="true" />
         <activity

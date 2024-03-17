@@ -37,6 +37,14 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<BookEntity> bookEntities = new ArrayList<>();
     private int viewType;
+    private OnItemClickListener itemClickListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(BookEntity book);
+    }
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.itemClickListener = listener;
+    }
 
     public BookAdapter() {
     }
@@ -80,12 +88,37 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         BookEntity book = bookEntities.get(position);
         if (holder instanceof BookViewHolder1) {
             ((BookViewHolder1) holder).bind(book);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (itemClickListener != null) {
+                        itemClickListener.onItemClick(book);
+                    }
+                }
+            });
         } else if (holder instanceof BookViewHolder2) {
             ((BookViewHolder2) holder).bind(book);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (itemClickListener != null) {
+                        itemClickListener.onItemClick(book);
+                    }
+                }
+            });
         } else if (holder instanceof BookViewHolder3) {
             ((BookViewHolder3) holder).bind(book);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (itemClickListener != null) {
+                        itemClickListener.onItemClick(book);
+                    }
+                }
+            });
         }
     }
+
 
     public BookEntity getItemAtPosition(int position) {
         return bookEntities.get(position);
