@@ -23,10 +23,21 @@ List book
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Manage Book"
+        android:layout_marginStart="24sp"
         android:layout_below="@+id/ivBack"
-        android:textSize="40dp"
-        />
+        android:textSize="32sp"
+        tools:ignore="HardcodedText" />
     <!-- Spinner for sorting options -->
+
+    <ImageView
+        android:id="@+id/iv_addBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="250dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_upload"
+        android:layout_alignBottom="@+id/tvManage"/>
+
     <Spinner
         android:id="@+id/spinner_sort_options"
         android:layout_width="wrap_content"
@@ -44,6 +55,7 @@ List book
         android:layout_height="match_parent"
         android:layout_below="@+id/tvManage"
         android:layout_marginTop="48dp"
+        android:layout_alignTop="@+id/spinner_sort_options"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:padding="8dp"

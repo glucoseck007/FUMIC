@@ -5,10 +5,12 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import java.util.List;
@@ -21,21 +23,26 @@ import fpt.edu.fumic.repository.BookRepository;
 Date 6/3/2024
 List book
  */
-public class BookListActivity extends AppCompatActivity {
+public class BookListActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Spinner spinnerSortOptions;
     private RecyclerView recyclerViewBooks;
     private BookAdapter bookAdapter;
     private BookRepository bookRepository;
+    ImageView ivAdd, ivBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
 
-
         spinnerSortOptions = findViewById(R.id.spinner_sort_options); // Find the spinner
         recyclerViewBooks = findViewById(R.id.recycler_view_books);
+        ivAdd = findViewById(R.id.iv_addBook);
+        ivBack = findViewById(R.id.ivBack);
+
+        ivAdd.setOnClickListener(this);
+        ivBack.setOnClickListener(this);
 
         // Initialize BookRepository
         bookRepository = new BookRepository(this);
@@ -99,5 +106,15 @@ public class BookListActivity extends AppCompatActivity {
                 bookAdapter.setBooks(books);
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.iv_addBook) {
+            Intent intent = new Intent(BookListActivity.this, AddBookActivity.class);
+            startActivity(intent);
+        } else if (v.getId() == R.id.ivBack) {
+            onBackPressed();
+        }
     }
 }

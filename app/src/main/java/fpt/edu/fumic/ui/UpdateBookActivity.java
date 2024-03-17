@@ -240,6 +240,7 @@ public class UpdateBookActivity extends AppCompatActivity implements View.OnClic
         if (id != null) {
             return id;
         } else {
+            repository.insertAuthor(repository.getLatestAuthorId() + 1, name);
             return repository.getLatestAuthorId() + 1;
         }
     }

@@ -152,7 +152,7 @@
                 android:background="@android:color/transparent"
                 android:layout_marginTop="15dp"
                 android:textSize="18sp"
-                android:drawableEnd="@drawable/ic_add"
+                android:drawableEnd="@drawable/ic_upload"
                 android:layout_marginEnd="24dp"
                 tools:ignore="HardcodedText" />
 

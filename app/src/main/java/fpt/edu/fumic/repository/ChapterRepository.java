@@ -14,5 +14,9 @@ public class ChapterRepository {
         chapterDAO = appDatabase.chapterDAO();
     }
 
+    public String getChapterPerContent(int bookId, int chapterNo) {return chapterDAO.getContentPerChapter(bookId, chapterNo); }
+
+    public String getChapterTitle(int bookId, int chapterNo) {return chapterDAO.getChapterTitle(bookId, chapterNo); }
+
 }
 

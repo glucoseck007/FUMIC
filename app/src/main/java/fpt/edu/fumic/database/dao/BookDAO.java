@@ -58,17 +58,4 @@ public interface BookDAO {
     @Query("DELETE FROM BOOK where id = :id")
     void deleteBook(int id);
 
-    @Query("SELECT * FROM BOOK ORDER BY noOfView DESC")
-    LiveData<List<BookEntity>> getBooksSortedByViews();
-    @Query("SELECT * FROM BOOK ORDER BY id")
-    LiveData<List<BookEntity>> loadBooksSortedById();
-
-    @Query("SELECT * FROM BOOK ORDER BY dateUpload DESC")
-    LiveData<List<BookEntity>> loadBooksSortedByDate();
-
-    @Query("SELECT * FROM BOOK WHERE title like :key")
-    List<BookEntity> searchByTitle(String key);
-
-    @Query("SELECT * FROM BOOK WHERE title = :title")
-    BookEntity getBookByTitle(String title);
 }
