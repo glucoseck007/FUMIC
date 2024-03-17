@@ -2,7 +2,6 @@ package fpt.edu.fumic.database.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.DeleteTable;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -27,7 +26,7 @@ public interface BookDAO {
     List<BookEntity> getBookListAvailable(int status,int limit, int offset);
 
     @Update
-    void updateBook(BookEntity book);
+    int updateBook(BookEntity book);
 
     @Query("SELECT id FROM CATEGORY WHERE name = :name")
     int getCategoryId(String name);
@@ -54,4 +53,7 @@ public interface BookDAO {
 
     @Query("SELECT * FROM BOOK WHERE title like :key")
     List<BookEntity> searchByTitle(String key);
+
+    @Query("SELECT * FROM BOOK WHERE title = :title")
+    BookEntity getBookByTitle(String title);
 }
