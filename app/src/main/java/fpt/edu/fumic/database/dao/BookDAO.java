@@ -26,7 +26,7 @@ public interface BookDAO {
     List<BookEntity> getBookListAvailable(int status,int limit, int offset);
 
     @Update
-    void updateBook(BookEntity book);
+    int updateBook(BookEntity book);
 
     @Query("SELECT * FROM BOOK ORDER BY noOfView DESC")
     LiveData<List<BookEntity>> getBooksSortedByViews();
@@ -68,4 +68,7 @@ public interface BookDAO {
 
     @Query("SELECT * FROM BOOK WHERE title like :key")
     List<BookEntity> searchByTitle(String key);
+
+    @Query("SELECT * FROM BOOK WHERE title = :title")
+    BookEntity getBookByTitle(String title);
 }
