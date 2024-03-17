@@ -15,6 +15,7 @@ import fpt.edu.fumic.R;
 import fpt.edu.fumic.ui.BookListActivity;
 import fpt.edu.fumic.ui.ManageActivity;
 import fpt.edu.fumic.ui.ManageUserActivity;
+import fpt.edu.fumic.utils.MyToast;
 
 public class ManagerFragment extends Fragment implements View.OnClickListener{
     private ImageView ivBook, ivUser, ivCategory, ivNotification;
@@ -47,11 +48,13 @@ public class ManagerFragment extends Fragment implements View.OnClickListener{
         } else if (viewId == R.id.iv_user) {
             intent = new Intent(getActivity(), ManageUserActivity.class);
         }
-//        else if (viewId == R.id.iv_category) {
+        else if (viewId == R.id.iv_category) {
+            MyToast.confusingToast(getContext(), "This function is coming soon!");
 //            intent = new Intent(ManageActivity.this, CategoryActivity.class);
-//        } else if (viewId == R.id.iv_notification) {
+        } else if (viewId == R.id.iv_notification) {
+            MyToast.confusingToast(getContext(), "This function is coming soon!");
 //            intent = new Intent(ManageActivity.this, NotificationActivity.class);
-//        }
+        }
         if (intent != null) {
             startActivity(intent);
         }

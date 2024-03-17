@@ -26,4 +26,6 @@ public interface ChapterDAO {
     @Query("SELECT * FROM CHAPTER where bookId = :id")
     List<ChapterEntity> getChapterTitleById(int id);
 
+    @Query("SELECT chapterTitle FROM CHAPTER where chapterNo = :id")
+    String getChapterTitleByChapterNo(int id);
 }

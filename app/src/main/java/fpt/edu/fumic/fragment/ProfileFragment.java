@@ -75,11 +75,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 //            loadView();
 //        }
 //    }
-//    ActivityResultLauncher<Intent> mStartForStoryResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-//            result -> {
-//                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-//                }
-//            });
+    ActivityResultLauncher<Intent> mStartForStoryResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+
+                }
+            });
 
 
     private void loadView() {
