@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,11 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:text="Chapter Title"
         android:id="@+id/tv_title"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,27 +22,26 @@
         android:layout_marginTop="10dp"
         android:text="Chapter content"
         android:id="@+id/tv_content"
-        android:orientation="horizontal"/>
+        tools:ignore="HardcodedText" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:weightSum="3">
+        android:weightSum="2">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Previous"/>
+            android:text="Back"
+            android:id="@+id/bt_back"
+            tools:ignore="HardcodedText" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Home"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Next"/>
+            android:text="Home"
+            android:id="@+id/bt_home"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

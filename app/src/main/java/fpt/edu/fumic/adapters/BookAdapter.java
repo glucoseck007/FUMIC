@@ -1,9 +1,17 @@
 package fpt.edu.fumic.adapters;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.text.InputType;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,9 +23,18 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import fpt.edu.fumic.MainActivity;
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.converter.ImageToByte;
 import fpt.edu.fumic.database.entity.BookEntity;
+import fpt.edu.fumic.fragment.BookFragment;
+import fpt.edu.fumic.fragment.HomepageFragment;
+import fpt.edu.fumic.ui.AddBookActivity;
+import fpt.edu.fumic.ui.BookDetailActivity;
+import fpt.edu.fumic.ui.BookListActivity;
+import fpt.edu.fumic.ui.ManageActivity;
+import fpt.edu.fumic.ui.UpdateBookActivity;
+import fpt.edu.fumic.utils.MyToast;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
@@ -61,7 +78,44 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             imageView = itemView.findViewById(R.id.imageViewBookCover);
             tvTitle = itemView.findViewById(R.id.tvBookTitle);
             tvAuthor = itemView.findViewById(R.id.tvBookAuthor);
+
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = imageView.getContext();
+                    if (context instanceof MainActivity) {
+                        Intent intent = new Intent(context, BookDetailActivity.class);
+                        intent.putExtra("title", tvTitle.getText().toString());
+                        context.startActivity(intent);
+                    } else if (context instanceof BookListActivity) {
+                        Intent intent = new Intent(context, UpdateBookActivity.class);
+                        intent.putExtra("title", tvTitle.getText().toString());
+                        context.startActivity(intent);
+                    }
+                }
+            });
         }
+
     }
+
+    /*private void showOptionDialog(Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Choose an option")
+                .setItems(new CharSequence[]{"Update", "Delete"}, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                Intent updateIntent = new Intent(context, UpdateBookActivity.class);
+                                context.startActivity(updateIntent);
+                                break;
+                            case 1:
+                                break;
+                        }
+                    }
+                });
+        builder.create().show();
+    }*/
+
 
 }

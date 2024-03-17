@@ -2,7 +2,6 @@ package fpt.edu.fumic.database.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.DeleteTable;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -25,30 +24,24 @@ public interface BookDAO {
 
     @Query("select * from BOOK where status =:status order by dateUpload asc limit :limit offset :offset")
     List<BookEntity> getBookListAvailable(int status,int limit, int offset);
-    /*
-    Date 6/3/2024
-    List book
-     */
+
+    @Update
+    int updateBook(BookEntity book);
+
     @Query("SELECT * FROM BOOK ORDER BY noOfView DESC")
     LiveData<List<BookEntity>> getBooksSortedByViews();
-    /*
-    Date 6/3/2024
-    List book
-     */
+
     @Query("SELECT * FROM BOOK ORDER BY id")
     LiveData<List<BookEntity>> loadBooksSortedById();
-    /*
-    Date 6/3/2024
-    List book
-     */
+
     @Query("SELECT * FROM BOOK ORDER BY dateUpload DESC")
     LiveData<List<BookEntity>> loadBooksSortedByDate();
 
-    @Query("SELECT * FROM BOOK WHERE TITLE LIKE :key")
+    @Query("SELECT * FROM BOOK WHERE title like :key")
     List<BookEntity> searchByTitle(String key);
 
-    @Update
-    void updateBook(BookEntity book);
+    @Query("SELECT * FROM BOOK WHERE title = :title")
+    BookEntity getBookByTitle(String title);
 
     @Query("SELECT id FROM CATEGORY WHERE name = :name")
     int getCategoryId(String name);
@@ -64,4 +57,5 @@ public interface BookDAO {
 
     @Query("DELETE FROM BOOK where id = :id")
     void deleteBook(int id);
+
 }

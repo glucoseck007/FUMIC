@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.AddBookActivity">
+    tools:context=".ui.UpdateBookActivity">
 
     <ScrollView
         android:id="@+id/addBookScrollView"
@@ -39,7 +39,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:text="Add book"
+                android:text="Update book"
                 android:textAllCaps="true"
                 android:textColor="@color/Black"
                 android:textSize="20sp"
@@ -186,7 +186,7 @@
                 android:layout_marginEnd="24dp"
                 android:background="@color/DarkOrange"
                 android:padding="16dp"
-                android:text="Add"
+                android:text="Update"
                 android:textAllCaps="true"
                 android:textColor="@color/White"
                 android:textSize="14sp"

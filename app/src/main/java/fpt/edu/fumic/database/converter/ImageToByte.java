@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
@@ -63,6 +64,29 @@ public class ImageToByte {
         } else {
             return null; // or handle error appropriately
         }
+    }
+
+    public static Bitmap resizeBitmap(Bitmap originalBitmap, int newWidth, int newHeight) {
+        int width = originalBitmap.getWidth();
+        int height = originalBitmap.getHeight();
+
+        // Calculate the scale factor
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+
+        // Create a matrix for the manipulation
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        // Resize the bitmap
+        Bitmap resizedBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, width, height, matrix, false);
+
+        // Recycle the original bitmap if necessary
+        if (resizedBitmap != originalBitmap) {
+            originalBitmap.recycle();
+        }
+
+        return resizedBitmap;
     }
 
 }
