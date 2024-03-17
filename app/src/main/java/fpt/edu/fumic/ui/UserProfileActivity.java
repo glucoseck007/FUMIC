@@ -2,6 +2,7 @@ package fpt.edu.fumic.ui;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.entity.UserEntity;
+import fpt.edu.fumic.database.model.User;
 import fpt.edu.fumic.repository.UserRepository;
 import fpt.edu.fumic.utils.UserInformation;
 
@@ -23,6 +25,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
     private UserEntity userEntity;
 
     private TextView tvName, tvEmail;
+    ActivityResultLauncher<Intent> mStartForProfileResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +40,23 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         viewHistories.setOnClickListener(this);
         viewFavourite.setOnClickListener(this);
         ivBack.setOnClickListener(this);
-
+        mStartForProfileResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == android.app.Activity.RESULT_OK) {
+                        loadUser();
+                    }
+                });
     }
 
+
+    private void loadUser() {
+
+        userEntity = UserInformation.getInstance().getUser();
+        if (userEntity == null) {
+            return;
+        }
+        loadView();
+    }
 
     private void loadView() {
         tvName.setText(userEntity.getName());
@@ -66,15 +83,6 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
 
 
     }
-
-
-//    ActivityResultLauncher<Intent> mStartForStoryResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-//            result -> {
-//                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-//                    loadUser();
-//                }
-//            });
-
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.ivBack) {
@@ -82,16 +90,16 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         } else if (view.getId() == R.id.viewInformation) {
             Intent intent = new Intent(UserProfileActivity.this, UserDetailActivity.class);
             startActivity(intent);
-//            mStartForStoryResult.launch(intent);
+            mStartForProfileResult.launch(intent);
         } else if (view.getId() == R.id.viewChangePassword) {
             Intent intent = new Intent(UserProfileActivity.this, ChangePasswordActivity.class);
             startActivity(intent);
-//            mStartForStoryResult.launch(intent);
+            mStartForProfileResult.launch(intent);
         } else if (view.getId() == R.id.viewBrowseBooks) {
             startActivity(new Intent(UserProfileActivity.this, BrowseBookActivity.class));
-        }else if (view.getId() == R.id.viewFavourite){
+        } else if (view.getId() == R.id.viewFavourite) {
             startActivity(new Intent(UserProfileActivity.this, FavouriteActivity.class));
-        }else if (view.getId() == R.id.viewHistories){
+        } else if (view.getId() == R.id.viewHistories) {
             startActivity(new Intent(UserProfileActivity.this, HistoriesActivity.class));
         }
     }
