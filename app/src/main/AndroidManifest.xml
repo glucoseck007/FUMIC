@@ -27,6 +27,9 @@
             android:name=".ui.BookDetailActivity"
             android:exported="true" />
         <activity
+            android:name=".ui.ChapterContentActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.AddBookActivity"
             android:exported="true" />
         <activity

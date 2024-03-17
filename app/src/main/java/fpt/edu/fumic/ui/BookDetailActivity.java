@@ -84,7 +84,9 @@ public class BookDetailActivity extends AppCompatActivity {
             @Override
             public void onItemClick(ChapterEntity chapter) {
                 Intent intent1 = new Intent(BookDetailActivity.this, ChapterContentActivity.class);
-                intent1.putExtra("ChapterContent", (Serializable) chapter);
+                intent1.putExtra("ChapterNo", chapter.getChapterNo());
+                intent1.putExtra("ChapterTitle", chapter.getChapterTitle());
+                intent1.putExtra("BookId", chapter.getBookId());
                 startActivity(intent1);
             }
         });

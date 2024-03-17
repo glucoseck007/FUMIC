@@ -23,6 +23,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import fpt.edu.fumic.MainActivity;
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.converter.ImageToByte;
 import fpt.edu.fumic.database.entity.BookEntity;
@@ -31,6 +32,7 @@ import fpt.edu.fumic.fragment.HomepageFragment;
 import fpt.edu.fumic.ui.AddBookActivity;
 import fpt.edu.fumic.ui.BookDetailActivity;
 import fpt.edu.fumic.ui.BookListActivity;
+import fpt.edu.fumic.ui.ManageActivity;
 import fpt.edu.fumic.ui.UpdateBookActivity;
 import fpt.edu.fumic.utils.MyToast;
 
@@ -81,9 +83,15 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                 @Override
                 public void onClick(View v) {
                     Context context = imageView.getContext();
-                    Intent intent = new Intent(context, BookDetailActivity.class);
-                    intent.putExtra("title", tvTitle.getText().toString());
-                    context.startActivity(intent);
+                    if (context instanceof MainActivity) {
+                        Intent intent = new Intent(context, BookDetailActivity.class);
+                        intent.putExtra("title", tvTitle.getText().toString());
+                        context.startActivity(intent);
+                    } else if (context instanceof BookListActivity) {
+                        Intent intent = new Intent(context, UpdateBookActivity.class);
+                        intent.putExtra("title", tvTitle.getText().toString());
+                        context.startActivity(intent);
+                    }
                 }
             });
         }
