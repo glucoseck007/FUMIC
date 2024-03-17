@@ -22,5 +22,6 @@ public class ChapterRepository {
 
     public List<ChapterEntity> getChapterTitleById(int bookId) {return chapterDAO.getChapterTitleById(bookId); }
 
+    public String getChapterTitleByChapterNo(int id) {return chapterDAO.getChapterTitleByChapterNo(id); };
 }
 

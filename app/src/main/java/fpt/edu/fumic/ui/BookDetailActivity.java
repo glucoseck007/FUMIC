@@ -87,6 +87,7 @@ public class BookDetailActivity extends AppCompatActivity {
                 intent1.putExtra("ChapterNo", chapter.getChapterNo());
                 intent1.putExtra("ChapterTitle", chapter.getChapterTitle());
                 intent1.putExtra("BookId", chapter.getBookId());
+                intent1.putExtra("noOfChapters", list.size());
                 startActivity(intent1);
             }
         });

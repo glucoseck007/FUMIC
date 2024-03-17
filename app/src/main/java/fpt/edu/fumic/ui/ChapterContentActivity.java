@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,8 +20,10 @@ import fpt.edu.fumic.repository.ChapterRepository;
 
 public class ChapterContentActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView tvChapterNumber, tvChapterContent;
-    private Button btBack, btHome;
+    private ImageView ivPre, ivNext;
     ChapterRepository repository;
+    private int bookId, chapterNo, noOfChapters;
+    private String chapterTitle;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -30,14 +33,15 @@ public class ChapterContentActivity extends AppCompatActivity implements View.On
         initView();
         repository = new ChapterRepository(this);
 
-        btHome.setOnClickListener(this);
-        btBack.setOnClickListener(this);
+        ivPre.setOnClickListener(this);
+        ivNext.setOnClickListener(this);
 
         //show chapter content
         Intent intent = getIntent();
-        int chapterNo = intent.getIntExtra("ChapterNo", 1);
-        int bookId = intent.getIntExtra("BookId", 1);
-        String chapterTitle = "Chapter " + chapterNo + ": " + intent.getStringExtra("ChapterTitle");
+        chapterNo = intent.getIntExtra("ChapterNo", 1);
+        bookId = intent.getIntExtra("BookId", 1);
+        chapterTitle = "Chapter " + chapterNo + ": " + repository.getChapterTitleByChapterNo(chapterNo);
+        noOfChapters = intent.getIntExtra("noOfChapters", 1);
         String content = repository.getChapterPerContent(bookId, chapterNo);
         tvChapterNumber.setText(chapterTitle);
         tvChapterContent.setText(standardizeData(content));
@@ -45,17 +49,30 @@ public class ChapterContentActivity extends AppCompatActivity implements View.On
     public void initView() {
         tvChapterNumber = findViewById(R.id.tv_title);
         tvChapterContent = findViewById(R.id.tv_content);
-        btBack = findViewById(R.id.bt_back);
-        btHome = findViewById(R.id.bt_home);
+        ivPre = findViewById(R.id.iv_previous);
+        ivNext = findViewById(R.id.iv_next);
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.bt_home) {
-            Intent intentHome = new Intent(ChapterContentActivity.this, MainActivity.class);
-            startActivity(intentHome);
-        } else if (v.getId() == R.id.bt_back) {
-            finish();
+        if (v.getId() == R.id.iv_previous) {
+            if (chapterNo == 1) finish();
+            else {
+                --chapterNo;
+                chapterTitle = "Chapter " + chapterNo + ": " + repository.getChapterTitleByChapterNo(chapterNo);
+                String content = repository.getChapterPerContent(bookId, chapterNo);
+                tvChapterNumber.setText(chapterTitle);
+                tvChapterContent.setText(standardizeData(content));
+            }
+        } else if (v.getId() == R.id.iv_next) {
+            if (chapterNo == noOfChapters) finish();
+            else {
+                ++chapterNo;
+                chapterTitle = "Chapter " + chapterNo + ": " + repository.getChapterTitleByChapterNo(chapterNo);
+                String content = repository.getChapterPerContent(bookId, chapterNo);
+                tvChapterNumber.setText(chapterTitle);
+                tvChapterContent.setText(standardizeData(content));
+            }
         }
     }
 
