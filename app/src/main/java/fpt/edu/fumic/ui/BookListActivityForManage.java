@@ -23,7 +23,7 @@ import fpt.edu.fumic.repository.BookRepository;
 import fpt.edu.fumic.utils.AlertDialog1;
 
 
-public class BookListActivity2 extends AppCompatActivity {
+public class BookListActivityForManage extends AppCompatActivity {
 
 
     private RecyclerView recyclerView;
@@ -35,7 +35,7 @@ public class BookListActivity2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_list2);
+        setContentView(R.layout.activity_book_list_for_manage);
 
 
         recyclerView = findViewById(R.id.recycler_view);
@@ -59,7 +59,7 @@ public class BookListActivity2 extends AppCompatActivity {
             @Override
             public void onItemClick(BookEntity book) {
                 // Gửi Intent để mở Activity chi tiết sách
-                Intent intent = new Intent(BookListActivity2.this, BookDetailActivity.class);
+                Intent intent = new Intent(BookListActivityForManage.this, BookDetailActivity.class);
                 intent.putExtra("SelectedBook", book);
                 startActivity(intent);
             }
@@ -90,7 +90,7 @@ public class BookListActivity2 extends AppCompatActivity {
         pendingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BookListActivity2.this, BrowseBookActivity.class);
+                Intent intent = new Intent(BookListActivityForManage.this, BrowseBookActivity.class);
                 startActivity(intent);
             }
         });

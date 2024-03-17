@@ -32,7 +32,7 @@ public class ManageActivity extends AppCompatActivity implements View.OnClickLis
         Intent intent = null;
         int viewId = v.getId();
         if (viewId == R.id.iv_book) {
-            intent = new Intent(ManageActivity.this, BookListActivity2.class);
+            intent = new Intent(ManageActivity.this, BookListActivityForManage.class);
         } else if (viewId == R.id.iv_user) {
             intent = new Intent(ManageActivity.this, ManageUserActivity.class);
         }

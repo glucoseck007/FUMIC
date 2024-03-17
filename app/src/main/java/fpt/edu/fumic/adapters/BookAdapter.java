@@ -32,7 +32,7 @@ import java.util.List;
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.converter.ImageToByte;
 import fpt.edu.fumic.database.entity.BookEntity;
-
+/////17/3
 public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<BookEntity> bookEntities = new ArrayList<>();
