@@ -117,7 +117,7 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
             });
         } else if (holder instanceof BookViewHolder3) {
-            ((BookViewHolder3) holder).bind();
+            ((BookViewHolder3) holder).bind(book);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -220,11 +220,9 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
             });
         }
-        public void bind(String title, byte[] image) {
-
-        }
-        public void bind() {
-
+        public void bind(BookEntity book) {
+            tvTitle.setText(book.getTitle());
+            imageView.setImageBitmap(ImageToByte.getBitmapFromByteArray(book.getImage()));
         }
     }
 //    class BookViewHolder3 extends RecyclerView.ViewHolder {

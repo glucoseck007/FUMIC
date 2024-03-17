@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,12 +18,19 @@ import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.converter.ImageToByte;
 import fpt.edu.fumic.database.entity.BookEntity;
 import fpt.edu.fumic.database.entity.CategoryEntity;
+import fpt.edu.fumic.database.entity.FavouriteEntity;
 import fpt.edu.fumic.repository.BookRepository;
+import fpt.edu.fumic.repository.FavouriteRepository;
+import fpt.edu.fumic.utils.MyToast;
+import fpt.edu.fumic.utils.UserInformation;
 
 public class BookDetailActivity extends AppCompatActivity {
     private ImageView cover, back;
     private TextView tvTitle, tvNoOfView, tvRating, tvDescription, tvCategory;
     private BookEntity bookEntity;
+    private FavouriteRepository favouriteRepository;
+    private FavouriteEntity favouriteEntity;
+    private CheckBox chkFavourite;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -50,6 +59,22 @@ public class BookDetailActivity extends AppCompatActivity {
                         }
                     }
                 });
+                chkFavourite.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        MyToast.confusingToast(getApplicationContext(), "This feature is coming soon!");
+                    }
+                });
+//                chkFavourite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                    @Override
+//                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                        if(b){
+//                            favouriteRepository.addFavourite(new FavouriteEntity(UserInformation.getInstance().getUser().getId(), bookEntity.getId()));
+//                        } else {
+//                            favouriteRepository.deleteFavourite(bookEntity.getId());
+//                        }
+//                    }
+//                });
             }
         }
 
@@ -76,5 +101,6 @@ public class BookDetailActivity extends AppCompatActivity {
         tvRating = findViewById(R.id.tv_rating);
         tvDescription = findViewById(R.id.tv_description);
         tvCategory = findViewById(R.id.tv_category);
+        chkFavourite = findViewById(R.id.cb_favourite);
     }
 }
