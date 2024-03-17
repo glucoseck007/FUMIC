@@ -67,9 +67,9 @@
 <!--        <activity-->
 <!--            android:name=".ui.BookListActivity2"-->
 <!--            android:exported="true" />-->
-        <activity
-            android:name=".ui.BookListActivity"
-            android:exported="true" />
+<!--        <activity-->
+<!--            android:name=".ui.BookListActivity"-->
+<!--            android:exported="true" />-->
 <!--        <activity-->
 <!--            android:name=".ui.ManageUserActivity"-->
 <!--            android:exported="true" />-->

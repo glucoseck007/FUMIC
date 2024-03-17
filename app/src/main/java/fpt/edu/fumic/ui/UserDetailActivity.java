@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.entity.UserEntity;
@@ -29,8 +30,30 @@ public class UserDetailActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_detail);
         initActivity();
-        userEntity = UserInformation.getInstance().getUser();
-        loadView();
+        Intent intent = getIntent();
+        if (intent != null) {
+            if (intent.hasExtra("userEntity")) {
+                userEntity = (UserEntity) intent.getSerializableExtra("userEntity");
+                if (userEntity != null) {
+                    loadView(userEntity);
+                } else {
+                    Toast.makeText(this, "Error: User not found or not authorized", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            } else {
+                // If no specific user is passed, load the current user
+                userEntity = UserInformation.getInstance().getUser();
+                if (userEntity != null) {
+                    loadView(userEntity);
+                } else {
+                    Toast.makeText(this, "Error: Current user not found", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }
+        } else {
+            Toast.makeText(this, "Intent is null", Toast.LENGTH_SHORT).show();
+            finish();
+        }
         ivBack.setOnClickListener(this);
         viewInformation.setOnClickListener(this);
 
@@ -45,7 +68,7 @@ public class UserDetailActivity extends AppCompatActivity implements View.OnClic
     }
 
 
-    private void loadView() {
+    private void loadView(UserEntity userEntity) {
         tvName.setText(userEntity.getName());
         tvNameTitle.setText(userEntity.getName());
         tvEmail.setText(userEntity.getEmail());

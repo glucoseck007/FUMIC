@@ -39,12 +39,6 @@ public class ManageActivity extends AppCompatActivity implements View.OnClickLis
         else if (viewId == R.id.iv_category) {
             intent = new Intent(ManageActivity.this, CategoryListActivity.class);
         }
-//        else if (viewId == R.id.iv_notification) {
-//            intent = new Intent(ManageActivity.this, NotificationActivity.class);
-//        }
-        else if (viewId==R.id.ivBack) {
-           finish();
-        }
         if (intent != null) {
             startActivity(intent);
         }
