@@ -10,17 +10,6 @@
     tools:context=".MainActivity">
 
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="Profile"
-        android:textColor="@color/White"
-        app:cornerRadius="10dp" />
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"

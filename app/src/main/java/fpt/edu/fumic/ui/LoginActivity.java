@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         intentFilter = new IntentFilter();
         intentFilter.addAction(ACTION_LOGIN);
     }
-    private void sendLoginStatusToBoardcast(String statusLoginStr) {
+    private void sendLoginStatusToBroadcast(String statusLoginStr) {
         Intent loginIntent = new Intent();
         loginIntent.setAction(ACTION_LOGIN);
         loginIntent.putExtra(STATUS_LOGIN, statusLoginStr);
@@ -140,7 +140,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 statusLogin = STATUS_LOGIN_FAILED;
             }
         }
-        sendLoginStatusToBoardcast(statusLogin);
+        sendLoginStatusToBroadcast(statusLogin);
     }
     @NonNull
     private String getText(TextInputLayout textInputLayout) {

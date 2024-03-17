@@ -13,6 +13,7 @@ import java.util.List;
 import fpt.edu.fumic.database.AppDatabase;
 import fpt.edu.fumic.database.dao.AuthorDAO;
 import fpt.edu.fumic.database.dao.BookDAO;
+import fpt.edu.fumic.database.dao.CategoryDAO;
 import fpt.edu.fumic.database.dao.ChapterDAO;
 import fpt.edu.fumic.database.dao.OwnDAO;
 import fpt.edu.fumic.database.entity.AuthorEntity;
@@ -23,6 +24,7 @@ import fpt.edu.fumic.database.entity.OwnEntity;
 public class BookRepository {
 
     private final BookDAO bookDAO;
+    private final CategoryDAO categoryDAO;
     private final OwnDAO ownDAO;
     private final AuthorDAO authorDAO;
     private final ChapterDAO chapterDAO;
@@ -33,6 +35,7 @@ public class BookRepository {
         bookDAO = appDatabase.bookDAO();
         ownDAO = appDatabase.ownDAO();
         authorDAO = appDatabase.authorDAO();
+        categoryDAO = appDatabase.categoryDAO();
         chapterDAO = appDatabase.chapterDAO();
     }
 
@@ -42,16 +45,20 @@ public class BookRepository {
         return bookDAO.insertBook(book);
     }
 
+    public String getCategoryNameById(int id) {return categoryDAO.getCategoryNameById(id); }
+
     public LiveData<List<BookEntity>> getAllBooks() {
         return bookDAO.loadAllBooks();
     }
+
+    public int updateOwn(OwnEntity own) {return ownDAO.updateOwn(own); }
 
     public List<BookEntity> getBooks(int status, int limit, int offset) {
         return bookDAO.getBookListAvailable(status, limit, offset);
     }
 
-    public void updateBook(BookEntity book) {
-        bookDAO.updateBook(book);
+    public int updateBook(BookEntity book) {
+        return bookDAO.updateBook(book);
     }
 
     public int getLatestBookId() {return bookDAO.getLatestBookId();}
@@ -73,6 +80,10 @@ public class BookRepository {
     }
     public Integer getLatestAuthorId() {return authorDAO.getLatestAuthorId(); }
 
+    public int getAuthorIdWhoOwn(int id) {return ownDAO.getAuthorIdWhoOwn(id); }
+
+    public String getAuthorById(int id) {return authorDAO.getAuthorById(id); }
+
     public Integer getExistAuthor(String name) {return authorDAO.getExistAuthor(name); }
 
     public int getCategoryId(String name) {return bookDAO.getCategoryId(name); }
@@ -89,10 +100,6 @@ public class BookRepository {
         return bookDAO.getBooksSortedByViews();
     }
 
-    /*
-Date 6/3/2024
-List book
- */
     public LiveData<List<BookEntity>> getBooksSortedByDate() {
         return bookDAO.loadBooksSortedByDate();
     }
@@ -100,11 +107,13 @@ List book
     public List<BookEntity> getBookListAvailable(int status, int limit, int offset) {
         return bookDAO.getBookListAvailable(status, limit, offset);
     }
-
     public LiveData<List<BookEntity>> getBooksSortedById() {
         return bookDAO.loadBooksSortedById();
     }
+
     public List<BookEntity> searchByTitle(String key) {
         return bookDAO.searchByTitle(key);
     }
+
+    public BookEntity getBookByTitle(String title) {return bookDAO.getBookByTitle(title); }
 }

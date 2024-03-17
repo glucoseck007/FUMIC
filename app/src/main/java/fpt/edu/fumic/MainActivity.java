@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import fpt.edu.fumic.fragment.BookFragment;
+import fpt.edu.fumic.fragment.HomepageFragment;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new BookFragment())
+                .commit();
     }
 }
