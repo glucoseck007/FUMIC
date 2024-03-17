@@ -16,22 +16,7 @@ import java.util.List;
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.converter.ImageToByte;
 import fpt.edu.fumic.database.entity.BookEntity;
-import android.annotation.SuppressLint;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import fpt.edu.fumic.R;
-import fpt.edu.fumic.database.converter.ImageToByte;
-import fpt.edu.fumic.database.entity.BookEntity;
 /////17/3
 public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -83,6 +68,7 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    // Modify the onBindViewHolder method in BookAdapter
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         BookEntity book = bookEntities.get(position);
@@ -118,6 +104,7 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             });
         }
     }
+
 
 
     public BookEntity getItemAtPosition(int position) {
@@ -197,6 +184,7 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             imageView = itemView.findViewById(R.id.imageViewBookCover);
             tvTitle = itemView.findViewById(R.id.tvBookTitle);
             tvAuthor = itemView.findViewById(R.id.tvBookAuthor);
+
         }
 
         public void bind(BookEntity bookEntity) {
