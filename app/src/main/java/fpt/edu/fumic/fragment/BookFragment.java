@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.adapters.BookAdapter;
+import fpt.edu.fumic.database.dao.CategoryDAO;
 import fpt.edu.fumic.viewmodel.BookViewModel;
 
 public class BookFragment extends Fragment {
@@ -34,11 +35,15 @@ public class BookFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_book, container, false);
 
-        RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        RecyclerView recyclerView1 = rootView.findViewById(R.id.recyclerView1);
+        recyclerView1.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+
+        RecyclerView recyclerView2 = rootView.findViewById(R.id.recyclerView2);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         adapter = new BookAdapter();
-        recyclerView.setAdapter(adapter);
+        recyclerView1.setAdapter(adapter);
+        recyclerView2.setAdapter(adapter);
 
         viewModel.getAllBooks().observe(getViewLifecycleOwner(), bookEntities -> {
             adapter.setBooks(bookEntities);

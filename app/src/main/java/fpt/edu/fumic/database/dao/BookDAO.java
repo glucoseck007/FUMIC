@@ -72,4 +72,7 @@ public interface BookDAO {
     LiveData<List<BookEntity>> getBooksByCategoryId(int categoryId);
     @Query("SELECT * FROM CATEGORY WHERE id = :categoryId")
     LiveData<CategoryEntity> getCategoryById(int categoryId);
+
+    @Query("DELETE FROM READ WHERE bookId = :id")
+    void deleteReadByBookId(int id);
 }

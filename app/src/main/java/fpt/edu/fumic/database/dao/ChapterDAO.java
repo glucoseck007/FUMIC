@@ -28,4 +28,7 @@ public interface ChapterDAO {
 
     @Query("SELECT chapterTitle FROM CHAPTER where chapterNo = :id")
     String getChapterTitleByChapterNo(int id);
+
+    @Query("DELETE FROM CHAPTER where bookId = :id")
+    void deleteChapterByBookId(int id);
 }

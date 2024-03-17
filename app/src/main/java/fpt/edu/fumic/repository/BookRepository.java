@@ -15,6 +15,7 @@ import fpt.edu.fumic.database.dao.AuthorDAO;
 import fpt.edu.fumic.database.dao.BookDAO;
 import fpt.edu.fumic.database.dao.CategoryDAO;
 import fpt.edu.fumic.database.dao.ChapterDAO;
+import fpt.edu.fumic.database.dao.FavouriteDao;
 import fpt.edu.fumic.database.dao.OwnDAO;
 import fpt.edu.fumic.database.entity.AuthorEntity;
 import fpt.edu.fumic.database.entity.BookEntity;
@@ -29,7 +30,7 @@ public class BookRepository {
     private final OwnDAO ownDAO;
     private final AuthorDAO authorDAO;
     private final ChapterDAO chapterDAO;
-
+    private final FavouriteDao favouriteDao;
 
     public BookRepository(Context context) {
         AppDatabase appDatabase = AppDatabase.getInstance(context);
@@ -38,6 +39,7 @@ public class BookRepository {
         authorDAO = appDatabase.authorDAO();
         categoryDAO = appDatabase.categoryDAO();
         chapterDAO = appDatabase.chapterDAO();
+        favouriteDao = appDatabase.favouriteDao();
     }
 
     public List<Long> createBook(List<BookEntity> bookEntities) {return bookDAO.insertAllBooks(bookEntities); }
@@ -77,6 +79,10 @@ public class BookRepository {
         return ownDAO.insert(own);
     }
 
+    public void deleteRelationship(int bookId) {ownDAO.deleteRelationship(bookId); }
+
+    public void deleteChapterByBookId(int bookId) {chapterDAO.deleteChapterByBookId(bookId);}
+    public void deleteFavouriteBookById(int bookId) {favouriteDao.deleteBookById(bookId); }
     public long insertAuthor(int authorId, String name) {
         AuthorEntity author = new AuthorEntity(authorId, name);
         return authorDAO.insertAuthor(author);
@@ -98,6 +104,7 @@ public class BookRepository {
     public int insertChapterContent(List<ChapterEntity> chapter) {
         return chapterDAO.insert(chapter).size();
     }
+    public void deleteReadByBookId(int bookId) {favouriteDao.deleteBookById(bookId); }
     ////////////////
     public LiveData<List<BookEntity> >getBooksByStatus(int status) {
         return bookDAO.getBooksByStatus(status);
