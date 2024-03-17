@@ -21,6 +21,7 @@ import fpt.edu.fumic.database.entity.CategoryEntity;
 import fpt.edu.fumic.database.entity.FavouriteEntity;
 import fpt.edu.fumic.repository.BookRepository;
 import fpt.edu.fumic.repository.FavouriteRepository;
+import fpt.edu.fumic.utils.MyToast;
 import fpt.edu.fumic.utils.UserInformation;
 
 public class BookDetailActivity extends AppCompatActivity {
@@ -81,6 +82,7 @@ public class BookDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (bookEntity != null){
+                    MyToast.confusingToast(BookDetailActivity.this, "Added successfully");
                     FavouriteEntity favourite = new FavouriteEntity(UserInformation.getInstance().getUser().getId(),bookEntity.getId());
                     favouriteRepository.addFavourite(favourite);
                 }else {
