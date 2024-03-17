@@ -42,7 +42,7 @@ import fpt.edu.fumic.ui.UpdateBookActivity;
 /////17/3
 public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<BookEntity> bookEntities = new ArrayList<>();
+    static List<BookEntity> bookEntities = new ArrayList<>();
     private int viewType;
     private OnItemClickListener itemClickListener;
 
@@ -207,14 +207,19 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Context context = imageView.getContext();
-                    if (context instanceof MainActivity) {
-                        Intent intent = new Intent(context, BookDetailActivity.class);
-                        intent.putExtra("title", tvTitle.getText().toString());
-                        context.startActivity(intent);
-                    } else if (context instanceof BookListActivity) {
-                        Intent intent = new Intent(context, UpdateBookActivity.class);
-                        intent.putExtra("title", tvTitle.getText().toString());
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        BookEntity bookEntity = bookEntities.get(position);
+
+                        Context context = imageView.getContext();
+                        Intent intent = new Intent();
+
+                        if (context instanceof MainActivity) {
+                            intent = new Intent(context, BookDetailActivity.class);
+                        } else if (context instanceof BookListActivity) {
+                            intent = new Intent(context, UpdateBookActivity.class);
+                        }
+                        intent.putExtra("SelectedBook", bookEntity);
                         context.startActivity(intent);
                     }
                 }
