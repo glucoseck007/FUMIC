@@ -1,5 +1,6 @@
 package fpt.edu.fumic;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,8 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import fpt.edu.fumic.adapters.BookMainAdapter;
 import fpt.edu.fumic.adapters.ViewPagerAdapter;
 import fpt.edu.fumic.ui.SearchActivity;
+import fpt.edu.fumic.R;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -23,9 +26,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         navigationView = findViewById(R.id.navigation_button);
+        navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
         viewPager = findViewById(R.id.view_pager);
+
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(),
                 FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -36,11 +42,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 switch (position){
-                    case 0: navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
+                    case 0:
                         break;
                     case 1:
                         break;
-                    case 2:navigationView.getMenu().findItem(R.id.nav_profile).setChecked(true);
+                    case 2:
                         break;
                 }
             }
@@ -56,7 +62,9 @@ public class MainActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 if(id==R.id.nav_home){
                     viewPager.setCurrentItem(0);
-                }else if (id == R.id.nav_profile){
+                } else if (id == R.id.nav_manage) {
+                    viewPager.setCurrentItem(1);
+                } else if (id == R.id.nav_profile) {
                     viewPager.setCurrentItem(2);
                 }
                 return true;
