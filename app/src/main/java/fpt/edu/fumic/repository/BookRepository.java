@@ -55,13 +55,7 @@ public class BookRepository {
         bookDAO.updateBook(book);
     }
 
-    /*
-Date 6/3/2024
-List book
- */
-    public LiveData<List<BookEntity>> getBooksSortedByViews() {
-        return bookDAO.getBooksSortedByViews();
-    }
+
     public int getLatestBookId() {return bookDAO.getLatestBookId();}
 
     public Integer getExistBook(String title) {return bookDAO.getExistBook(title); }
@@ -78,13 +72,7 @@ List book
         AuthorEntity author = new AuthorEntity(authorId, name);
         return authorDAO.insertAuthor(author);
     }
-    /*
-Date 6/3/2024
-List book
- */
-    public LiveData<List<BookEntity>> getBooksSortedByDate() {
-        return bookDAO.loadBooksSortedByDate();
-    }
+
     public Integer getLatestAuthorId() {return authorDAO.getLatestAuthorId(); }
     public Integer getExistAuthor(String name) {return authorDAO.getExistAuthor(name); }
 
@@ -97,11 +85,37 @@ List book
     public int insertChapterContent(List<ChapterEntity> chapter) {
         return chapterDAO.insert(chapter).size();
     }
-    /*
-    Date 6/3/2024
-    List book
-     */
-    public LiveData<List<BookEntity>> getBooksSortedById() {
-        return bookDAO.loadBooksSortedById();
+    ////////////////
+    public LiveData<List<BookEntity> >getBooksByStatus(int status) {
+        return bookDAO.getBooksByStatus(status);
     }
+    public void deleteBook(BookEntity book) {
+        bookDAO.deleteBook(book);
+    }
+    public LiveData<List<BookEntity>> getBooksSortedByViews(int categoryId) {
+        return bookDAO.getBooksSortedByViews(categoryId);
+    }
+
+
+    public LiveData<List<BookEntity>> getBooksByCategoryId(int categoryId) {
+        return bookDAO.getBooksByCategoryId(categoryId);
+    }
+
+
+    public LiveData<List<BookEntity>> getBooksSortedByDateDESC(int categoryId) {
+        return bookDAO.loadBooksSortedByDateDESC(categoryId);
+    }
+
+
+    public LiveData<List<BookEntity>> getBooksSortedByDateASC(int categoryId) {
+        return bookDAO.loadBooksSortedByDateASC(categoryId);
+    }
+
+
+    public LiveData<List<BookEntity>> getBooksSortedByRatingDESC(int categoryId) {
+        return bookDAO.loadBooksSortedByRatingDESC(categoryId);
+    }
+
+
+
 }

@@ -1,12 +1,6 @@
 <resources>
     <string name="app_name">FUMIC</string>
-    <!--
-Date 6/3/2024
-List book
--->
-    <string name="sort_by_views">Sort by Views</string>
-    <string name="sort_by_date">Sort by Date</string>
-    <string name="sort_by_id">Sort by ID</string>
+
     <string-array name="Category">
         <item>Novel</item>
         <item>Science Fiction</item>
@@ -18,8 +12,14 @@ List book
         <item>Biography</item>
     </string-array>
     <string-array name="sort_options_array">
-        <item>Sort by Views</item>
-        <item>Sort by Date</item>
-        <item>Sort by ID</item>
+        <item>Top View</item>
+        <item>Newest</item>
+        <item>Oldest</item>
+        <item>Top Rating</item>
+
     </string-array>
+    <string name="sort_by_views">Top View</string>
+    <string name="sort_by_date_DESC">Newest</string>
+    <string name="sort_by_id_ASC">Oldest</string>
+    <string name="sort_by_rating_DESC">Top Rating</string>
 </resources>

@@ -24,5 +24,6 @@ public interface CategoryDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(CategoryEntity category);
-
+    @Query("SELECT * FROM CATEGORY WHERE id = :id")
+    LiveData<List<CategoryEntity>> getCategoryByID(int id);
 }

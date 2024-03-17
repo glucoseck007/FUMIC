@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Date : 5/3/2024
+   Date : 5/3/2024
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -20,24 +20,13 @@
             android:layout_weight="1"
             android:padding="16dp"
             android:textSize="16sp" />
-        <!-- TextView to display the user's name -->
+
         <TextView
             android:id="@+id/txt_user_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:padding="16dp"
             android:textSize="16sp" />
-
-        <!-- ImageView for the delete action -->
-<!--        <ImageView-->
-<!--            android:id="@+id/img_delete"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:clickable="true"-->
-<!--            android:contentDescription="@string/app_name"-->
-<!--            android:focusable="true"-->
-<!--            android:padding="16dp"-->
-<!--            android:src="@drawable/ic_delete" />-->
     </LinearLayout>
 </LinearLayout>

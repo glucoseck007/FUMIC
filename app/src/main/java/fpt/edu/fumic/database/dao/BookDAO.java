@@ -2,6 +2,7 @@ package fpt.edu.fumic.database.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.DeleteTable;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -25,24 +26,6 @@ public interface BookDAO {
 
     @Query("select * from BOOK where status =:status order by dateUpload asc limit :limit offset :offset")
     List<BookEntity> getBookListAvailable(int status,int limit, int offset);
-    /*
-    Date 6/3/2024
-    List book
-     */
-    @Query("SELECT * FROM BOOK ORDER BY noOfView DESC")
-    LiveData<List<BookEntity>> getBooksSortedByViews();
-    /*
-    Date 6/3/2024
-    List book
-     */
-    @Query("SELECT * FROM BOOK ORDER BY id")
-    LiveData<List<BookEntity>> loadBooksSortedById();
-    /*
-    Date 6/3/2024
-    List book
-     */
-    @Query("SELECT * FROM BOOK ORDER BY dateUpload DESC")
-    LiveData<List<BookEntity>> loadBooksSortedByDate();
 
     @Query("SELECT * FROM BOOK WHERE TITLE LIKE :key")
     List<BookEntity> searchByTitle(String key);
@@ -64,4 +47,24 @@ public interface BookDAO {
 
     @Query("DELETE FROM BOOK where id = :id")
     void deleteBook(int id);
+    ////////////////////////
+    @Delete
+    void deleteBook(BookEntity book);
+
+    @Query("SELECT * FROM BOOK WHERE status = :status ORDER BY dateUpload ASC")
+    LiveData<List<BookEntity>> getBooksByStatus(int status);
+    @Query("SELECT * FROM BOOK WHERE categoryId = :categoryId ORDER BY noOfView DESC")
+    LiveData<List<BookEntity>> getBooksSortedByViews(int categoryId);
+
+    @Query("SELECT * FROM BOOK WHERE categoryId = :categoryId ORDER BY dateUpload DESC")
+    LiveData<List<BookEntity>> loadBooksSortedByDateDESC(int categoryId);
+
+
+    @Query("SELECT * FROM BOOK WHERE categoryId = :categoryId ORDER BY dateUpload ASC")
+    LiveData<List<BookEntity>> loadBooksSortedByDateASC(int categoryId);
+
+    @Query("SELECT * FROM BOOK WHERE categoryId = :categoryId ORDER BY rating DESC")
+    LiveData<List<BookEntity>> loadBooksSortedByRatingDESC(int categoryId);
+    @Query("SELECT * FROM BOOK WHERE categoryId = :categoryId")
+    LiveData<List<BookEntity>> getBooksByCategoryId(int categoryId);
 }
