@@ -59,6 +59,7 @@ import fpt.edu.fumic.database.entity.ChapterEntity;
 import fpt.edu.fumic.database.entity.OwnEntity;
 import fpt.edu.fumic.repository.BookRepository;
 import fpt.edu.fumic.utils.MyToast;
+import fpt.edu.fumic.utils.UserInformation;
 
 public class AddBookActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
@@ -126,7 +127,7 @@ public class AddBookActivity extends AppCompatActivity implements View.OnClickLi
         @Override
         protected Boolean doInBackground(String... params) {
             if (bookTableHandler(params[0], params[1], params[2], params[3]) && chapterContentHandler(params[0])) {
-               return true;
+                return true;
             } else {
                 repository.deleteBook(getExistBook(params[0].toUpperCase()));
                 repository.deleteAuthor(getExistAuthor(params[1].toUpperCase()));
@@ -145,8 +146,12 @@ public class AddBookActivity extends AppCompatActivity implements View.OnClickLi
                 ivUpload.setImageResource(R.drawable.ic_add_photo);
                 pickImageStatus = false;
             } else {
-                if (noti == 0) MyToast.errorToast(AddBookActivity.this, "Add unsuccessful, book exist!");
-                if (noti == 1) MyToast.errorToast(AddBookActivity.this, "Add unsuccessful, cannot read data from file!");
+                if (noti == 0)
+                    MyToast.errorToast(AddBookActivity.this, "Add unsuccessfully, book exist!");
+                if (noti == 1)
+                    MyToast.errorToast(AddBookActivity.this, "Add unsuccessfully, cannot read data from file!");
+                if (noti == 2)
+                    MyToast.successfulToast(AddBookActivity.this, "Request successfully, waiting for confirm!");
             }
         }
     }
@@ -169,7 +174,7 @@ public class AddBookActivity extends AppCompatActivity implements View.OnClickLi
             }
 
             if (requestCode == PICK_FILE) {
-               Uri fileUri = data.getData();
+                Uri fileUri = data.getData();
                 assert fileUri != null;
                 btnAddContent.setText(fileUri.toString());
 
@@ -304,7 +309,13 @@ public class AddBookActivity extends AppCompatActivity implements View.OnClickLi
         book.setDescription(description);
         book.setCategoryId(categoryId);
         book.setDateUpload(Date.from(Instant.now()));
-        book.setStatus(1);
+        if (UserInformation.getInstance().getUser().getRole() == 0 || UserInformation.getInstance().getUser().getRole() == 1) {
+            book.setStatus(1);
+        }
+        if (UserInformation.getInstance().getUser().getRole() == 2) {
+            book.setStatus(2);
+            noti = 2;
+        }
         book.setImage(ImageToByte.imageViewToByte(ivUpload, 210, 297));
         book.setContentURI(contentURI);
 

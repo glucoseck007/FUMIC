@@ -1,6 +1,8 @@
 package fpt.edu.fumic.adapters;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import fpt.edu.fumic.MainActivity;
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.converter.ImageToByte;
 import fpt.edu.fumic.database.entity.BookEntity;
@@ -32,6 +35,10 @@ import java.util.List;
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.database.converter.ImageToByte;
 import fpt.edu.fumic.database.entity.BookEntity;
+import fpt.edu.fumic.ui.BookDetailActivity;
+import fpt.edu.fumic.ui.BookListActivity;
+import fpt.edu.fumic.ui.UpdateBookActivity;
+
 /////17/3
 public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -65,6 +72,9 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void setOnDeleteItemClickListener(OnDeleteItemClickListener listener) {
         onDeleteItemClickListener = listener;
     }
+
+
+
 
     @NonNull
     @Override
@@ -107,7 +117,7 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
             });
         } else if (holder instanceof BookViewHolder3) {
-            ((BookViewHolder3) holder).bind(book);
+            ((BookViewHolder3) holder).bind();
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -139,7 +149,6 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         bookEntities.clear();
         notifyDataSetChanged();
     }
-
     class BookViewHolder1 extends RecyclerView.ViewHolder {
         private TextView txtTitle, txtId;
 
@@ -187,32 +196,57 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
         }
     }
-
-    class BookViewHolder3 extends RecyclerView.ViewHolder {
-        private ImageView imageView;
-        private TextView tvTitle, tvAuthor;
-
+    static class BookViewHolder3 extends RecyclerView.ViewHolder {
+        ImageView imageView;
+        TextView tvTitle, tvAuthor;
         public BookViewHolder3(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageViewBookCover);
             tvTitle = itemView.findViewById(R.id.tvBookTitle);
             tvAuthor = itemView.findViewById(R.id.tvBookAuthor);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = imageView.getContext();
+                    if (context instanceof MainActivity) {
+                        Intent intent = new Intent(context, BookDetailActivity.class);
+                        intent.putExtra("title", tvTitle.getText().toString());
+                        context.startActivity(intent);
+                    } else if (context instanceof BookListActivity) {
+                        Intent intent = new Intent(context, UpdateBookActivity.class);
+                        intent.putExtra("title", tvTitle.getText().toString());
+                        context.startActivity(intent);
+                    }
+                }
+            });
         }
+        public void bind(String title, byte[] image) {
 
-        public void bind(BookEntity bookEntity) {
-            if (tvTitle != null) {
-                tvTitle.setText(bookEntity.getTitle());
-            }
-            if (imageView != null) {
-                imageView.setImageBitmap(ImageToByte.getBitmapFromByteArray(bookEntity.getImage()));
-            }
-            // Uncomment the following lines if you also want to set the author
-            // if (tvAuthor != null) {
-            //     tvAuthor.setText(bookEntity.getAuthor());
-            // }
+        }
+        public void bind() {
+
         }
     }
-
+//    class BookViewHolder3 extends RecyclerView.ViewHolder {
+//        private ImageView imageView;
+//        private TextView tvTitle, tvAuthor;
+//
+//        public BookViewHolder3(@NonNull View itemView) {
+//            super(itemView);
+//            imageView = itemView.findViewById(R.id.imageViewBookCover);
+//            tvTitle = itemView.findViewById(R.id.tvBookTitle);
+//            tvAuthor = itemView.findViewById(R.id.tvBookAuthor);
+//        }
+//
+//        public void bind(BookEntity bookEntity) {
+//            if (tvTitle != null) {
+//                tvTitle.setText(bookEntity.getTitle());
+//            }
+//            if (imageView != null) {
+//                imageView.setImageBitmap(ImageToByte.getBitmapFromByteArray(bookEntity.getImage()));
+//            }
+//        }
+//    }
 }
 
 //public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {

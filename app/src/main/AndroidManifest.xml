@@ -54,31 +54,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.ManageActivity" />
         </activity>
-
-<!--        <activity-->
-<!--            android:name=".ui.CategoryListActivity"-->
-<!--            android:exported="true" />-->
         <activity
             android:name=".ui.BookDetailActivity"
             android:exported="true" />
         <activity
             android:name=".ui.ManageActivity"
             android:exported="true" />
-<!--        <activity-->
-<!--            android:name=".ui.BookListActivity2"-->
-<!--            android:exported="true" />-->
-<!--        <activity-->
-<!--            android:name=".ui.BookListActivity"-->
-<!--            android:exported="true" />-->
-<!--        <activity-->
-<!--            android:name=".ui.ManageUserActivity"-->
-<!--            android:exported="true" />-->
         <activity
             android:name=".ui.AddBookActivity"
             android:exported="true" />
         <activity
             android:name=".ui.FavouriteActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ui.HistoriesActivity"
             android:exported="true" />
