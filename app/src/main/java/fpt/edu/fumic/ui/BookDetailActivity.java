@@ -22,6 +22,7 @@ import fpt.edu.fumic.database.converter.ImageToByte;
 import fpt.edu.fumic.adapters.ChapterAdapter;
 import fpt.edu.fumic.database.entity.ChapterEntity;
 import fpt.edu.fumic.database.model.Book;
+import fpt.edu.fumic.repository.ChapterRepository;
 
 public class BookDetailActivity extends AppCompatActivity {
     private ImageView cover, back;
@@ -60,19 +61,19 @@ public class BookDetailActivity extends AppCompatActivity {
             }
         });
         //recycler view chapter list
-        list = chapterRepository.getChaptersByBookId(book.getId());
-        chapterAdapter.setList(list);
-        GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 1);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(chapterAdapter);
-        chapterAdapter.setOnItemClickListener(new ChapterAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(ChapterEntity chapter) {
-                Intent intent1 = new Intent(BookDetailActivity.this, ChapterContentActivity.class);
-                intent1.putExtra("ChapterContent", (Serializable) chapter);
-                startActivity(intent1);
-            }
-        });
+//        list = chapterRepository.getChaptersByBookId(book.getId());
+//        chapterAdapter.setList(list);
+//        GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 1);
+//        recyclerView.setLayoutManager(manager);
+//        recyclerView.setAdapter(chapterAdapter);
+//        chapterAdapter.setOnItemClickListener(new ChapterAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(ChapterEntity chapter) {
+//                Intent intent1 = new Intent(BookDetailActivity.this, ChapterContentActivity.class);
+//                intent1.putExtra("ChapterContent", (Serializable) chapter);
+//                startActivity(intent1);
+//            }
+//        });
     }
 
     public void initView(){
@@ -82,8 +83,6 @@ public class BookDetailActivity extends AppCompatActivity {
         tvNoOfView = findViewById(R.id.tv_view);
         tvRating = findViewById(R.id.tv_rating);
         tvDescription = findViewById(R.id.tv_description);
-        chapterAdapter = new ChapterAdapter();
-        chapterRepository = new ChapterRepository(getApplicationContext());
         recyclerView = findViewById(R.id.rv_chapter);
         tvDateUpload = findViewById(R.id.tv_date);
     }
