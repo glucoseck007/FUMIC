@@ -121,8 +121,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         } else if (view.getId() == R.id.viewBrowseBooks) {
             startActivity(new Intent(requireActivity(), BrowseBookActivity.class));
         } else if (view.getId() == R.id.viewFavourite) {
-//            startActivity(new Intent(requireActivity(), FavouriteActivity.class));
-            MyToast.confusingToast(getContext(), "This function is coming soon!");
+            startActivity(new Intent(requireActivity(), FavouriteActivity.class));
+//            MyToast.confusingToast(getContext(), "This function is coming soon!");
         } else if (view.getId() == R.id.viewHistories) {
             MyToast.confusingToast(getContext(), "This function is coming soon!");
 //            startActivity(new Intent(requireActivity(), HistoriesActivity.class));
