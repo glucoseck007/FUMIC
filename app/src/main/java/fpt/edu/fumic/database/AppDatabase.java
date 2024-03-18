@@ -84,8 +84,11 @@ public abstract class AppDatabase extends RoomDatabase {
             super.onCreate(db);
             Executors.newSingleThreadExecutor().execute(() -> {
                 DataGenerator.readBookCSV(sAppContext, "book.csv", sInstance);
+                DataGenerator.readAuthorsCSV(sAppContext, "author.csv", sInstance);
                 DataGenerator.readCategoryCSV(sAppContext, "category.csv", sInstance);
                 DataGenerator.readUserCSV(sAppContext, "user.csv", sInstance);
+                DataGenerator.readChapterContent(sAppContext, "chapter.csv", sInstance);
+                DataGenerator.readOwnCSV(sAppContext, "own.csv", sInstance);
             });
         }
 
@@ -94,8 +97,11 @@ public abstract class AppDatabase extends RoomDatabase {
             super.onOpen(db);
             Executors.newSingleThreadExecutor().execute(() -> {
                 DataGenerator.readBookCSV(sAppContext, "book.csv", sInstance);
+                DataGenerator.readAuthorsCSV(sAppContext, "author.csv", sInstance);
                 DataGenerator.readCategoryCSV(sAppContext, "category.csv", sInstance);
                 DataGenerator.readUserCSV(sAppContext, "user.csv", sInstance);
+                DataGenerator.readChapterContent(sAppContext, "chapter.csv", sInstance);
+                DataGenerator.readOwnCSV(sAppContext, "own.csv", sInstance);
             });
         }
     };
