@@ -54,7 +54,7 @@ public interface BookDAO {
     @Delete
     void deleteBook(BookEntity book);
 
-    @Query("SELECT * FROM BOOK WHERE status = :status ORDER BY dateUpload ASC")
+    @Query("SELECT * FROM BOOK WHERE status = :status ORDER BY id ASC") // change dateUpload = id
     LiveData<List<BookEntity>> getBooksByStatus(int status);
     @Query("SELECT * FROM BOOK WHERE categoryId = :categoryId ORDER BY noOfView DESC")
     LiveData<List<BookEntity>> getBooksSortedByViews(int categoryId);
