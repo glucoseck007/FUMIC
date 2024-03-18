@@ -59,8 +59,9 @@ public class BookListActivity2 extends AppCompatActivity {
             @Override
             public void onItemClick(BookEntity book) {
                 // Gửi Intent để mở Activity chi tiết sách
-                Intent intent = new Intent(BookListActivity2.this, BookDetailActivity.class);
+                Intent intent = new Intent(BookListActivity2.this, UpdateBookActivity.class);
                 intent.putExtra("SelectedBook", book);
+                intent.putExtra("title", book.getTitle());
                 startActivity(intent);
             }
         });

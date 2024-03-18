@@ -23,9 +23,11 @@ import java.util.Date;
 import java.util.List;
 
 import fpt.edu.fumic.database.converter.ImageToByte;
+import fpt.edu.fumic.database.entity.AuthorEntity;
 import fpt.edu.fumic.database.entity.BookEntity;
 import fpt.edu.fumic.database.entity.CategoryEntity;
 import fpt.edu.fumic.database.entity.ChapterEntity;
+import fpt.edu.fumic.database.entity.OwnEntity;
 import fpt.edu.fumic.database.entity.UserEntity;
 import fpt.edu.fumic.repository.BookRepository;
 
@@ -152,6 +154,80 @@ public class DataGenerator {
             throw new RuntimeException(e);
         }
     }
+
+    public static void readChapterContent(Context context, String fileName, AppDatabase instance) {
+        List<ChapterEntity> list = new ArrayList<>();
+        try {
+            InputStream inputStream = context.getAssets().open(fileName);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            reader.readLine();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split("\t");
+                int chapterNo = Integer.parseInt(data[0]);
+                String content = data[2];
+                String chapterTitle = data[3];
+                int bookId = Integer.parseInt(data[1]);
+
+                ChapterEntity chapter = new ChapterEntity();
+                chapter.setChapterTitle(chapterTitle);
+                chapter.setContent(content);
+                chapter.setBookId(bookId);
+                chapter.setChapterNo(chapterNo);
+
+                list.add(chapter);
+            }
+            reader.close();
+            inputStream.close();
+            instance.chapterDAO().insert(list);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void readOwnCSV(Context context, String fileName, AppDatabase instance) {
+        try {
+            InputStream inputStream = context.getAssets().open(fileName);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            reader.readLine();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(";");
+                int authorId = Integer.parseInt(data[0]);
+                int bookId = Integer.parseInt(data[1]);
+                OwnEntity own = new OwnEntity(authorId, bookId);
+                instance.ownDAO().insert(own);
+            }
+            reader.close();
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void readAuthorsCSV(Context context, String fileName, AppDatabase instance) {
+        try {
+            InputStream inputStream = context.getAssets().open(fileName);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            reader.readLine(); // Skipping header line
+            String line;
+            while ((line = reader.readLine()) != null) {
+                line = line.replaceAll("\"", "");
+                String[] data = line.split(",");
+                int authorId = Integer.parseInt(data[0]);
+                String name = data[1];
+                int age = Integer.parseInt(data[2]);
+                String information = data[3];
+                AuthorEntity author = new AuthorEntity(authorId, name, age, information);
+                instance.authorDAO().insertAuthor(author);
+            }
+            reader.close();
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private static String DateToString(Date date) {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");

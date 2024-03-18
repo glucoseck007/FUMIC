@@ -16,13 +16,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
 import fpt.edu.fumic.R;
 import fpt.edu.fumic.adapters.BookAdapter;
 import fpt.edu.fumic.database.entity.BookEntity;
+import fpt.edu.fumic.database.entity.ChapterEntity;
 import fpt.edu.fumic.repository.BookRepository;
+import fpt.edu.fumic.repository.ChapterRepository;
 
 
 public class BookListActivity extends AppCompatActivity {
@@ -59,7 +62,6 @@ public class BookListActivity extends AppCompatActivity {
                 // Gửi Intent để mở Activity chi tiết sách
                 Intent intent = new Intent(BookListActivity.this, BookDetailActivity.class);
                 intent.putExtra("SelectedBook", book);
-                startActivity(intent);
             }
         });
 

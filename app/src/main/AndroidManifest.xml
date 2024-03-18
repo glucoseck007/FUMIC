@@ -27,6 +27,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.ManageActivity" />
         </activity>
+        <activity android:name=".ui.UpdateBookActivity"
+            android:exported="true"/>
+        <activity android:name=".ui.ChapterContentActivity"
+            android:exported="true"/>
         <activity
             android:name=".ui.BookListActivity"
             android:exported="true"
