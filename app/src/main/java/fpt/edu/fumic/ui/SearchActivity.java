@@ -65,7 +65,7 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(BookEntity book) {
                         Intent intent = new Intent(SearchActivity.this, BookDetailActivity.class);
-                        intent.putExtra("BookDetail", (Serializable) book);
+                        intent.putExtra("SelectedBook", (Serializable) book);
                         startActivity(intent);
                     }
                 });
