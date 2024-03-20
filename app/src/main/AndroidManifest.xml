@@ -62,6 +62,9 @@
             android:name=".ui.BookDetailActivity"
             android:exported="true" />
         <activity
+            android:name=".ui.SearchActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.ManageActivity"
             android:exported="true" />
         <activity

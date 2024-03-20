@@ -30,7 +30,7 @@ public interface BookDAO {
 
     @Update
     int updateBook(BookEntity book);
-    @Query("SELECT * FROM BOOK WHERE title like :key")
+    @Query("SELECT * FROM BOOK WHERE title LIKE '%' || :key || '%'")
     List<BookEntity> searchByTitle(String key);
 
     @Query("SELECT * FROM BOOK WHERE title = :title")

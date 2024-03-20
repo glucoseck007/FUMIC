@@ -16,4 +16,10 @@
         android:id="@+id/m_category"
         app:showAsAction="always"
         android:icon="@drawable/img_category"/>
+
+    <item
+        android:title="Category"
+        android:id="@+id/m_search"
+        app:showAsAction="always"
+        android:icon="@drawable/img_search"/>
 </menu>

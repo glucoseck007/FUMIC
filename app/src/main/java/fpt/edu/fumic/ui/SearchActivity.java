@@ -1,5 +1,6 @@
 package fpt.edu.fumic.ui;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -47,6 +48,7 @@ public class SearchActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String key) {
                 List<BookEntity> list = db.searchByTitle(key);
                 adapter = new BookMainAdapter(getApplicationContext(), list);
+                adapter.setList(list);
                 adapter.notifyDataSetChanged();
                 return true;
             }
@@ -70,10 +72,12 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
     }
+
     public void initView(){
         searchView = findViewById(R.id.sv_search);
         btSearch = findViewById(R.id.bt_search);
         btCancel = findViewById(R.id.bt_cancel);
+
         db = new BookRepository(getApplicationContext());
         recyclerView = findViewById(R.id.rv_search_list);
     }
