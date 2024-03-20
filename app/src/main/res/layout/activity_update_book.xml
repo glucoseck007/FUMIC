@@ -91,6 +91,7 @@
                     android:drawablePadding="10dp"
                     android:hint="Title"
                     android:inputType="text"
+                    android:enabled="false"
                     android:textSize="16sp"
                     tools:ignore="HardcodedText" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -172,6 +173,7 @@
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"
                     android:hint="Description"
+                    android:enabled="false"
                     android:inputType="text"
                     android:textSize="16sp"
                     tools:ignore="HardcodedText" />

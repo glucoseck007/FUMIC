@@ -70,6 +70,7 @@ public class UpdateBookActivity extends AppCompatActivity implements View.OnClic
         tilAuthor.getEditText().setText(author);
         tilDescription.getEditText().setText(book.getDescription());
         defaultPosition = book.getCategoryId() - 1;
+        spinnerCategory.setSelection(defaultPosition);
         ivUpload.setImageBitmap(ImageToByte.getBitmapFromByteArray(book.getImage()));
 
         btnAddContent.setOnClickListener(this);
@@ -92,7 +93,6 @@ public class UpdateBookActivity extends AppCompatActivity implements View.OnClic
                 android.R.layout.simple_spinner_item);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategory.setAdapter(arrayAdapter);
-        spinnerCategory.setSelection(defaultPosition);
     }
 
     private void updateBook() {
@@ -241,7 +241,7 @@ public class UpdateBookActivity extends AppCompatActivity implements View.OnClic
         } else {
             repository.insertAuthor(repository.getLatestAuthorId() + 1, name);
             flag = 1;
-            return repository.getLatestAuthorId() + 1;
+            return repository.getLatestAuthorId();
         }
     }
 
@@ -267,10 +267,12 @@ public class UpdateBookActivity extends AppCompatActivity implements View.OnClic
 
         own.setAuthorId(authorId);
         own.setBookId(bookId);
-        if (flag == 1) repository.insertRelationship(authorId, bookId);
+        if (flag == 1) {
+            repository.insertRelationship(authorId, bookId);
+        }
         boolean isUpdatedBook = repository.updateBook(book) > 0;
         boolean isUpdatedOwn = repository.updateOwn(own) > 0;
-        return isUpdatedBook || isUpdatedOwn;
+        return isUpdatedBook && isUpdatedOwn;
     }
 
     private boolean chapterContentHandler(String title) {
